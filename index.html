@@ -616,51 +616,63 @@
                         <h2>Нормативные документы и руководства</h2>
                     </div>
                     <div class="link-list">
-                        <div class="link-item dropdown-toggle">
-                            <div class="link-content">
-                                <div class="link-icon">⌄</div>
-                                <div class="link-text">Клинические рекомендации</div>
-                            </div>
-                        </div>
-                        <div class="dropdown-content">
-                            <a href="https://cr.minzdrav.gov.ru/clin-rec" target="_blank" class="dropdown-link">
-                                <div class="link-content">
-                                    <div class="link-icon">→</div>
-                                    <div class="link-text">Все рекомендации МЗ РФ</div>
-                                </div>
-                            </a>
-                            <a href="https://cr.minzdrav.gov.ru/view-cr/16_3" target="_blank" class="dropdown-link">
-                                <div class="link-content">
-                                    <div class="link-icon">→</div>
-                                    <div class="link-text">Туберкулез (Взрослые)</div>
-                                </div>
-                            </a>
-                            <a href="https://cr.minzdrav.gov.ru/view-cr/507_3" target="_blank" class="dropdown-link">
-                                <div class="link-content">
-                                    <div class="link-icon">→</div>
-                                    <div class="link-text">Туберкулез (Дети)</div>
-                                </div>
-                            </a>
-                            <a href="https://1drv.ms/b/c/8d834935e09ce801/EXfoaQoPodRFlFCwYQF30E4BOpcXAQ02t2QHElCyODukjA?e=xysaif" target="_blank" class="dropdown-link">
-                                <div class="link-content">
-                                    <div class="link-icon">→</div>
-                                    <div class="link-text">Терапия туберкулеза у взрослых</div>
-                                </div>
-                                <div class="dropdown-meta">Подробный справочник по режимам ХТ</div>
-                            </a>
-                            <a href="https://1drv.ms/b/c/8d834935e09ce801/EbEu8ZIm4sJDphnusFoGcNsB6qunIguEoDTWNKzO1xqAjg?e=SjH49f" target="_blank" class="dropdown-link">
-                                <div class="link-content">
-                                    <div class="link-icon">→</div>
-                                    <div class="link-text">Латентная туберкулезная инфекция у детей</div>
-                                </div>
-                            </a>
-                            <a href="https://1drv.ms/b/c/8d834935e09ce801/IQDii3FykF2ASJhjQF0k8n_dAQ2knA0cwKguGbuqltg3MlM?e=CFp4Yt" target="_blank" class="dropdown-link">
-                                <div class="link-content">
-                                    <div class="link-icon">→</div>
-                                    <div class="link-text">Иммунодиагностика у детей и подростков МОКПТД 2025</div>
-                                </div>
-                            </a>
-                        </div>
+                        <!-- ========== КЛИНИЧЕСКИЕ РЕКОМЕНДАЦИИ (ОСНОВНОЙ ВЫПАДАЮЩИЙ СПИСОК) ========== -->
+<div class="link-item dropdown-toggle">
+    <div class="link-content">
+        <div class="link-icon">⌄</div>
+        <div class="link-text">Клинические рекомендации</div>
+    </div>
+</div>
+<div class="dropdown-content">
+
+    <!-- ГРУППА 1: Официальный рубрикатор Минздрава РФ -->
+    <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-bottom: 1px solid var(--border);">
+        Официальные КР на сайте Минздрава РФ
+    </div>
+    <a href="https://cr.minzdrav.gov.ru/clin-rec" target="_blank" class="dropdown-link">
+        <div class="link-content">
+            <div class="link-icon">→</div>
+            <div class="link-text">Все клинические рекомендации (рубрикатор)</div>
+        </div>
+    </a>
+    <a href="https://cr.minzdrav.gov.ru/view-cr/16_3" target="_blank" class="dropdown-link">
+        <div class="link-content">
+            <div class="link-icon">→</div>
+            <div class="link-text">Туберкулез у взрослых</div>
+        </div>
+    </a>
+    <a href="https://cr.minzdrav.gov.ru/view-cr/507_3" target="_blank" class="dropdown-link">
+        <div class="link-content">
+            <div class="link-icon">→</div>
+            <div class="link-text">Туберкулез у детей</div>
+        </div>
+    </a>
+
+    <!-- ГРУППА 2: Материалы РОФ (презентационные версии) — ОДНА ССЫЛКА -->
+    <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
+        Материалы Российского общества фтизиатров (РОФ)
+    </div>
+    <a href="https://rof-tb.ru/structure/" target="_blank" class="dropdown-link">
+        <div class="link-content">
+            <div class="link-icon">→</div>
+            <div class="link-text">Версии клинических рекомендаций на сайте РОФ</div>
+        </div>
+        <div class="dropdown-meta">Справочники, ЛТИ, менингит, вакцинация и другие материалы РОФ</div>
+    </a>
+
+    <!-- ГРУППА 3: Региональные документы (Московская область) -->
+    <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
+        Документы Московской области
+    </div>
+    <a href="https://ptdklin.github.io/links/documents/immunodiagnostika_2025.pdf" target="_blank" class="dropdown-link">
+        <div class="link-content">
+            <div class="link-icon">→</div>
+            <div class="link-text">Иммунодиагностика у детей и подростков (МОКПТД, 2025)</div>
+        </div>
+        <div class="dropdown-meta">Методические рекомендации Министерства здравоохранения Московской области</div>
+    </a>
+
+</div> <!-- Конец dropdown-content для Клинических рекомендаций -->
 
                         <a href="https://1drv.ms/f/c/8d834935e09ce801/IgAHV3AUCk3xRLEbyvornycIAd7p4A2qleNA8HNAiSkxOtc?e=i4vt1i" class="link-item">
                             <div class="link-content">
