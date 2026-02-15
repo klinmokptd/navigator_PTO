@@ -40,7 +40,6 @@
             font-display: swap;
         }
         
-        /* ОСТАЛЬНЫЕ СТИЛИ */
         * {
             margin: 0;
             padding: 0;
@@ -48,7 +47,6 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
         
-        /* ЦВЕТОВАЯ ПАЛИТРА */
         :root {
             --primary: #4B0082;
             --primary-light: #f0f8ff; 
@@ -78,7 +76,6 @@
             min-height: 100vh;
         }
         
-        /* ШАПКА */
         .content-header {
             background: var(--surface);
             padding: 35px 40px 35px 60px; 
@@ -155,7 +152,6 @@
             text-align: left;
         }
         
-        /* БЛОК ОБЪЯВЛЕНИЙ */
         .announcements-box-container {
             display: flex;
             align-items: center;
@@ -305,20 +301,19 @@
             transform: scale(1.05);
         }
         
-        /* ЦВЕТА БЛОКОВ */
         .card-1 {
             --block-color: #2563eb;
             --block-color-light: #f5f8ff;
         }
         
         .card-2 {
-            --block-color: #dc2626;
-            --block-color-light: #fffafa;
+            --block-color: #B45309;
+            --block-color-light: #fffff5;
         }
         
         .card-3 {
-            --block-color: #B45309;
-            --block-color-light: #fffff5;
+            --block-color: #dc2626;
+            --block-color-light: #fffafa;
         }
         
         .card-4 {
@@ -327,39 +322,26 @@
         }
         
         .card-5 {
-            --block-color: #059669;
-            --block-color-light: #f8fffb;
-        }
-        
-        .card-6 {
-            --block-color: #ea580c;
-            --block-color-light: #fffcf5;
-        }
-        
-        .card-7 {
             --block-color: #0891b2;
             --block-color-light: #f5feff;
         }
         
-        .card-8 {
-            --block-color: #dc2626;
-            --block-color-light: #fffafa;
+        .card-6 {
+            --block-color: #059669;
+            --block-color-light: #f8fffb;
         }
-
-        .card-9 {
+        
+        .card-7 {
+            --block-color: #ea580c;
+            --block-color-light: #fffcf5;
+        }
+        
+        .card-8 {
             --block-color: #7c3aed;
             --block-color-light: #fcfaff;
         }
         
-        .card-1 .card-icon { background: var(--block-color-light); }
-        .card-2 .card-icon { background: var(--block-color-light); }
-        .card-3 .card-icon { background: var(--block-color-light); }
-        .card-4 .card-icon { background: var(--block-color-light); }
-        .card-5 .card-icon { background: var(--block-color-light); }
-        .card-6 .card-icon { background: var(--block-color-light); }
-        .card-7 .card-icon { background: var(--block-color-light); }
-        .card-8 .card-icon { background: var(--block-color-light); }
-        .card-9 .card-icon { background: var(--block-color-light); }
+        .card .card-icon { background: var(--block-color-light); }
         
         .card h2 {
             color: var(--block-color);
@@ -617,157 +599,161 @@
         
         <div class="content-area">
             <div class="grid">
-                <!-- КАРТОЧКА 1: Нормативные документы и руководства -->
-<div class="card card-1" id="normative-documents">
-    <div class="card-header">
-        <div class="card-icon">📋</div>
-        <h2>Стандартизация во фтизиатрии</h2>
-    </div>
-    <div class="link-list">
-        <!-- ========== КЛИНИЧЕСКИЕ РЕКОМЕНДАЦИИ ========== -->
-        <div class="link-item dropdown-toggle">
-            <div class="link-content">
-                <div class="link-icon">⌄</div>
-                <div class="link-text">Клинические рекомендации</div>
-            </div>
-        </div>
-        <div class="dropdown-content">
-
-            <!-- ГРУППА 1: Официальный рубрикатор Минздрава РФ -->
-            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-bottom: 1px solid var(--border);">
-                Официальные КР на сайте Минздрава РФ
-            </div>
-            <a href="https://cr.minzdrav.gov.ru/clin-rec" target="_blank" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Все клинические рекомендации (рубрикатор)</div>
-                </div>
-            </a>
-            <a href="https://cr.minzdrav.gov.ru/view-cr/16_3" target="_blank" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Туберкулез у взрослых</div>
-                </div>
-            </a>
-            <a href="https://cr.minzdrav.gov.ru/view-cr/507_3" target="_blank" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Туберкулез у детей</div>
-                </div>
-            </a>
-
-            <!-- ГРУППА 2: Материалы РОФ -->
-            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
-                Материалы Российского общества фтизиатров (РОФ)
-            </div>
-            <a href="https://rof-tb.ru/structure/" target="_blank" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Версии клинических рекомендаций на сайте РОФ</div>
-                </div>
-                <div class="dropdown-meta">Справочники, ЛТИ, менингит, вакцинация и другие материалы РОФ</div>
-            </a>
-
-            <!-- ГРУППА 3: Региональные документы (Московская область) -->
-            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
-                Документы Московской области
-            </div>
-            <a href="https://klinmokptd.github.io/navigator_PTO/documents/immunodiagnostika_2025.pdf" target="_blank" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Иммунодиагностика у детей и подростков (МОКПТД, 2025)</div>
-                </div>
-                <div class="dropdown-meta">Методические рекомендации Министерства здравоохранения Московской области</div>
-            </a>
-
-            <!-- ГРУППА 4: Бланки (ДОБАВЛЕНО) -->
-            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
-                Бланки и шаблоны
-            </div>
-            <a href="https://1drv.ms/f/c/8d834935e09ce801/IgDtcPDNaZimTLX7Ijz2YfzBATPvdnHtiXjXf-H5kseM3wc?e=bhgCFd" target="_blank" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Бланки</div>
-                </div>
-                <div class="dropdown-meta">Шаблоны и образцы</div>
-            </a>
-
-            <!-- ГРУППА 5: Контрольные листы (ДОБАВЛЕНО) -->
-            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
-                Контрольные листы
-            </div>
-            <a href="medical_record_guidelines.html" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Порядок ведения и оформления медицинской карты</div>
-                </div>
-                <div class="dropdown-meta">Письмо ГБУЗ МО «МОКПТД» от 29.07.2025 № 04-594/25</div>
-            </a>
-            <a href="checklist_tb_offices.html" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Организация противотуберкулезной помощи</div>
-                </div>
-                <div class="dropdown-meta">Для тубкабинетов</div>
-            </a>
-
-        </div> <!-- Конец dropdown-content для Клинические рекомендации -->
-
-        <!-- Новые документы -->
-        <a href="https://1drv.ms/f/c/8d834935e09ce801/IgAHV3AUCk3xRLEbyvornycIAd7p4A2qleNA8HNAiSkxOtc?e=i4vt1i" class="link-item">
-            <div class="link-content">
-                <div class="link-icon">→</div>
-                <div class="link-text">Новые документы</div>
-            </div>
-        </a>
-        
-        <!-- Нормативно-правовая база -->
-        <div class="link-item dropdown-toggle">
-            <div class="link-content">
-                <div class="link-icon">⌄</div>
-                <div class="link-text">Нормативно-правовая база</div>
-            </div>
-        </div>
-        <div class="dropdown-content">
-            <a href="https://1drv.ms/f/c/8d834935e09ce801/IgBSJqfyAkOPS6X7hjQ9BdaYAaA7d0TB-zC7Ha6pUq44RCM?e=6iuFMi" target="_blank" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Приказы МОКПТД</div>
-                </div>
-                <div class="dropdown-meta">Применимые к ПТО/кабинетам ГБ</div>
-            </a>
-            <a href="#" target="_blank" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Нормативные документы по раннему выявлению туберкулеза</div>
-                </div>
-            </a>
-            <a href="#" target="_blank" class="dropdown-link">
-                <div class="link-content">
-                    <div class="link-icon">→</div>
-                    <div class="link-text">Федеральные и региональные нормативные документы</div>
-                </div>
-            </a>
-        </div> <!-- Конец dropdown-content для Нормативно-правовая база -->
-        
-        <!-- Гид по работе врача-фтизиатра (ОДНА ССЫЛКА) -->
-        <a href="https://klinmokptd.github.io/gid_vracha_ftiziatra/" target="_blank" class="link-item">
-            <div class="link-content">
-                <div class="link-icon">→</div>
-                <div class="link-text">Гид по работе врача-фтизиатра</div>
-            </div>
-        </a>
-        
-    </div> <!-- Конец link-list -->
-</div> <!-- Конец card-1 -->
                 
-                <!-- КАРТОЧКА 3: Справочник -->
-                <div class="card card-3" id="drugs">
+                <!-- КАРТОЧКА: Стандартизация во фтизиатрии -->
+                <div class="card card-1" id="normative-documents">
+                    <div class="card-header">
+                        <div class="card-icon">📋</div>
+                        <h2>Стандартизация во фтизиатрии</h2>
+                    </div>
+                    <div class="link-list">
+                        
+                        <!-- Раздел: Клинические рекомендации -->
+                        <div class="link-item dropdown-toggle">
+                            <div class="link-content">
+                                <div class="link-icon">⌄</div>
+                                <div class="link-text">Клинические рекомендации</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-content">
+                            
+                            <!-- Подраздел: Официальный рубрикатор Минздрава РФ -->
+                            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-bottom: 1px solid var(--border);">
+                                Официальные КР на сайте Минздрава РФ
+                            </div>
+                            <a href="https://cr.minzdrav.gov.ru/clin-rec" target="_blank" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Все клинические рекомендации (рубрикатор)</div>
+                                </div>
+                            </a>
+                            <a href="https://cr.minzdrav.gov.ru/view-cr/16_3" target="_blank" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Туберкулез у взрослых</div>
+                                </div>
+                            </a>
+                            <a href="https://cr.minzdrav.gov.ru/view-cr/507_3" target="_blank" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Туберкулез у детей</div>
+                                </div>
+                            </a>
+
+                            <!-- Подраздел: Материалы РОФ -->
+                            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
+                                Материалы Российского общества фтизиатров (РОФ)
+                            </div>
+                            <a href="https://rof-tb.ru/structure/" target="_blank" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Версии клинических рекомендаций на сайте РОФ</div>
+                                </div>
+                                <div class="dropdown-meta">Справочники, ЛТИ, менингит, вакцинация и другие материалы РОФ</div>
+                            </a>
+
+                            <!-- Подраздел: Документы Московской области -->
+                            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
+                                Документы Московской области
+                            </div>
+                            <a href="https://klinmokptd.github.io/navigator_PTO/documents/immunodiagnostika_2025.pdf" target="_blank" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Иммунодиагностика у детей и подростков (МОКПТД, 2025)</div>
+                                </div>
+                                <div class="dropdown-meta">Методические рекомендации Министерства здравоохранения Московской области</div>
+                            </a>
+
+                            <!-- Подраздел: Бланки и шаблоны (ПЕРЕНЕСЕНО) -->
+                            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
+                                Бланки и шаблоны
+                            </div>
+                            <a href="https://1drv.ms/f/c/8d834935e09ce801/IgDtcPDNaZimTLX7Ijz2YfzBATPvdnHtiXjXf-H5kseM3wc?e=bhgCFd" target="_blank" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Бланки</div>
+                                </div>
+                                <div class="dropdown-meta">Шаблоны и образцы</div>
+                            </a>
+
+                            <!-- Подраздел: Контрольные листы (ПЕРЕНЕСЕНО) -->
+                            <div style="padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--block-1-color); background: var(--block-1-light); border-top: 2px dashed var(--border); border-bottom: 1px solid var(--border); margin-top: 10px;">
+                                Контрольные листы
+                            </div>
+                            <a href="medical_record_guidelines.html" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Порядок ведения и оформления медицинской карты</div>
+                                </div>
+                                <div class="dropdown-meta">Письмо ГБУЗ МО «МОКПТД» от 29.07.2025 № 04-594/25</div>
+                            </a>
+                            <a href="checklist_tb_offices.html" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Организация противотуберкулезной помощи</div>
+                                </div>
+                                <div class="dropdown-meta">Для тубкабинетов</div>
+                            </a>
+
+                        </div> <!-- Конец раздела Клинические рекомендации -->
+
+                        <!-- Раздел: Новые документы -->
+                        <a href="https://1drv.ms/f/c/8d834935e09ce801/IgAHV3AUCk3xRLEbyvornycIAd7p4A2qleNA8HNAiSkxOtc?e=i4vt1i" class="link-item">
+                            <div class="link-content">
+                                <div class="link-icon">→</div>
+                                <div class="link-text">Новые документы</div>
+                            </div>
+                        </a>
+                        
+                        <!-- Раздел: Нормативно-правовая база -->
+                        <div class="link-item dropdown-toggle">
+                            <div class="link-content">
+                                <div class="link-icon">⌄</div>
+                                <div class="link-text">Нормативно-правовая база</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-content">
+                            <a href="https://1drv.ms/f/c/8d834935e09ce801/IgBSJqfyAkOPS6X7hjQ9BdaYAaA7d0TB-zC7Ha6pUq44RCM?e=6iuFMi" target="_blank" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Приказы МОКПТД</div>
+                                </div>
+                                <div class="dropdown-meta">Применимые к ПТО/кабинетам ГБ</div>
+                            </a>
+                            <a href="#" target="_blank" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Нормативные документы по раннему выявлению туберкулеза</div>
+                                </div>
+                            </a>
+                            <a href="#" target="_blank" class="dropdown-link">
+                                <div class="link-content">
+                                    <div class="link-icon">→</div>
+                                    <div class="link-text">Федеральные и региональные нормативные документы</div>
+                                </div>
+                            </a>
+                        </div> <!-- Конец раздела Нормативно-правовая база -->
+                        
+                        <!-- Раздел: Гид по работе врача-фтизиатра -->
+                        <a href="https://klinmokptd.github.io/gid_vracha_ftiziatra/" target="_blank" class="link-item">
+                            <div class="link-content">
+                                <div class="link-icon">→</div>
+                                <div class="link-text">Гид по работе врача-фтизиатра</div>
+                            </div>
+                        </a>
+                        
+                    </div> <!-- Конец link-list -->
+                </div> <!-- Конец карточки Стандартизация во фтизиатрии -->
+                
+                <!-- КАРТОЧКА: Справочник -->
+                <div class="card card-2" id="drugs">
                     <div class="card-header">
                         <div class="card-icon">💊</div>
                         <h2>Справочник</h2>
                     </div>
                     <div class="link-list">
+                        
+                        <!-- Раздел: Справочники лекарственных препаратов -->
                         <div class="link-item dropdown-toggle">
                             <div class="link-content">
                                 <div class="link-icon">⌄</div>
@@ -787,8 +773,9 @@
                                     <div class="link-text">ВИДАЛЬ</div>
                                 </div>
                             </a>
-                        </div>
+                        </div> <!-- Конец раздела Справочники ЛП -->
                         
+                        <!-- Раздел: Калькулятор СКФ -->
                         <a href="https://www.cardioneurology.ru/skf/" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -796,6 +783,7 @@
                             </div>
                         </a>
                         
+                        <!-- Раздел: Калькулятор дозировок -->
                         <a href="calculator_doz.html" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -803,22 +791,26 @@
                             </div>
                         </a>
                         
+                        <!-- Раздел: Взаимодействия ЛС -->
                         <a href="https://check-medicament.ru/" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
                                 <div class="link-text">Взаимодействия ЛС</div>
                             </div>
                         </a>
-                    </div>
-                </div>
+                        
+                    </div> <!-- Конец link-list -->
+                </div> <!-- Конец карточки Справочник -->
 
-                <!-- КАРТОЧКА 8: Мониторинг, анализ и безопасность -->
-                <div class="card card-8" id="adverse-reactions">
+                <!-- КАРТОЧКА: Мониторинг, анализ и безопасность -->
+                <div class="card card-3" id="adverse-reactions">
                     <div class="card-header">
                         <div class="card-icon">⚠️</div>
                         <h2>Мониторинг, анализ и безопасность</h2>
                     </div>
                     <div class="link-list">
+                        
+                        <!-- Раздел: Классификация и регистрация НПР -->
                         <a href="registration.html" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -826,6 +818,7 @@
                             </div>
                         </a>
                         
+                        <!-- Раздел: Мониторинг НПР -->
                         <div class="link-item dropdown-toggle">
                             <div class="link-content">
                                 <div class="link-icon">⌄</div>
@@ -851,8 +844,9 @@
                                     <div class="link-text">Мониторинг НПР в зависимости от режима и фазы ХТ</div>
                                 </div>
                             </a>
-                        </div>
+                        </div> <!-- Конец раздела Мониторинг НПР -->
                         
+                        <!-- Раздел: Шкала Наранжо -->
                         <a href="naranjo.html" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -860,6 +854,8 @@
                             </div>
                             <div class="link-meta">Шкала Наранжо</div>
                         </a>
+                        
+                        <!-- Раздел: Приложения к КР -->
                         <a href="https://1drv.ms/x/c/8d834935e09ce801/EVdJemGlT35IqKO8SQrr9dkBhyIxGMn2HXF45kmNPXQgfw?e=6mUyKm" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -867,23 +863,27 @@
                             </div>
                             <div class="link-meta">Формат Excel</div>
                         </a>
-                    </div>
-                </div>
+                        
+                    </div> <!-- Конец link-list -->
+                </div> <!-- Конец карточки Мониторинг, анализ и безопасность -->
                 
-                <!-- КАРТОЧКА 4: Рабочие системы -->
+                <!-- КАРТОЧКА: Рабочие системы -->
                 <div class="card card-4" id="work-systems">
                     <div class="card-header">
                         <div class="card-icon">🖥️</div>
                         <h2>Рабочие системы</h2>
                     </div>
                     <div class="link-list">
+                        
+                        <!-- Раздел: 1С-мокрота -->
                         <a href="https://1c.mokptd.ru:8443/mis" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
                                 <div class="link-text">1С-мокрота</div>
                             </div>
                         </a>
-                                                                     
+                        
+                        <!-- Раздел: Проверка полиса ОМС -->
                         <div class="link-item dropdown-toggle">
                             <div class="link-content">
                                 <div class="link-icon">⌄</div>
@@ -903,8 +903,9 @@
                                     <div class="link-text">Вариант 2 - Резервный сервис</div>
                                 </div>
                             </a>
-                        </div>
+                        </div> <!-- Конец раздела Проверка полиса ОМС -->
                         
+                        <!-- Раздел: DIGIPAX -->
                         <a href="https://webviewer.eris.mosreg.ru/viewer/#/login" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -912,6 +913,7 @@
                             </div>
                         </a>
                         
+                        <!-- Раздел: ЕМИАС -->
                         <a href="http://main.emias.mosreg.ru/MIS/MO_MOPD/Home/Index" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -919,28 +921,53 @@
                             </div>
                         </a>
                         
+                        <!-- Раздел: ФРБТ -->
                         <a href="https://nr.egisz.rosminzdrav.ru/index.xhtml" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
                                 <div class="link-text">ФРБТ</div>
                             </div>
                         </a>
+                        
+                        <!-- Раздел: МедИнфо -->
                         <a href="https://stat.miacmo.ru/datainput" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
                                 <div class="link-text">МедИнфо</div>
                             </div>
                         </a>
-                    </div>
-                </div>
+                        
+                    </div> <!-- Конец link-list -->
+                </div> <!-- Конец карточки Рабочие системы -->
                 
-                <!-- КАРТОЧКА 5: Работа с пациентами -->
-                <div class="card card-5" id="patient-work">
+                <!-- КАРТОЧКА: Интеграция с общей лечебной сетью (НОВАЯ) -->
+                <div class="card card-5" id="integration-ols">
+                    <div class="card-header">
+                        <div class="card-icon">🔄</div>
+                        <h2>Интеграция с общей лечебной сетью</h2>
+                    </div>
+                    <div class="link-list">
+                        
+                        <!-- Раздел: Работа с ОЛС по выявлению туберкулеза -->
+                        <a href="#" class="link-item">
+                            <div class="link-content">
+                                <div class="link-icon">→</div>
+                                <div class="link-text">Работа с ОЛС по выявлению туберкулеза</div>
+                            </div>
+                        </a>
+                        
+                    </div> <!-- Конец link-list -->
+                </div> <!-- Конец карточки Интеграция с ОЛС -->
+                
+                <!-- КАРТОЧКА: Работа с пациентами -->
+                <div class="card card-6" id="patient-work">
                     <div class="card-header">
                         <div class="card-icon">👨‍⚕️</div>
                         <h2>Работа с пациентами</h2>
                     </div>
                     <div class="link-list">
+                        
+                        <!-- Раздел: FAQ -->
                         <a href="faq.html" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -948,30 +975,26 @@
                             </div>
                         </a>
                         
+                        <!-- Раздел: Материалы для информирования -->
                         <a href="https://1drv.ms/f/c/8d834935e09ce801/IgAB6JzgNUmDIICNPOgAAAAAAZULily1ajsngWpbw6vPUF0?e=jNQdj2" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
                                 <div class="link-text">Материалы для информирования пациентов</div>
                             </div>
                         </a>
-                    </div>
-                </div>
+                        
+                    </div> <!-- Конец link-list -->
+                </div> <!-- Конец карточки Работа с пациентами -->
                 
-                <!-- КАРТОЧКА 6: Дополнительные ресурсы -->
-                <div class="card card-6" id="additional-resources">
+                <!-- КАРТОЧКА: Дополнительные ресурсы (БЕЗ бланков и контрольных листов) -->
+                <div class="card card-7" id="additional-resources">
                     <div class="card-header">
                         <div class="card-icon">📁</div>
                         <h2>Дополнительные ресурсы</h2>
                     </div>
                     <div class="link-list">
-                        <a href="https://1drv.ms/f/c/8d834935e09ce801/IgDtcPDNaZimTLX7Ijz2YfzBATPvdnHtiXjXf-H5kseM3wc?e=bhgCFd" target="_blank" class="link-item">
-                            <div class="link-content">
-                                <div class="link-icon">→</div>
-                                <div class="link-text">Бланки</div>
-                            </div>
-                            <div class="link-meta">Шаблоны и образцы</div>
-                        </a>
                         
+                        <!-- Раздел: Папка ТМК -->
                         <a href="tmk.html" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -979,51 +1002,34 @@
                             </div>
                         </a>
                         
-                        <div class="link-item dropdown-toggle">
-                            <div class="link-content">
-                                <div class="link-icon">⌄</div>
-                                <div class="link-text">Контрольные листы</div>
-                            </div>
-                        </div>
-                        <div class="dropdown-content">
-                            <a href="medical_record_guidelines.html" class="dropdown-link">
-                                <div class="link-content">
-                                    <div class="link-icon">→</div>
-                                    <div class="link-text">Порядок ведения и оформления медицинской карты</div>
-                                </div>
-                                <div class="dropdown-meta">Письмо ГБУЗ МО «МОКПТД» от 29.07.2025 № 04-594/25</div>
-                            </a>
-                       
-                            <a href="checklist_tb_offices.html" class="dropdown-link">
-                                <div class="link-content">
-                                    <div class="link-icon">→</div>
-                                    <div class="link-text">Организация противотуберкулезной помощи</div>
-                                </div>
-                                <div class="dropdown-meta">Для тубкабинетов</div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    </div> <!-- Конец link-list -->
+                </div> <!-- Конец карточки Дополнительные ресурсы -->
                 
-                <!-- КАРТОЧКА 7: Образовательные ресурсы -->
-                <div class="card card-7" id="educational-resources">
+                <!-- КАРТОЧКА: Образовательные ресурсы -->
+                <div class="card card-8" id="educational-resources">
                     <div class="card-header">
                         <div class="card-icon">🎓</div>
                         <h2>Образовательные ресурсы</h2>
                     </div>
                     <div class="link-list">
+                        
+                        <!-- Раздел: РОФ -->
                         <a href="https://rof-tb.ru/" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
                                 <div class="link-text">Российское общество фтизиатров</div>
                             </div>
                         </a>
+                        
+                        <!-- Раздел: НМРЦ -->
                         <a href="https://nmrc.ru/" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
                                 <div class="link-text">Национальный центр фтизиопульмонологии</div>
                             </div>
                         </a>
+                        
+                        <!-- Раздел: Журнал -->
                         <a href="https://www.tibl-journal.com/jour?locale=ru_RU" target="_blank" class="link-item">
                             <div class="link-content">
                                 <div class="link-icon">→</div>
@@ -1031,6 +1037,8 @@
                             </div>
                             <div class="link-meta">Журнал</div>
                         </a>
+                        
+                        <!-- Раздел: Международные ресурсы -->
                         <div class="link-item dropdown-toggle">
                             <div class="link-content">
                                 <div class="link-icon">⌄</div>
@@ -1087,19 +1095,20 @@
                                 </div>
                                 <div class="dropdown-meta">Международная организация, публикует практические руководства, исследования и образовательные программы для специалистов по туберкулёзу и заболеваниям лёгких.</div>
                             </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </div> <!-- Конец раздела Международные ресурсы -->
+                        
+                    </div> <!-- Конец link-list -->
+                </div> <!-- Конец карточки Образовательные ресурсы -->
+                
+            </div> <!-- Конец grid -->
             
             <div class="footer">
                 <p><span class="year">2025</span></p>
             </div>
-        </div>
+        </div> <!-- Конец content-area -->
     </main>
 
     <script>
-        // Dropdown functionality
         const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
         
         dropdownToggles.forEach(toggle => {
@@ -1110,7 +1119,6 @@
             });
         });
         
-        // Close dropdowns when clicking outside
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.dropdown-toggle')) {
                 document.querySelectorAll('.dropdown-content').forEach(dropdown => {
