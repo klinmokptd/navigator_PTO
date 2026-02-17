@@ -4,12 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Инструкция: Подключение сетевой папки ТМК</title>
+    
+    <!-- ЛОКАЛЬНЫЕ ШРИФТЫ (такой же путь, как в index.html) -->
     <style>
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
         }
         
         body {
@@ -105,6 +139,15 @@
             border-radius: 0 8px 8px 0;
         }
         
+        .important-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            color: #856404;
+        }
+        
         @media (max-width: 768px) {
             .step {
                 flex-direction: column;
@@ -163,6 +206,11 @@
                         <strong>http://217.107.102.71:90/tmk/</strong>
                     </div>
                     <p>• Нажмите кнопку <strong>"Готово"</strong></p>
+                    <p>• После нажатия кнопки "Готово" появится окно для ввода логина и пароля</p>
+                    
+                    <div class="important-note">
+                        <strong>⚠️ Важно:</strong> Логин и пароль получите у IT-специалиста филиала, который курирует вашу территорию. Этот же специалист, возможно, поможет вам настроить папку, если самостоятельно подключиться не получится.
+                    </div>
                 </div>
             </div>
             
