@@ -1646,43 +1646,70 @@
             }
 
             function exportToExcel() {
-    const timestamp = document.getElementById('timestamp').value;
-    const date = new Date(timestamp + 'T00:00:00').toLocaleDateString('ru-RU');
-    const orgName = document.getElementById('org-name').value || 'Не указано';
-    const inspector = document.getElementById('inspector').value || 'Не указано';
+    // Собираем основные данные
+    const patientIdValue = document.getElementById('patientId').value || 'Не указано';
+    const checkDateValue = document.getElementById('checkDate').value 
+        ? new Date(document.getElementById('checkDate').value).toLocaleDateString('ru-RU') 
+        : 'Не указана';
     
-    const wb = XLSX.utils.book_new();
-    const excelData = [
-        ["Чек-лист проверки организации противотуберкулезной помощи"],
-        [`Проверяемая организация: ${orgName}`],
-        [`Проверяющий: ${inspector}`],
-        ["ГБУЗ МО МОКПТД"],
-        ['Филиал "Клинский"'],
-        [`Дата проверки: ${date}`],
-        [],
-        ["Раздел", "Вопрос", "Статус", "Комментарий"]
-    ];
+    // Получаем все разделы
+    const sections = document.querySelectorAll('.section');
+    const excelRows = [];
     
-    sections.forEach((section, sectionIndex) => {
-        excelData.push([section.title, "", "", ""]);
+    // Заголовок документа
+    excelRows.push(['Чек-лист проверки медицинской карты (форма 025/у)']);
+    excelRows.push([]);
+    excelRows.push(['ID/номер карты:', patientIdValue]);
+    excelRows.push(['Дата проверки:', checkDateValue]);
+    excelRows.push([]);
+    excelRows.push(['Раздел', '№', 'Критерий', 'Статус', 'Комментарий']);
+    
+    // Проходим по всем разделам
+    sections.forEach((section) => {
+        const sectionTitle = section.querySelector('h2')?.textContent || 'Раздел';
+        excelRows.push([sectionTitle, '', '', '', '']);
         
-        section.questions.forEach((question, questionIndex) => {
-            const answerData = answers[sectionIndex]?.[questionIndex];
-            // Получаем статус: если есть ответ и он не "Не проверено", то "Проверено", иначе "Не проверено"
-            const status = (answerData?.answer && answerData.answer !== 'Не проверено') ? 'Проверено' : 'Не проверено';
-            excelData.push(["", question, status, answerData?.comment || '']);
+        // Получаем все вопросы в разделе
+        const questions = section.querySelectorAll('.question-block');
+        questions.forEach((question) => {
+            const questionNumber = question.querySelector('.question-text strong')?.textContent || '';
+            const questionText = question.querySelector('.question-text')?.innerText.replace(questionNumber, '').trim() || '';
+            const checkbox = question.querySelector('input[type="checkbox"]');
+            const comment = question.querySelector('.comment-area')?.value || '';
+            
+            const status = checkbox?.checked ? 'Проверено' : 'Не проверено';
+            
+            excelRows.push(['', questionNumber, questionText, status, comment]);
         });
         
-        const additional = answers[sectionIndex]?.[section.questions.length];
-        const additionalStatus = (additional?.answer && additional.answer !== 'Не проверено') ? 'Проверено' : 'Не проверено';
-        excelData.push(["", "Дополнительная информация", additionalStatus, additional?.comment || '']);
-        excelData.push([]);
+        // Добавляем общий комментарий к разделу
+        const sectionComment = section.querySelector('.section-comment-area')?.value || '';
+        if (sectionComment) {
+            excelRows.push(['', '', 'Общий комментарий к разделу:', '', sectionComment]);
+        }
+        
+        excelRows.push(['']); // Пустая строка между разделами
     });
     
-    const ws = XLSX.utils.aoa_to_sheet(excelData);
-    ws['!cols'] = [{ wch: 20 }, { wch: 50 }, { wch: 15 }, { wch: 50 }];
-    XLSX.utils.book_append_sheet(wb, ws, "Чек-лист ПТП");
-    XLSX.writeFile(wb, `чек-лист_птп_${date.replace(/\./g, '-')}.xlsx`);
+    // Создаем рабочий лист
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet(excelRows);
+    
+    // Настраиваем ширину колонок
+    ws['!cols'] = [
+        { wch: 20 }, // Раздел
+        { wch: 8 },  // №
+        { wch: 60 }, // Критерий
+        { wch: 15 }, // Статус
+        { wch: 50 }  // Комментарий
+    ];
+    
+    // Добавляем лист в книгу
+    XLSX.utils.book_append_sheet(wb, ws, 'Чек-лист');
+    
+    // Сохраняем файл
+    const fileName = `мед_карта_${patientIdValue || 'бланк'}_${checkDateValue.replace(/\./g, '-')}.xlsx`;
+    XLSX.writeFile(wb, fileName);
 }
 
             function showStatus(msg, type) {
