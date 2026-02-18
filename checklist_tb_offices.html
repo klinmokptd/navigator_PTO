@@ -811,78 +811,93 @@
             });
         }
         
-        function createQuestionElement(sectionIndex, questionIndex, questionText) {
-            const questionElement = document.createElement('div');
-            questionElement.className = 'question';
-            questionElement.dataset.questionId = `${sectionIndex}-${questionIndex}`;
-            
-            const questionTextElement = document.createElement('div');
-            questionTextElement.className = 'question-text';
-            questionTextElement.textContent = questionText;
-            
-            const checkButton = document.createElement('div');
-            checkButton.className = 'check-button';
-            checkButton.dataset.questionId = `${sectionIndex}-${questionIndex}`;
-            
-            questionElement.appendChild(questionTextElement);
-            questionElement.appendChild(checkButton);
-            
-            const comment = document.createElement('textarea');
-            comment.className = 'comment';
-            comment.dataset.questionId = `${sectionIndex}-${questionIndex}`;
-            
-            questionElement.appendChild(comment);
-            
-            const updateButtonFromComment = () => {
-                const hasCommentText = comment.value.trim() !== '';
-                if (hasCommentText) {
-                    if (!checkButton.classList.contains('checked') && !checkButton.classList.contains('checked-red')) {
-                        checkButton.classList.add('checked-red');
-                    }
-                } else {
-                    if (checkButton.classList.contains('checked-red') && !checkButton.classList.contains('checked')) {
-                        checkButton.classList.remove('checked-red');
-                    }
-                }
-                saveAnswer(sectionIndex, questionIndex, 
-                    checkButton.classList.contains('checked') ? 'Проверено' : 
-                    (checkButton.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Не проверено'), 
-                    comment.value);
-                updateSectionStatus(sectionIndex);
-                updateProgressBar();
-                saveToLocalStorage(true);
-            };
-            
-            comment.addEventListener('input', function() {
-                updateButtonFromComment();
-                this.style.height = 'auto';
-                this.style.height = (this.scrollHeight) + 'px';
-            });
-            
-            checkButton.addEventListener('click', function() {
-                if (this.classList.contains('checked')) {
-                    this.classList.remove('checked');
-                } else if (this.classList.contains('checked-red')) {
-                    this.classList.remove('checked-red');
-                } else {
-                    if (comment.value.trim() !== '') {
-                        this.classList.add('checked-red');
-                    } else {
-                        this.classList.add('checked');
-                    }
-                }
-                
-                saveAnswer(sectionIndex, questionIndex, 
-                    this.classList.contains('checked') ? 'Проверено' : 
-                    (this.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Не проверено'), 
-                    comment.value);
-                updateSectionStatus(sectionIndex);
-                updateProgressBar();
-                saveToLocalStorage(true);
-            });
-            
-            return questionElement;
+        // Функция создания элемента вопроса (исправленная логика)
+function createQuestionElement(sectionIndex, questionIndex, questionText) {
+    const questionElement = document.createElement('div');
+    questionElement.className = 'question';
+    questionElement.dataset.questionId = `${sectionIndex}-${questionIndex}`;
+    
+    const questionTextElement = document.createElement('div');
+    questionTextElement.className = 'question-text';
+    questionTextElement.textContent = questionText;
+    
+    const checkButton = document.createElement('div');
+    checkButton.className = 'check-button';
+    checkButton.dataset.questionId = `${sectionIndex}-${questionIndex}`;
+    
+    questionElement.appendChild(questionTextElement);
+    questionElement.appendChild(checkButton);
+    
+    const comment = document.createElement('textarea');
+    comment.className = 'comment';
+    comment.dataset.questionId = `${sectionIndex}-${questionIndex}`;
+    comment.placeholder = 'Комментарий (при наличии замечаний)...';
+    
+    questionElement.appendChild(comment);
+    
+    // Функция обновления состояния кнопки на основе комментария
+    const updateButtonFromComment = () => {
+        const hasCommentText = comment.value.trim() !== '';
+        
+        if (hasCommentText) {
+            // Если есть комментарий - всегда красная галочка
+            checkButton.classList.remove('checked');
+            checkButton.classList.add('checked-red');
+        } else {
+            // Если нет комментария - можно убрать красную, но зеленую не трогаем
+            if (checkButton.classList.contains('checked-red')) {
+                checkButton.classList.remove('checked-red');
+            }
         }
+        
+        saveAnswer(sectionIndex, questionIndex, 
+            checkButton.classList.contains('checked') ? 'Проверено' : 
+            (checkButton.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Не проверено'), 
+            comment.value);
+        updateSectionStatus(sectionIndex);
+        updateProgressBar();
+        saveToLocalStorage(true);
+    };
+    
+    // Обработчик ввода в комментарий
+    comment.addEventListener('input', function() {
+        updateButtonFromComment();
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+    
+    // Обработчик клика по галочке
+    checkButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        const hasCommentText = comment.value.trim() !== '';
+        
+        if (hasCommentText) {
+            // Если есть комментарий - принудительно ставим красную и не даем снять
+            this.classList.remove('checked');
+            this.classList.add('checked-red');
+        } else {
+            // Если нет комментария - переключаем между зеленой и пустой
+            if (this.classList.contains('checked')) {
+                this.classList.remove('checked');
+            } else {
+                // Убираем красную, если была, и ставим зеленую
+                this.classList.remove('checked-red');
+                this.classList.add('checked');
+            }
+        }
+        
+        saveAnswer(sectionIndex, questionIndex, 
+            this.classList.contains('checked') ? 'Проверено' : 
+            (this.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Не проверено'), 
+            comment.value);
+        updateSectionStatus(sectionIndex);
+        updateProgressBar();
+        saveToLocalStorage(true);
+    });
+    
+    return questionElement;
+}
         
         function saveAnswer(sectionIndex, questionIndex, answer, comment = null) {
             if (!answers[sectionIndex]) answers[sectionIndex] = {};
