@@ -1646,51 +1646,44 @@
             }
 
             function exportToExcel() {
-                try {
-                    const rows = [
-                        ['Чек-лист медицинской карты (форма 025/у)'],
-                        ['ID/№ карты:', patientId.value || '—'],
-                        ['Дата проверки:', checkDate.value || '—'],
-                        []
-                    ];
-
-                    rows.push(['Раздел', 'Пункт', 'Статус', 'Комментарий']);
-
-                    const sections = form.querySelectorAll('.section');
-                    sections.forEach(section => {
-                        const title = section.querySelector('h2')?.textContent || '';
-                        rows.push([title, '', '', '']);
-
-                        const blocks = section.querySelectorAll('.question-block');
-                        blocks.forEach(block => {
-                            const cb = block.querySelector('input[type="checkbox"]');
-                            const labelSpan = block.querySelector('.question-text');
-                            const comment = block.querySelector('.comment-area')?.value || '';
-
-                            const status = cb?.checked ? '✅' : '⬜';
-                            const text = labelSpan ? labelSpan.innerText.replace(/\n/g, ' ').trim() : '';
-
-                            rows.push(['', text, status, comment]);
-                        });
-
-                        const secComment = section.querySelector('.section-comment-area');
-                        if (secComment && secComment.value.trim()) {
-                            rows.push(['', 'Общий комментарий:', '', secComment.value]);
-                        }
-                        rows.push([]);
-                    });
-
-                    const wb = XLSX.utils.book_new();
-                    const ws = XLSX.utils.aoa_to_sheet(rows);
-                    ws['!cols'] = [{wch:20}, {wch:60}, {wch:10}, {wch:40}];
-                    XLSX.utils.book_append_sheet(wb, ws, 'Карта');
-                    const fileName = `checklist_${patientId.value || 'card'}_${checkDate.value || 'today'}.xlsx`;
-                    XLSX.writeFile(wb, fileName);
-                    showStatus('Excel сохранён', 'success');
-                } catch (err) {
-                    alert('Ошибка при сохранении Excel');
-                }
-            }
+    const timestamp = document.getElementById('timestamp').value;
+    const date = new Date(timestamp + 'T00:00:00').toLocaleDateString('ru-RU');
+    const orgName = document.getElementById('org-name').value || 'Не указано';
+    const inspector = document.getElementById('inspector').value || 'Не указано';
+    
+    const wb = XLSX.utils.book_new();
+    const excelData = [
+        ["Чек-лист проверки организации противотуберкулезной помощи"],
+        [`Проверяемая организация: ${orgName}`],
+        [`Проверяющий: ${inspector}`],
+        ["ГБУЗ МО МОКПТД"],
+        ['Филиал "Клинский"'],
+        [`Дата проверки: ${date}`],
+        [],
+        ["Раздел", "Вопрос", "Статус", "Комментарий"]
+    ];
+    
+    sections.forEach((section, sectionIndex) => {
+        excelData.push([section.title, "", "", ""]);
+        
+        section.questions.forEach((question, questionIndex) => {
+            const answerData = answers[sectionIndex]?.[questionIndex];
+            // Получаем статус: если есть ответ и он не "Не проверено", то "Проверено", иначе "Не проверено"
+            const status = (answerData?.answer && answerData.answer !== 'Не проверено') ? 'Проверено' : 'Не проверено';
+            excelData.push(["", question, status, answerData?.comment || '']);
+        });
+        
+        const additional = answers[sectionIndex]?.[section.questions.length];
+        const additionalStatus = (additional?.answer && additional.answer !== 'Не проверено') ? 'Проверено' : 'Не проверено';
+        excelData.push(["", "Дополнительная информация", additionalStatus, additional?.comment || '']);
+        excelData.push([]);
+    });
+    
+    const ws = XLSX.utils.aoa_to_sheet(excelData);
+    ws['!cols'] = [{ wch: 20 }, { wch: 50 }, { wch: 15 }, { wch: 50 }];
+    XLSX.utils.book_append_sheet(wb, ws, "Чек-лист ПТП");
+    XLSX.writeFile(wb, `чек-лист_птп_${date.replace(/\./g, '-')}.xlsx`);
+}
 
             function showStatus(msg, type) {
                 statusMsg.textContent = msg;
