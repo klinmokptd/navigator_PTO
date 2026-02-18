@@ -10,7 +10,6 @@
             --secondary-color: #7fcdbb;
             --light-color: #f0f9ff;
             --border-color: #ddd;
-            /* удаляем переменную для зеленого фона */
             --save-btn-bg: #ffc107;      /* желтый */
             --save-btn-hover: #e0a800;
             --export-btn-bg: #28a745;     /* зеленый */
@@ -51,36 +50,54 @@
             font-size: 1.8rem;
         }
         
-        .subtitle {
-            color: #666;
-            font-size: 1.1rem;
-            margin: 0;
-            font-weight: bold;
-        }
-        
-        /* Исправлено для мобильных: теперь вертикально */
-        .branch-info {
+        /* Общий блок с информацией о проверке */
+        .info-block {
             background-color: var(--light-color);
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
+            gap: 15px;
+        }
+        
+        .info-row {
+            display: flex;
+            flex-direction: column;
             gap: 5px;
         }
         
-        .branch-name {
-            font-size: 1.2rem;
+        .info-row label {
             font-weight: bold;
-            line-height: 1.4;
         }
         
-        .branch-details {
+        .info-row input, .info-row textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
             font-size: 1rem;
-            line-height: 1.4;
+            background-color: white;
         }
         
-        /* Исправлено для мобильных */
+        .info-row textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+        
+        /* Горизонтальное расположение для немобильных */
+        @media (min-width: 769px) {
+            .info-row-horizontal {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+            }
+            .info-row-horizontal label {
+                min-width: 200px;
+            }
+        }
+        
         .timestamp {
             background-color: var(--light-color);
             padding: 15px;
@@ -106,7 +123,7 @@
         .auto-save-status {
             font-size: 0.9rem;
             color: #666;
-            margin-left: 0; /* убираем прижатие вправо */
+            margin-left: 0;
         }
         
         .progress-bar {
@@ -181,7 +198,6 @@
             position: relative;
         }
         
-        /* класс completed больше не дает зеленый фон */
         .question-text {
             margin-bottom: 10px;
             font-weight: 500;
@@ -218,7 +234,6 @@
             font-size: 14px;
         }
         
-        /* Красная галочка для замечаний */
         .check-button.checked-red {
             background-color: #dc3545;
             border-color: #dc3545;
@@ -326,7 +341,6 @@
                 display: none !important;
             }
             
-            /* Раскрываем все секции при печати */
             .section {
                 max-height: none !important;
                 margin-bottom: 10px !important;
@@ -411,17 +425,15 @@
                 margin-bottom: 5px !important;
             }
             
-            .branch-info {
+            .info-block {
                 padding: 8px !important;
                 margin-bottom: 10px !important;
             }
             
-            .branch-name {
-                font-size: 11pt !important;
-            }
-            
-            .branch-details {
-                font-size: 10pt !important;
+            .info-row input, .info-row textarea {
+                border: none !important;
+                background: transparent !important;
+                padding: 2px 0 !important;
             }
             
             .timestamp {
@@ -462,9 +474,22 @@
             <h1>Чек-лист проверки организации противотуберкулезной помощи</h1>
         </header>
         
-        <div class="branch-info">
-            <div class="branch-name">ГБУЗ МО МОКПТД</div>
-            <div class="branch-details">Филиал "Клинский"</div>
+        <!-- Блок информации о проверке (расширенный) -->
+        <div class="info-block">
+            <div class="info-row">
+                <label for="org-name">Проверяемая организация:</label>
+                <input type="text" id="org-name" placeholder="Введите наименование учреждения">
+            </div>
+            
+            <div class="info-row">
+                <label for="inspector">Проверяющий (должность, ФИО):</label>
+                <textarea id="inspector" placeholder="Введите должность и ФИО проверяющего" rows="2"></textarea>
+            </div>
+            
+            <div class="info-row">
+                <div class="branch-name">ГБУЗ МО МОКПТД</div>
+                <div class="branch-details">Филиал "Клинский"</div>
+            </div>
         </div>
         
         <div class="timestamp">
@@ -491,7 +516,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
-        // Данные чек-листа из документа по противотуберкулезной помощи
+        // Данные чек-листа (полностью сохранены)
         const sections = [
             {
                 title: "I. Документооборот и ведение медицинской карты (амбулаторная карта - АК)",
@@ -648,9 +673,7 @@
         let autoSaveInterval;
         let lastSaveTime = null;
         
-        // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
-            // Установка текущей даты
             const now = new Date();
             const timestampInput = document.getElementById('timestamp');
             const year = now.getFullYear();
@@ -658,25 +681,16 @@
             const day = String(now.getDate()).padStart(2, '0');
             timestampInput.value = `${year}-${month}-${day}`;
             
-            // Генерация секций
             generateSections();
-            
-            // Обновление прогресс-бара
             updateProgressBar();
             
-            // Обработчики событий для кнопок
             document.getElementById('save-btn').addEventListener('click', saveToLocalStorage);
             document.getElementById('export-btn').addEventListener('click', exportToExcel);
             document.getElementById('clear-btn').addEventListener('click', clearForm);
             document.getElementById('print-btn').addEventListener('click', printForm);
             
-            // Загрузка сохраненных данных
             loadFromLocalStorage();
-            
-            // Запуск автосохранения
             startAutoSave();
-            
-            // Автоматическое увеличение полей комментариев
             setupAutoResizeTextareas();
         });
         
@@ -685,9 +699,7 @@
                 section.classList.remove('collapsed');
                 section.classList.add('expanded');
             });
-            setTimeout(() => {
-                window.print();
-            }, 100);
+            setTimeout(() => window.print(), 100);
         }
         
         function setupAutoResizeTextareas() {
@@ -702,9 +714,7 @@
         }
         
         function startAutoSave() {
-            autoSaveInterval = setInterval(() => {
-                saveToLocalStorage(true);
-            }, 3 * 60 * 1000);
+            autoSaveInterval = setInterval(() => saveToLocalStorage(true), 3 * 60 * 1000);
         }
         
         function generateSections() {
@@ -733,16 +743,10 @@
                 content.className = 'section-content';
                 
                 section.questions.forEach((question, qIndex) => {
-                    const questionElement = createQuestionElement(index, qIndex, question);
-                    content.appendChild(questionElement);
+                    content.appendChild(createQuestionElement(index, qIndex, question));
                 });
                 
-                const additionalInfoElement = createQuestionElement(
-                    index, 
-                    section.questions.length, 
-                    "Дополнительная информация"
-                );
-                content.appendChild(additionalInfoElement);
+                content.appendChild(createQuestionElement(index, section.questions.length, "Дополнительная информация"));
                 
                 sectionElement.appendChild(header);
                 sectionElement.appendChild(content);
@@ -759,17 +763,13 @@
                         section.classList.remove('collapsed');
                         section.classList.add('expanded');
                         
-                        setTimeout(() => {
-                            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 100);
+                        setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
                     } else {
                         section.classList.remove('expanded');
                         section.classList.add('collapsed');
                     }
                     
-                    setTimeout(() => {
-                        setupAutoResizeTextareas();
-                    }, 100);
+                    setTimeout(setupAutoResizeTextareas, 100);
                 });
                 
                 container.appendChild(sectionElement);
@@ -795,18 +795,14 @@
             const comment = document.createElement('textarea');
             comment.className = 'comment';
             comment.dataset.questionId = `${sectionIndex}-${questionIndex}`;
-            // убираем placeholder, как в оригинале
             
             questionElement.appendChild(comment);
             
-            // Функция обновления статуса от комментария
             const updateButtonFromComment = () => {
                 const hasCommentText = comment.value.trim() !== '';
                 if (hasCommentText) {
                     if (!checkButton.classList.contains('checked') && !checkButton.classList.contains('checked-red')) {
                         checkButton.classList.add('checked-red');
-                    } else if (checkButton.classList.contains('checked')) {
-                        // зеленая остается зеленой (приоритет ручной установки)
                     }
                 } else {
                     if (checkButton.classList.contains('checked-red') && !checkButton.classList.contains('checked')) {
@@ -875,38 +871,34 @@
             
             sections.forEach((section, index) => {
                 totalQuestions += section.questions.length + 1;
-                if (answers[index]) {
-                    answeredQuestions += Object.keys(answers[index]).length;
-                }
+                if (answers[index]) answeredQuestions += Object.keys(answers[index]).length;
             });
             
-            const progressPercentage = (answeredQuestions / totalQuestions) * 100;
-            progressBar.style.width = `${progressPercentage}%`;
+            progressBar.style.width = `${(answeredQuestions / totalQuestions) * 100}%`;
         }
         
         function saveToLocalStorage(silent = false) {
             document.querySelectorAll('.check-button').forEach(button => {
-                const questionId = button.dataset.questionId;
-                const [sectionIndex, questionIndex] = questionId.split('-').map(Number);
-                const questionElement = document.querySelector(`[data-question-id="${questionId}"]`);
-                const comment = questionElement ? questionElement.querySelector('textarea') : null;
+                const [sectionIndex, questionIndex] = button.dataset.questionId.split('-').map(Number);
+                const questionElement = document.querySelector(`[data-question-id="${button.dataset.questionId}"]`);
+                const comment = questionElement?.querySelector('textarea');
                 let answerStatus = 'Не проверено';
                 if (button.classList.contains('checked')) answerStatus = 'Проверено';
                 else if (button.classList.contains('checked-red')) answerStatus = 'Проверено (замечания)';
                 
-                saveAnswer(sectionIndex, questionIndex, answerStatus, comment ? comment.value : null);
+                saveAnswer(sectionIndex, questionIndex, answerStatus, comment?.value || null);
             });
             
-            const timestamp = document.getElementById('timestamp').value;
             const data = {
-                timestamp: timestamp,
+                timestamp: document.getElementById('timestamp').value,
+                orgName: document.getElementById('org-name').value,
+                inspector: document.getElementById('inspector').value,
                 answers: answers,
                 lastSaved: new Date().toLocaleString('ru-RU')
             };
             
             localStorage.setItem('tuberculosis_checklist_data', JSON.stringify(data));
             lastSaveTime = new Date();
-            
             if (!silent) alert('Данные сохранены в браузере!');
             updateAutoSaveStatus();
         }
@@ -927,6 +919,10 @@
                 const data = JSON.parse(savedData);
                 answers = data.answers || {};
                 
+                if (data.timestamp) document.getElementById('timestamp').value = data.timestamp;
+                if (data.orgName) document.getElementById('org-name').value = data.orgName;
+                if (data.inspector) document.getElementById('inspector').value = data.inspector;
+                
                 Object.keys(answers).forEach(sectionIndex => {
                     Object.keys(answers[sectionIndex]).forEach(questionIndex => {
                         const answerData = answers[sectionIndex][questionIndex];
@@ -935,28 +931,20 @@
                         if (questionElement) {
                             const checkButton = questionElement.querySelector('.check-button');
                             if (checkButton) {
-                                if (answerData.answer === 'Проверено') {
-                                    checkButton.classList.add('checked');
-                                } else if (answerData.answer === 'Проверено (замечания)') {
-                                    checkButton.classList.add('checked-red');
-                                }
+                                if (answerData.answer === 'Проверено') checkButton.classList.add('checked');
+                                else if (answerData.answer === 'Проверено (замечания)') checkButton.classList.add('checked-red');
                             }
                             
-                            if (answerData.comment) {
-                                const comment = questionElement.querySelector('textarea');
-                                if (comment) comment.value = answerData.comment;
-                            }
+                            const comment = questionElement.querySelector('textarea');
+                            if (comment && answerData.comment) comment.value = answerData.comment;
                         }
                     });
                     updateSectionStatus(parseInt(sectionIndex));
                 });
                 
-                if (data.timestamp) document.getElementById('timestamp').value = data.timestamp;
-                
                 updateProgressBar();
                 updateAutoSaveStatus();
-                
-                setTimeout(() => { setupAutoResizeTextareas(); }, 100);
+                setTimeout(setupAutoResizeTextareas, 100);
             }
         }
         
@@ -966,15 +954,10 @@
                 localStorage.removeItem('tuberculosis_checklist_data');
                 
                 document.querySelectorAll('.question').forEach(question => {
-                    const checkButtons = question.querySelectorAll('.check-button');
-                    checkButtons.forEach(button => {
-                        button.classList.remove('checked', 'checked-red');
-                    });
-                    
-                    const textareas = question.querySelectorAll('textarea');
-                    textareas.forEach(textarea => {
-                        textarea.value = '';
-                        textarea.style.height = '60px';
+                    question.querySelectorAll('.check-button').forEach(btn => btn.classList.remove('checked', 'checked-red'));
+                    question.querySelectorAll('textarea').forEach(ta => {
+                        ta.value = '';
+                        ta.style.height = '60px';
                     });
                 });
                 
@@ -983,57 +966,53 @@
                     status.textContent = `0/${sections[sectionIndex].questions.length + 1}`;
                 });
                 
+                document.getElementById('org-name').value = '';
+                document.getElementById('inspector').value = '';
+                
+                const now = new Date();
+                document.getElementById('timestamp').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+                
                 updateProgressBar();
                 updateAutoSaveStatus();
-                
                 alert('Форма очищена!');
             }
         }
         
         function exportToExcel() {
             const timestamp = document.getElementById('timestamp').value;
-            const date = new Date(timestamp + 'T00:00:00');
-            const formattedDate = date.toLocaleDateString('ru-RU');
+            const date = new Date(timestamp + 'T00:00:00').toLocaleDateString('ru-RU');
+            const orgName = document.getElementById('org-name').value || 'Не указано';
+            const inspector = document.getElementById('inspector').value || 'Не указано';
             
             const wb = XLSX.utils.book_new();
-            const excelData = [];
-            
-            excelData.push(["Чек-лист проверки организации противотуберкулезной помощи"]);
-            excelData.push(["ГБУЗ МО МОКПТД"]);
-            excelData.push(['Филиал "Клинский"']);
-            excelData.push([`Дата проверки: ${formattedDate}`]);
-            excelData.push([]);
-            excelData.push(["Раздел", "Вопрос", "Статус", "Комментарий"]);
+            const excelData = [
+                ["Чек-лист проверки организации противотуберкулезной помощи"],
+                [`Проверяемая организация: ${orgName}`],
+                [`Проверяющий: ${inspector}`],
+                ["ГБУЗ МО МОКПТД"],
+                ['Филиал "Клинский"'],
+                [`Дата проверки: ${date}`],
+                [],
+                ["Раздел", "Вопрос", "Статус", "Комментарий"]
+            ];
             
             sections.forEach((section, sectionIndex) => {
                 excelData.push([section.title, "", "", ""]);
                 
                 section.questions.forEach((question, questionIndex) => {
                     const answerData = answers[sectionIndex]?.[questionIndex];
-                    const answer = answerData?.answer || 'Не проверено';
-                    const comment = answerData?.comment || '';
-                    excelData.push(["", question, answer, comment]);
+                    excelData.push(["", question, answerData?.answer || 'Не проверено', answerData?.comment || '']);
                 });
                 
-                const additionalInfoData = answers[sectionIndex]?.[section.questions.length];
-                const additionalInfoAnswer = additionalInfoData?.answer || 'Не проверено';
-                const additionalInfoComment = additionalInfoData?.comment || '';
-                excelData.push(["", "Дополнительная информация", additionalInfoAnswer, additionalInfoComment]);
+                const additional = answers[sectionIndex]?.[section.questions.length];
+                excelData.push(["", "Дополнительная информация", additional?.answer || 'Не проверено', additional?.comment || '']);
                 excelData.push([]);
             });
             
             const ws = XLSX.utils.aoa_to_sheet(excelData);
-            
-            // Настройка ширины столбцов
-            ws['!cols'] = [
-                { wch: 20 },  // A
-                { wch: 50 },  // B
-                { wch: 15 },  // C
-                { wch: 50 }   // D
-            ];
-            
+            ws['!cols'] = [{ wch: 20 }, { wch: 50 }, { wch: 15 }, { wch: 50 }];
             XLSX.utils.book_append_sheet(wb, ws, "Чек-лист ПТП");
-            XLSX.writeFile(wb, `чек-лист_птп_клинский_${formattedDate.replace(/\./g, '-')}.xlsx`);
+            XLSX.writeFile(wb, `чек-лист_птп_${date.replace(/\./g, '-')}.xlsx`);
         }
     </script>
 </body>
