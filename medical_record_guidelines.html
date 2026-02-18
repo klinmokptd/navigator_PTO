@@ -1474,263 +1474,333 @@
 
     <script>
         (function() {
-            const form = document.getElementById('checklistForm');
-            const statusMsg = document.getElementById('statusMessage');
-            const clearBtn = document.getElementById('clearBtn');
-            const saveBtn = document.getElementById('saveExcelBtn');
-            const progressFill = document.getElementById('progressFill');
-            const progressPercent = document.getElementById('progressPercent');
-            const completedSpan = document.getElementById('completedCount');
-            const totalSpan = document.getElementById('totalCount');
-            const currentDateDisplay = document.getElementById('currentDateDisplay');
-            const patientId = document.getElementById('patientId');
-            const checkDate = document.getElementById('checkDate');
+    const form = document.getElementById('checklistForm');
+    const statusMsg = document.getElementById('statusMessage');
+    const clearBtn = document.getElementById('clearBtn');
+    const saveBtn = document.getElementById('saveExcelBtn');
+    const progressFill = document.getElementById('progressFill');
+    const progressPercent = document.getElementById('progressPercent');
+    const completedSpan = document.getElementById('completedCount');
+    const totalSpan = document.getElementById('totalCount');
+    const currentDateDisplay = document.getElementById('currentDateDisplay');
+    const patientId = document.getElementById('patientId');
+    const checkDate = document.getElementById('checkDate');
 
-            // Установить общее количество пунктов (67)
-            totalSpan.textContent = '67';
+    totalSpan.textContent = '67';
 
-            function setCurrentDate() {
-                const today = new Date().toISOString().split('T')[0];
-                if (!checkDate.value) checkDate.value = today;
+    function setCurrentDate() {
+        const today = new Date().toISOString().split('T')[0];
+        if (!checkDate.value) checkDate.value = today;
+        updateDateDisplay();
+    }
+
+    function updateDateDisplay() {
+        if (checkDate.value) {
+            const d = new Date(checkDate.value);
+            currentDateDisplay.textContent = d.toLocaleDateString('ru-RU');
+        } else {
+            currentDateDisplay.textContent = 'дата не выбрана';
+        }
+    }
+
+    // ОСНОВНАЯ ФУНКЦИЯ: обновление цвета галочек по правилам
+    function updateCheckboxColors() {
+        document.querySelectorAll('.question-block').forEach(block => {
+            const checkbox = block.querySelector('input[type="checkbox"]');
+            const commentArea = block.querySelector('.comment-area');
+            const hasComment = commentArea && commentArea.value.trim() !== '';
+            
+            // Убираем все классы цвета
+            block.classList.remove('checkbox-green', 'checkbox-red');
+            
+            if (hasComment) {
+                // Если есть комментарий - всегда красная галочка
+                block.classList.add('checkbox-red');
+                // Принудительно включаем чекбокс, если он выключен
+                if (!checkbox.checked) {
+                    checkbox.checked = true;
+                }
+            } else if (checkbox.checked) {
+                // Если нет комментария и чекбокс включен - зеленая
+                block.classList.add('checkbox-green');
+            }
+            // Если нет комментария и чекбокс выключен - классы не добавляем (серый)
+        });
+    }
+
+    // Обновление прогресса и цветов
+    function updateProgressAndColors() {
+        const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+        let checkedCount = 0;
+        
+        checkboxes.forEach(cb => {
+            if (cb.checked) checkedCount++;
+        });
+        
+        const total = checkboxes.length;
+        const percent = total ? Math.round((checkedCount / total) * 100) : 0;
+        progressFill.style.width = percent + '%';
+        progressPercent.textContent = percent + '%';
+        completedSpan.textContent = checkedCount;
+        
+        // Применяем правила цветов
+        updateCheckboxColors();
+    }
+
+    // Обработчик клика по чекбоксу с новой логикой
+    function handleCheckboxClick(e) {
+        const checkbox = e.target;
+        const block = checkbox.closest('.question-block');
+        const commentArea = block.querySelector('.comment-area');
+        const hasComment = commentArea && commentArea.value.trim() !== '';
+        
+        if (hasComment) {
+            // Если есть комментарий - запрещаем снимать галочку
+            checkbox.checked = true;
+            e.preventDefault();
+            return false;
+        }
+        // Если нет комментария - разрешаем обычное переключение
+        // Цвет обновится в updateProgressAndColors
+    }
+
+    // Обработчик ввода в комментарий
+    function handleCommentInput(e) {
+        const commentArea = e.target;
+        const block = commentArea.closest('.question-block');
+        const checkbox = block.querySelector('input[type="checkbox"]');
+        const hasComment = commentArea.value.trim() !== '';
+        
+        if (hasComment) {
+            // При появлении комментария - включаем чекбокс и делаем красным
+            checkbox.checked = true;
+        } else {
+            // При удалении комментария - проверяем, нужно ли оставить зеленый
+            // Если чекбокс был включен, он останется включенным, но станет зеленым
+            // (цвет обновится в updateCheckboxColors)
+        }
+        
+        updateProgressAndColors();
+        saveAllData();
+    }
+
+    function attachListeners() {
+        // Клик по блоку (включая чекбокс)
+        document.querySelectorAll('.question-block').forEach(block => {
+            block.addEventListener('click', function(e) {
+                // Если кликнули по текстовому полю - не обрабатываем
+                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+                    return;
+                }
+                
+                const cb = this.querySelector('input[type="checkbox"]');
+                const commentArea = this.querySelector('.comment-area');
+                const hasComment = commentArea && commentArea.value.trim() !== '';
+                
+                if (cb) {
+                    if (hasComment) {
+                        // Если есть комментарий - оставляем включенным
+                        cb.checked = true;
+                    } else {
+                        // Если нет комментария - переключаем
+                        cb.checked = !cb.checked;
+                    }
+                    updateProgressAndColors();
+                    saveAllData();
+                }
+            });
+        });
+
+        // Отдельный обработчик для чекбоксов (более надежный)
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+            cb.addEventListener('click', handleCheckboxClick);
+        });
+
+        // Обработчики для комментариев
+        document.querySelectorAll('.comment-area').forEach(area => {
+            area.addEventListener('input', handleCommentInput);
+        });
+
+        // Общие комментарии разделов
+        document.querySelectorAll('.section-comment-area').forEach(area => {
+            area.addEventListener('input', saveAllData);
+        });
+
+        patientId.addEventListener('input', saveAllData);
+        checkDate.addEventListener('change', function() {
+            updateDateDisplay();
+            saveAllData();
+        });
+
+        // Слушаем изменения на форме
+        form.addEventListener('change', function(e) {
+            if (e.target.type === 'checkbox') {
+                // Для чекбоксов уже сработал отдельный обработчик
+                // Но на всякий случай обновляем
+                updateProgressAndColors();
+                saveAllData();
+            }
+        });
+    }
+
+    function saveAllData() {
+        const data = {
+            checkboxes: {},
+            comments: {},
+            sectionComments: {},
+            patientId: patientId.value,
+            checkDate: checkDate.value
+        };
+
+        form.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+            data.checkboxes[cb.id] = cb.checked;
+        });
+
+        document.querySelectorAll('.comment-area').forEach(area => {
+            const id = area.id.replace('comment_', '');
+            data.comments[id] = area.value;
+        });
+
+        document.querySelectorAll('.section-comment-area').forEach(area => {
+            const sectionId = area.id.replace('section_comment_', '');
+            data.sectionComments[sectionId] = area.value;
+        });
+
+        localStorage.setItem('checklistFull', JSON.stringify(data));
+        showStatus('Автосохранение', 'success');
+    }
+
+    function loadSaved() {
+        const saved = localStorage.getItem('checklistFull');
+        if (!saved) return;
+
+        try {
+            const data = JSON.parse(saved);
+
+            // Загружаем чекбоксы
+            for (let [id, val] of Object.entries(data.checkboxes || {})) {
+                const cb = document.getElementById(id);
+                if (cb) cb.checked = val;
+            }
+
+            // Загружаем комментарии
+            for (let [id, val] of Object.entries(data.comments || {})) {
+                const area = document.getElementById('comment_' + id);
+                if (area) area.value = val;
+            }
+
+            // Загружаем комментарии разделов
+            for (let [secId, val] of Object.entries(data.sectionComments || {})) {
+                const area = document.getElementById('section_comment_' + secId);
+                if (area) area.value = val;
+            }
+
+            if (data.patientId) patientId.value = data.patientId;
+            if (data.checkDate) {
+                checkDate.value = data.checkDate;
                 updateDateDisplay();
             }
 
-            function updateDateDisplay() {
-                if (checkDate.value) {
-                    const d = new Date(checkDate.value);
-                    currentDateDisplay.textContent = d.toLocaleDateString('ru-RU');
-                } else {
-                    currentDateDisplay.textContent = 'дата не выбрана';
-                }
-            }
+            // Применяем правила цветов после загрузки
+            updateCheckboxColors();
+            updateProgressAndColors();
+        } catch (e) {
+            console.warn('Ошибка загрузки', e);
+        }
+    }
 
-            function updateProgressAndColors() {
-                const checkboxes = form.querySelectorAll('input[type="checkbox"]');
-                let checkedCount = 0;
-                checkboxes.forEach(cb => {
-                    if (cb.checked) checkedCount++;
-                });
-                const total = checkboxes.length;
-                const percent = total ? Math.round((checkedCount / total) * 100) : 0;
-                progressFill.style.width = percent + '%';
-                progressPercent.textContent = percent + '%';
-                completedSpan.textContent = checkedCount;
+    function clearAll() {
+        if (!confirm('Очистить все отметки и комментарии?')) return;
 
-                checkboxes.forEach(cb => {
-                    const block = cb.closest('.question-block');
-                    if (!block) return;
-                    const commentArea = block.querySelector('.comment-area');
-                    const hasComment = commentArea && commentArea.value.trim() !== '';
-                    
-                    block.classList.remove('checkbox-green', 'checkbox-red');
-                    
-                    if (hasComment) {
-                        block.classList.add('checkbox-red');
-                    } else if (cb.checked) {
-                        block.classList.add('checkbox-green');
-                    }
-                });
-            }
+        form.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        form.querySelectorAll('.comment-area').forEach(a => a.value = '');
+        document.querySelectorAll('.section-comment-area').forEach(a => a.value = '');
+        patientId.value = '';
+        setCurrentDate();
 
-            function attachListeners() {
-                document.querySelectorAll('.question-block').forEach(block => {
-                    block.addEventListener('click', function(e) {
-                        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
-                        const cb = this.querySelector('input[type="checkbox"]');
-                        if (cb) {
-                            cb.checked = !cb.checked;
-                            updateProgressAndColors();
-                            saveAllData();
-                        }
-                    });
-                });
+        updateProgressAndColors();
+        saveAllData();
+        showStatus('Форма очищена', 'success');
+    }
 
-                document.querySelectorAll('.comment-area').forEach(area => {
-                    area.addEventListener('input', function() {
-                        updateProgressAndColors();
-                        saveAllData();
-                    });
-                });
-
-                document.querySelectorAll('.section-comment-area').forEach(area => {
-                    area.addEventListener('input', saveAllData);
-                });
-
-                patientId.addEventListener('input', saveAllData);
-                checkDate.addEventListener('change', function() {
-                    updateDateDisplay();
-                    saveAllData();
-                });
-
-                form.addEventListener('change', function(e) {
-                    if (e.target.type === 'checkbox') {
-                        updateProgressAndColors();
-                        saveAllData();
-                    }
-                });
-            }
-
-            function saveAllData() {
-                const data = {
-                    checkboxes: {},
-                    comments: {},
-                    sectionComments: {},
-                    patientId: patientId.value,
-                    checkDate: checkDate.value
-                };
-
-                form.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-                    data.checkboxes[cb.id] = cb.checked;
-                });
-
-                document.querySelectorAll('.comment-area').forEach(area => {
-                    const id = area.id.replace('comment_', '');
-                    data.comments[id] = area.value;
-                });
-
-                document.querySelectorAll('.section-comment-area').forEach(area => {
-                    const sectionId = area.id.replace('section_comment_', '');
-                    data.sectionComments[sectionId] = area.value;
-                });
-
-                localStorage.setItem('checklistFull', JSON.stringify(data));
-                showStatus('Автосохранение', 'success');
-            }
-
-            function loadSaved() {
-                const saved = localStorage.getItem('checklistFull');
-                if (!saved) return;
-
-                try {
-                    const data = JSON.parse(saved);
-
-                    for (let [id, val] of Object.entries(data.checkboxes || {})) {
-                        const cb = document.getElementById(id);
-                        if (cb) cb.checked = val;
-                    }
-
-                    for (let [id, val] of Object.entries(data.comments || {})) {
-                        const area = document.getElementById('comment_' + id);
-                        if (area) area.value = val;
-                    }
-
-                    for (let [secId, val] of Object.entries(data.sectionComments || {})) {
-                        const area = document.getElementById('section_comment_' + secId);
-                        if (area) area.value = val;
-                    }
-
-                    if (data.patientId) patientId.value = data.patientId;
-                    if (data.checkDate) {
-                        checkDate.value = data.checkDate;
-                        updateDateDisplay();
-                    }
-
-                    updateProgressAndColors();
-                } catch (e) {
-                    console.warn('Ошибка загрузки', e);
-                }
-            }
-
-            function clearAll() {
-                if (!confirm('Очистить все отметки и комментарии?')) return;
-
-                form.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-                form.querySelectorAll('.comment-area').forEach(a => a.value = '');
-                document.querySelectorAll('.section-comment-area').forEach(a => a.value = '');
-                patientId.value = '';
-                setCurrentDate();
-
-                updateProgressAndColors();
-                saveAllData();
-                showStatus('Форма очищена', 'success');
-            }
-
-            function exportToExcel() {
-    // Собираем основные данные
-    const patientIdValue = document.getElementById('patientId').value || 'Не указано';
-    const checkDateValue = document.getElementById('checkDate').value 
-        ? new Date(document.getElementById('checkDate').value).toLocaleDateString('ru-RU') 
-        : 'Не указана';
-    
-    // Получаем все разделы
-    const sections = document.querySelectorAll('.section');
-    const excelRows = [];
-    
-    // Заголовок документа
-    excelRows.push(['Чек-лист проверки медицинской карты (форма 025/у)']);
-    excelRows.push([]);
-    excelRows.push(['ID/номер карты:', patientIdValue]);
-    excelRows.push(['Дата проверки:', checkDateValue]);
-    excelRows.push([]);
-    excelRows.push(['Раздел', '№', 'Критерий', 'Статус', 'Комментарий']);
-    
-    // Проходим по всем разделам
-    sections.forEach((section) => {
-        const sectionTitle = section.querySelector('h2')?.textContent || 'Раздел';
-        excelRows.push([sectionTitle, '', '', '', '']);
+    function exportToExcel() {
+        const patientIdValue = document.getElementById('patientId').value || 'Не указано';
+        const checkDateValue = document.getElementById('checkDate').value 
+            ? new Date(document.getElementById('checkDate').value).toLocaleDateString('ru-RU') 
+            : 'Не указана';
         
-        // Получаем все вопросы в разделе
-        const questions = section.querySelectorAll('.question-block');
-        questions.forEach((question) => {
-            const questionNumber = question.querySelector('.question-text strong')?.textContent || '';
-            const questionText = question.querySelector('.question-text')?.innerText.replace(questionNumber, '').trim() || '';
-            const checkbox = question.querySelector('input[type="checkbox"]');
-            const comment = question.querySelector('.comment-area')?.value || '';
+        const sections = document.querySelectorAll('.section');
+        const excelRows = [];
+        
+        excelRows.push(['Чек-лист проверки медицинской карты (форма 025/у)']);
+        excelRows.push([]);
+        excelRows.push(['ID/номер карты:', patientIdValue]);
+        excelRows.push(['Дата проверки:', checkDateValue]);
+        excelRows.push([]);
+        excelRows.push(['Раздел', '№', 'Критерий', 'Статус', 'Комментарий']);
+        
+        sections.forEach((section) => {
+            const sectionTitle = section.querySelector('h2')?.textContent || 'Раздел';
+            excelRows.push([sectionTitle, '', '', '', '']);
             
-            const status = checkbox?.checked ? 'Проверено' : 'Не проверено';
+            const questions = section.querySelectorAll('.question-block');
+            questions.forEach((question) => {
+                const questionNumber = question.querySelector('.question-text strong')?.textContent || '';
+                const questionText = question.querySelector('.question-text')?.innerText.replace(questionNumber, '').trim() || '';
+                const checkbox = question.querySelector('input[type="checkbox"]');
+                const comment = question.querySelector('.comment-area')?.value || '';
+                
+                const status = checkbox?.checked ? 'Проверено' : 'Не проверено';
+                
+                excelRows.push(['', questionNumber, questionText, status, comment]);
+            });
             
-            excelRows.push(['', questionNumber, questionText, status, comment]);
+            const sectionComment = section.querySelector('.section-comment-area')?.value || '';
+            if (sectionComment) {
+                excelRows.push(['', '', 'Общий комментарий к разделу:', '', sectionComment]);
+            }
+            
+            excelRows.push(['']);
         });
         
-        // Добавляем общий комментарий к разделу
-        const sectionComment = section.querySelector('.section-comment-area')?.value || '';
-        if (sectionComment) {
-            excelRows.push(['', '', 'Общий комментарий к разделу:', '', sectionComment]);
-        }
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(excelRows);
         
-        excelRows.push(['']); // Пустая строка между разделами
-    });
-    
-    // Создаем рабочий лист
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.aoa_to_sheet(excelRows);
-    
-    // Настраиваем ширину колонок
-    ws['!cols'] = [
-        { wch: 20 }, // Раздел
-        { wch: 8 },  // №
-        { wch: 60 }, // Критерий
-        { wch: 15 }, // Статус
-        { wch: 50 }  // Комментарий
-    ];
-    
-    // Добавляем лист в книгу
-    XLSX.utils.book_append_sheet(wb, ws, 'Чек-лист');
-    
-    // Сохраняем файл
-    const fileName = `мед_карта_${patientIdValue || 'бланк'}_${checkDateValue.replace(/\./g, '-')}.xlsx`;
-    XLSX.writeFile(wb, fileName);
-}
+        ws['!cols'] = [
+            { wch: 20 },
+            { wch: 8 },
+            { wch: 60 },
+            { wch: 15 },
+            { wch: 50 }
+        ];
+        
+        XLSX.utils.book_append_sheet(wb, ws, 'Чек-лист');
+        
+        const fileName = `мед_карта_${patientIdValue || 'бланк'}_${checkDateValue.replace(/\./g, '-')}.xlsx`;
+        XLSX.writeFile(wb, fileName);
+    }
 
-            function showStatus(msg, type) {
-                statusMsg.textContent = msg;
-                statusMsg.style.background = type === 'success' ? '#e3f7e3' : '#fde8e8';
-                setTimeout(() => {
-                    statusMsg.innerHTML = 'Готов к работе • Автосохранение каждые 10 секунд';
-                    statusMsg.style.background = '#e8f4fd';
-                }, 2500);
-            }
+    function showStatus(msg, type) {
+        statusMsg.textContent = msg;
+        statusMsg.style.background = type === 'success' ? '#e3f7e3' : '#fde8e8';
+        setTimeout(() => {
+            statusMsg.innerHTML = 'Готов к работе • Автосохранение каждые 10 секунд';
+            statusMsg.style.background = '#e8f4fd';
+        }, 2500);
+    }
 
-            setCurrentDate();
-            loadSaved();
-            attachListeners();
-            updateProgressAndColors();
+    // Инициализация
+    setCurrentDate();
+    loadSaved();
+    attachListeners();
+    updateProgressAndColors();
 
-            setInterval(saveAllData, 10000);
+    // Автосохранение
+    setInterval(saveAllData, 10000);
 
-            clearBtn.addEventListener('click', clearAll);
-            saveBtn.addEventListener('click', exportToExcel);
-        })();
+    clearBtn.addEventListener('click', clearAll);
+    saveBtn.addEventListener('click', exportToExcel);
+})();
     </script>
 </body>
 </html>
