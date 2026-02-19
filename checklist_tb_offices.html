@@ -1167,78 +1167,103 @@
                 setTimeout(() => window.print(), 100);
             }
 
-            // ---------- ЛЕНИВЫЙ ЭКСПОРТ В EXCEL ----------
-            async function lazyExportToExcel() {
-                const exportBtn = document.getElementById('export-btn');
-                const originalText = exportBtn.textContent;
-                exportBtn.textContent = 'Загрузка...';
-                exportBtn.disabled = true;
+            // ---------- ЛЕНИВЫЙ ЭКСПОРТ В EXCEL (С ДОБАВЛЕНИЕМ СКРЫТОГО ЛИСТА С ПРОМПТОМ) ----------
+async function lazyExportToExcel() {
+    const exportBtn = document.getElementById('export-btn');
+    const originalText = exportBtn.textContent;
+    exportBtn.textContent = 'Загрузка...';
+    exportBtn.disabled = true;
 
-                try {
-                    // Динамическая загрузка XLSX
-                    if (!window.XLSX) {
-                        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');
-                    }
+    try {
+        // Динамическая загрузка XLSX
+        if (!window.XLSX) {
+            await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');
+        }
 
-                    // Подготовка данных
-                    const timestamp = document.getElementById('timestamp').value;
-                    const date = new Date(timestamp + 'T00:00:00').toLocaleDateString('ru-RU');
-                    const orgName = document.getElementById('org-name').value || 'Не указано';
-                    const inspector = document.getElementById('inspector').value || 'Не указано';
+        // Подготовка данных
+        const timestamp = document.getElementById('timestamp').value;
+        const date = new Date(timestamp + 'T00:00:00').toLocaleDateString('ru-RU');
+        const orgName = document.getElementById('org-name').value || 'Не указано';
+        const inspector = document.getElementById('inspector').value || 'Не указано';
 
-                    // Убеждаемся, что все данные из DOM сохранены в answers
-                    document.querySelectorAll('.section[data-initialized="true"]').forEach(section => {
-                        const sectionIndex = section.dataset.sectionIndex;
-                        section.querySelectorAll('.question').forEach(question => {
-                            const questionId = question.dataset.questionId.split('-');
-                            const qIndex = parseInt(questionId[1]);
-                            const checkButton = question.querySelector('.check-button');
-                            const comment = question.querySelector('.comment').value;
+        // Убеждаемся, что все данные из DOM сохранены в answers
+        document.querySelectorAll('.section[data-initialized="true"]').forEach(section => {
+            const sectionIndex = section.dataset.sectionIndex;
+            section.querySelectorAll('.question').forEach(question => {
+                const questionId = question.dataset.questionId.split('-');
+                const qIndex = parseInt(questionId[1]);
+                const checkButton = question.querySelector('.check-button');
+                const comment = question.querySelector('.comment').value;
 
-                            let answerStatus = 'Не проверено';
-                            if (checkButton.classList.contains('checked')) answerStatus = 'Проверено';
-                            else if (checkButton.classList.contains('checked-red')) answerStatus = 'Проверено (замечания)';
+                let answerStatus = 'Не проверено';
+                if (checkButton.classList.contains('checked')) answerStatus = 'Проверено';
+                else if (checkButton.classList.contains('checked-red')) answerStatus = 'Проверено (замечания)';
 
-                            saveAnswer(parseInt(sectionIndex), qIndex, answerStatus, comment);
-                        });
-                    });
+                saveAnswer(parseInt(sectionIndex), qIndex, answerStatus, comment);
+            });
+        });
 
-                    const wb = XLSX.utils.book_new();
-                    const excelData = [
-                        ["Чек-лист проверки организации противотуберкулезной помощи"],
-                        [`Проверяемая организация: ${orgName}`],
-                        [`Проверяющий: ${inspector}`],
-                        [`Дата проверки: ${date}`],
-                        [],
-                        ["Раздел", "Вопрос", "Статус", "Комментарий"]
-                    ];
+        // СОЗДАЁМ НОВУЮ КНИГУ
+        const wb = XLSX.utils.book_new();
 
-                    sections.forEach((section, sectionIndex) => {
-                        excelData.push([section.title, "", "", ""]);
+        // === ЛИСТ 1: Чек-лист ===
+        const checklistData = [
+            ["Чек-лист проверки организации противотуберкулезной помощи"],
+            [`Проверяемая организация: ${orgName}`],
+            [`Проверяющий: ${inspector}`],
+            [`Дата проверки: ${date}`],
+            [],
+            ["Раздел", "Вопрос", "Статус", "Комментарий"]
+        ];
 
-                        section.questions.forEach((question, questionIndex) => {
-                            const answerData = answers[sectionIndex]?.[questionIndex];
-                            excelData.push(["", question, answerData?.answer || 'Не проверено', answerData?.comment || '']);
-                        });
+        sections.forEach((section, sectionIndex) => {
+            checklistData.push([section.title, "", "", ""]);
 
-                        const additional = answers[sectionIndex]?.[section.questions.length];
-                        excelData.push(["", "Дополнительная информация", additional?.answer || 'Не проверено', additional?.comment || '']);
-                        excelData.push([]);
-                    });
+            section.questions.forEach((question, questionIndex) => {
+                const answerData = answers[sectionIndex]?.[questionIndex];
+                checklistData.push(["", question, answerData?.answer || 'Не проверено', answerData?.comment || '']);
+            });
 
-                    const ws = XLSX.utils.aoa_to_sheet(excelData);
-                    ws['!cols'] = [{ wch: 20 }, { wch: 50 }, { wch: 15 }, { wch: 50 }];
-                    XLSX.utils.book_append_sheet(wb, ws, "Чек-лист ПТП");
-                    XLSX.writeFile(wb, `чек-лист_птп_${date.replace(/\./g, '-')}.xlsx`);
+            const additional = answers[sectionIndex]?.[section.questions.length];
+            checklistData.push(["", "Дополнительная информация", additional?.answer || 'Не проверено', additional?.comment || '']);
+            checklistData.push([]);
+        });
 
-                } catch (error) {
-                    console.error('Ошибка при экспорте:', error);
-                    alert('Ошибка при загрузке библиотеки для экспорта. Попробуйте еще раз.');
-                } finally {
-                    exportBtn.textContent = originalText;
-                    exportBtn.disabled = false;
-                }
-            }
+        const wsChecklist = XLSX.utils.aoa_to_sheet(checklistData);
+        wsChecklist['!cols'] = [{ wch: 20 }, { wch: 50 }, { wch: 15 }, { wch: 50 }];
+        XLSX.utils.book_append_sheet(wb, wsChecklist, "Чек-лист ПТП");
+
+        // === ЛИСТ 2: Промт для ИИ (СКРЫТЫЙ) ===
+        const promptSheetData = createPromptSheet();
+        const wsPrompt = XLSX.utils.aoa_to_sheet(promptSheetData);
+        
+        // Настройка ширины колонок для читаемости
+        wsPrompt['!cols'] = [{ wch: 15 }, { wch: 100 }];
+        
+        // Добавляем лист в книгу
+        XLSX.utils.book_append_sheet(wb, wsPrompt, "Промт для ИИ");
+        
+        // ДЕЛАЕМ ЛИСТ СКРЫТЫМ (hidden = 1 означает скрытый лист, который можно отобразить через интерфейс Excel)
+        if (!wb.Workbook) wb.Workbook = { Sheets: [] };
+        if (!wb.Workbook.Sheets) wb.Workbook.Sheets = [];
+        
+        // Находим индекс только что добавленного листа
+        const sheetIndex = wb.SheetNames.length - 1;
+        
+        // Устанавливаем состояние скрытости
+        wb.Workbook.Sheets[sheetIndex] = { Hidden: 1 }; // 0 - видимый, 1 - скрытый, 2 - очень скрытый
+
+        // === СОХРАНЯЕМ ФАЙЛ ===
+        XLSX.writeFile(wb, `чек-лист_птп_${date.replace(/\./g, '-')}.xlsx`);
+
+    } catch (error) {
+        console.error('Ошибка при экспорте:', error);
+        alert('Ошибка при загрузке библиотеки для экспорта. Попробуйте еще раз.');
+    } finally {
+        exportBtn.textContent = originalText;
+        exportBtn.disabled = false;
+    }
+}
 
             // ---------- ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ДЛЯ ЗАГРУЗКИ СКРИПТОВ ----------
             function loadScript(src) {
