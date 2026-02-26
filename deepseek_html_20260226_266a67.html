@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приказы МОКПТД | для противотуберкулезных кабинетов</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f4f7fc;
+            color: #1e2b3a;
+            line-height: 1.5;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 30px 25px;
+        }
+        .header {
+            margin-bottom: 40px;
+        }
+        .header-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #003b6f;
+            margin-bottom: 8px;
+        }
+        .header-sub {
+            font-size: 1.2rem;
+            color: #2c5779;
+            border-left: 4px solid #2c8bd4;
+            padding-left: 18px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 18px;
+        }
+        .card {
+            background: white;
+            border: 1px solid #cfddee;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body {
+            padding: 20px;
+            flex: 1;
+        }
+        .card-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #003b6f;
+            line-height: 1.45;
+        }
+        .card-footer {
+            padding: 10px 20px 20px;
+            border-top: 1px solid #e7edf5;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .btn-open {
+            background: #1a5f9e;
+            color: white;
+            text-decoration: none;
+            padding: 8px 26px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .btn-open:hover {
+            background: #2c8bd4;
+        }
+        .footer {
+            margin-top: 55px;
+            color: #4f6f8f;
+            text-align: center;
+            border-top: 1px dashed #b8cee4;
+            padding-top: 25px;
+        }
+        @media (max-width: 500px) {
+            body { padding: 20px 15px; }
+            .header-title { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="header-title">Приказы ГБУЗ МО МОКПТД</h1>
+        <div class="header-sub">применимые к противотуберкулезным кабинетам городских больниц</div>
+    </div>
+
+    <main>
+        <div class="grid" id="ordersGrid"></div>
+    </main>
+
+    <div class="footer">
+        ГБУЗ Московской области «Московский областной клинический противотуберкулезный диспансер»
+    </div>
+
+    <script>
+        const orders = [
+            "Письмо № 04-594_25 о Порядок ведения медицинской карты пациента.pdf",
+            "Приказ № 109-25 от 14.07.2025.pdf",
+            "Приказ № 116-24 от 21.05.2024.pdf",
+            "Приказ № 15-26 от 15.01.2026.pdf",
+            "Приказ № 198-23 от 17.07.2023.pdf",
+            "Приказ № 211-25 от 27.11.2025.pdf",
+            "Приказ № 217-22 от 28.07.2022.pdf",
+            "Приказ № 220-23 от 04.09.2023.pdf",
+            "Приказ № 94-24 от 18.04.2024.pdf",
+            "Приказ № 99-22 от 01.04.2022.pdf"
+        ];
+
+        const fileNames = [
+            "pismo_04-594_25.pdf",
+            "prikaz_109-25.pdf",
+            "prikaz_116-24.pdf",
+            "prikaz_15-26.pdf",
+            "prikaz_198-23.pdf",
+            "prikaz_211-25.pdf",
+            "prikaz_217-22.pdf",
+            "prikaz_220-23.pdf",
+            "prikaz_94-24.pdf",
+            "prikaz_99-22.pdf"
+        ];
+
+        const grid = document.getElementById('ordersGrid');
+        if (!grid) return;
+
+        orders.forEach((displayName, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            const body = document.createElement('div');
+            body.className = 'card-body';
+            const title = document.createElement('div');
+            title.className = 'card-title';
+            title.textContent = displayName;
+            body.appendChild(title);
+
+            const footer = document.createElement('div');
+            footer.className = 'card-footer';
+
+            const link = document.createElement('a');
+            link.className = 'btn-open';
+            link.href = 'documents/' + fileNames[index];
+            link.target = '_blank';
+            link.textContent = 'Открыть';
+
+            footer.appendChild(link);
+            card.appendChild(body);
+            card.appendChild(footer);
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
