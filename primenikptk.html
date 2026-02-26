@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Приказы МОКПТД | для противотуберкулезных кабинетов</title>
-    <!-- Шрифты Inter (как в normativka.html) -->
+    <!-- Шрифты Inter -->
     <style>
         @font-face {
             font-family: 'Inter';
@@ -27,7 +27,6 @@
             font-display: swap;
             src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
         }
-        /* базовые переменные – легко и без тяжелых теней */
         * {
             margin: 0;
             padding: 0;
@@ -43,14 +42,13 @@
             padding: 30px 25px;
             font-weight: 400;
         }
-        /* шапка — чёткая, без излишеств */
         .header {
             margin-bottom: 40px;
         }
         .header-title {
             font-size: 2.2rem;
             font-weight: 600;
-            color: #003b6f;        /* глубокий синий */
+            color: #003b6f;
             line-height: 1.2;
             margin-bottom: 8px;
             letter-spacing: -0.02em;
@@ -63,13 +61,11 @@
             padding-left: 18px;
             margin-top: 4px;
         }
-        /* простая сетка */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             gap: 18px;
         }
-        /* карточка — белая, без лишних теней, только граница */
         .card {
             background: #ffffff;
             border: 1px solid #cfddee;
@@ -82,7 +78,6 @@
             border-color: #8bb4da;
             box-shadow: 0 4px 12px rgba(0, 59, 111, 0.08);
         }
-        /* тело карточки содержит только полное название */
         .card-body {
             padding: 20px 20px 15px 20px;
             flex: 1;
@@ -93,13 +88,11 @@
             color: #003b6f;
             line-height: 1.45;
             word-break: break-word;
-            /* ограничим до 7 строк, на случай совсем длинных */
             display: -webkit-box;
             -webkit-line-clamp: 7;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        /* нижняя часть — только кнопка справа */
         .card-footer {
             padding: 10px 20px 20px 20px;
             border-top: 1px solid #e7edf5;
@@ -130,7 +123,6 @@
             font-size: 1.2rem;
             line-height: 1;
         }
-        /* футер короткий */
         .footer {
             margin-top: 55px;
             font-size: 0.9rem;
@@ -139,7 +131,6 @@
             border-top: 1px dashed #b8cee4;
             padding-top: 25px;
         }
-        /* адаптация */
         @media (max-width: 500px) {
             body { padding: 20px 15px; }
             .header-title { font-size: 1.8rem; }
@@ -149,8 +140,6 @@
     </style>
 </head>
 <body>
-
-    <!-- ШАПКА именно такая, как вы уточнили -->
     <div class="header">
         <h1 class="header-title">Приказы ГБУЗ МО МОКПТД</h1>
         <div class="header-sub">применимые к противотуберкулезным кабинетам городских больниц</div>
@@ -167,7 +156,7 @@
 
     <script>
         (function() {
-            // ПОЛНЫЕ НАЗВАНИЯ ПРИКАЗОВ (добуквенно со скриншота image.png)
+            // РУССКИЕ НАЗВАНИЯ ДЛЯ ОТОБРАЖЕНИЯ (то, что видят люди)
             const orders = [
                 "Письмо № 04-594_25 о Порядок ведения медицинской карты пациента. Порядок оформления документации при взятии на учет Алгоритм обследования пациента ИФ.pdf",
                 "Приказ № 109-25 от 14.07.2025 Об организации деятельности по мониторингу эффективности и безопасности лекарственных препаратов.pdf",
@@ -181,37 +170,43 @@
                 "Приказ № 99-22 от 01.04.2022 Порядок организации работы в очагах.pdf"
             ];
 
-            // ПУТЬ К ФАЙЛАМ: исправлено — папка documents/ в корне репозитория
-            const BASE_PATH = 'documents/';
+            // ЛАТИНИЦА ДЛЯ ССЫЛОК (фактические имена файлов в папке documents/)
+            const fileNames = [
+                "pismo_04-594_25.pdf",
+                "prikaz_109-25.pdf",
+                "prikaz_116-24.pdf",
+                "prikaz_15-26.pdf",
+                "prikaz_198-23.pdf",
+                "prikaz_211-25.pdf",
+                "prikaz_217-22.pdf",
+                "prikaz_220-23.pdf",
+                "prikaz_94-24.pdf",
+                "prikaz_99-22.pdf"
+            ];
 
+            const BASE_PATH = 'documents/';
             const grid = document.getElementById('ordersGrid');
             if (!grid) return;
 
-            // очищаем (на случай повторного запуска)
             grid.innerHTML = '';
 
-            orders.forEach(fullName => {
-                // создаём карточку
+            orders.forEach((displayName, index) => {
                 const card = document.createElement('div');
                 card.className = 'card';
 
-                // блок с полным названием
                 const body = document.createElement('div');
                 body.className = 'card-body';
                 const title = document.createElement('div');
                 title.className = 'card-title';
-                title.textContent = fullName;   // полное название документа
+                title.textContent = displayName;  // РУССКОЕ название в интерфейсе
                 body.appendChild(title);
 
-                // нижняя часть с кнопкой
                 const footer = document.createElement('div');
                 footer.className = 'card-footer';
 
                 const link = document.createElement('a');
                 link.className = 'btn-open';
-                // КОДИРУЕМ название файла, чтобы ссылка работала с пробелами и спецсимволами
-                const encoded = encodeURIComponent(fullName);
-                link.href = BASE_PATH + encoded;
+                link.href = BASE_PATH + fileNames[index];  // ЛАТИНИЦА в ссылке
                 link.target = '_blank';
                 link.rel = 'noopener noreferrer';
                 link.textContent = 'Открыть'; 
@@ -221,21 +216,7 @@
                 card.appendChild(footer);
                 grid.appendChild(card);
             });
-
-            // небольшая анимация появления (мягкая)
-            const cards = document.querySelectorAll('.card');
-            cards.forEach((c, idx) => {
-                c.style.opacity = '0';
-                c.style.transform = 'translateY(6px)';
-                c.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-                setTimeout(() => {
-                    c.style.opacity = '1';
-                    c.style.transform = 'translateY(0)';
-                }, idx * 20);
-            });
         })();
     </script>
-
-    <!-- Все ссылки ведут в папку documents/ с корректным кодированием -->
 </body>
 </html>
