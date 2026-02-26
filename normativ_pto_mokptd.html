@@ -5,86 +5,188 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Приказы МОКПТД | для противотуберкулезных кабинетов</title>
     <style>
+        /* ========== ШРИФТЫ (как в index - 2026-02-26T175426.946.html) ========== */
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
+
+        :root {
+            --primary: #4B0082;
+            --primary-light: #f0f8ff;
+            --primary-dark: #370066;
+            --primary-very-light: #f3f8ff;
+            --secondary: #64748b;
+            --accent: #00BCD4;
+            --dark-turquoise: #009ACD;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --background: #f4f7fc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background: #f4f7fc;
-            color: #1e2b3a;
+            background: var(--background);
+            color: var(--text-primary);
             line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
             max-width: 1300px;
             margin: 0 auto;
             padding: 30px 25px;
         }
+
         .header {
             margin-bottom: 40px;
         }
+
         .header-title {
             font-size: 2.2rem;
-            font-weight: 600;
-            color: #003b6f;
+            font-weight: 700;
+            color: var(--primary);
             margin-bottom: 8px;
         }
+
         .header-sub {
             font-size: 1.2rem;
-            color: #2c5779;
-            border-left: 4px solid #2c8bd4;
+            color: var(--dark-turquoise);
+            border-left: 4px solid var(--accent);
             padding-left: 18px;
+            font-weight: 500;
         }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 20px;
         }
+
         .card {
-            background: white;
-            border: 1px solid #cfddee;
-            border-radius: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
         }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
         .card-body {
-            padding: 20px;
+            padding: 22px 22px 15px 22px;
             flex: 1;
         }
+
         .card-title {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #003b6f;
-            line-height: 1.45;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
         }
+
+        .card-icon {
+            font-size: 1.3rem;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
         .card-footer {
-            padding: 10px 20px 20px;
-            border-top: 1px solid #e7edf5;
+            padding: 0 22px 22px 22px;
             display: flex;
             justify-content: flex-end;
         }
+
         .btn-open {
-            background: #1a5f9e;
+            background: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 8px 26px;
+            padding: 8px 28px;
             border-radius: 30px;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
         }
+
         .btn-open:hover {
-            background: #2c8bd4;
+            background: var(--primary-dark);
         }
+
         .footer {
             margin-top: 55px;
-            color: #4f6f8f;
+            color: var(--text-secondary);
             text-align: center;
-            border-top: 1px dashed #b8cee4;
+            border-top: 1px dashed var(--border);
             padding-top: 25px;
+            font-weight: 500;
         }
+
         @media (max-width: 500px) {
             body { padding: 20px 15px; }
             .header-title { font-size: 1.8rem; }
             .grid { grid-template-columns: 1fr; }
+            .card-title { font-size: 1rem; }
         }
     </style>
 </head>
@@ -103,44 +205,73 @@
     </div>
 
     <script>
-        const orders = [
-            "Письмо № 04-594_25 о Порядок ведения медицинской карты пациента.pdf",
-            "Приказ № 109-25 от 14.07.2025.pdf",
-            "Приказ № 116-24 от 21.05.2024.pdf",
-            "Приказ № 15-26 от 15.01.2026.pdf",
-            "Приказ № 198-23 от 17.07.2023.pdf",
-            "Приказ № 211-25 от 27.11.2025.pdf",
-            "Приказ № 217-22 от 28.07.2022.pdf",
-            "Приказ № 220-23 от 04.09.2023.pdf",
-            "Приказ № 94-24 от 18.04.2024.pdf",
-            "Приказ № 99-22 от 01.04.2022.pdf"
-        ];
-
-        const fileNames = [
-            "pismo_04-594_25.pdf",
-            "prikaz_109-25.pdf",
-            "prikaz_116-24.pdf",
-            "prikaz_15-26.pdf",
-            "prikaz_198-23.pdf",
-            "prikaz_211-25.pdf",
-            "prikaz_217-22.pdf",
-            "prikaz_220-23.pdf",
-            "prikaz_94-24.pdf",
-            "prikaz_99-22.pdf"
+        // Данные для карточек: [Отображаемое название (из скриншота), Имя файла]
+        const ordersData = [
+            {
+                title: "Письмо № 04-594_25 о Порядок ведения медицинской карты пациента. Порядок оформления документации при взятии на учет Алгоритм обследования пациента ИФ",
+                file: "pismo_04-594_25.pdf"
+            },
+            {
+                title: "Приказ № 109-25 от 14.07.2025 Об организации деятельности по мониторингу эффективности и безопасности лекарственных препаратов",
+                file: "prikaz_109-25.pdf"
+            },
+            {
+                title: "Приказ № 116-24 от 21.05.2024 Об обращении лекарственных средств и медицинских изделий",
+                file: "prikaz_116-24.pdf"
+            },
+            {
+                title: "Приказ № 15-26 от 15.01.2026 О централизованном контроле за диспансерным наблюдением, лечением больных туберкулезом и контролем за оформлением свидетельств о смерти от туберкулеза в Московской области",
+                file: "prikaz_15-26.pdf"
+            },
+            {
+                title: "Приказ № 198-23 от 17.07.2023 О правилах пребывания пациентов в стационарных отделениях",
+                file: "prikaz_198-23.pdf"
+            },
+            {
+                title: "Приказ № 211-25 от 27.11.2025 Об утверждении алгоритма назначения МГМ пациентам с подозрением или выявленным диагнозом Т6",
+                file: "prikaz_211-25.pdf"
+            },
+            {
+                title: "Приказ № 217-22 от 28.07.2022 об алгоритме контроля за оформлением и ведением медицинской карты пациента, получающего медицинскую помощь в ам",
+                file: "prikaz_217-22.pdf"
+            },
+            {
+                title: "Приказ № 220-23 от 04.09.2023 о перечне продуктов, запрещенных для передачи",
+                file: "prikaz_220-23.pdf"
+            },
+            {
+                title: "Приказ № 94-24 от 18.04.2024 Об утверждении порядка назначения и выдачи лекарственных препаратов",
+                file: "prikaz_94-24.pdf"
+            },
+            {
+                title: "Приказ № 99-22 от 01.04.2022 Порядок организации работы в очагах",
+                file: "prikaz_99-22.pdf"
+            }
         ];
 
         const grid = document.getElementById('ordersGrid');
         if (!grid) return;
 
-        orders.forEach((displayName, index) => {
+        ordersData.forEach((item) => {
             const card = document.createElement('div');
             card.className = 'card';
 
             const body = document.createElement('div');
             body.className = 'card-body';
+            
             const title = document.createElement('div');
             title.className = 'card-title';
-            title.textContent = displayName;
+            
+            // Добавляем иконку для красоты
+            const iconSpan = document.createElement('span');
+            iconSpan.className = 'card-icon';
+            iconSpan.textContent = '📄';
+            
+            const textSpan = document.createElement('span');
+            textSpan.textContent = item.title;
+            
+            title.appendChild(iconSpan);
+            title.appendChild(textSpan);
             body.appendChild(title);
 
             const footer = document.createElement('div');
@@ -148,7 +279,7 @@
 
             const link = document.createElement('a');
             link.className = 'btn-open';
-            link.href = 'documents/' + fileNames[index];
+            link.href = 'documents/' + item.file;
             link.target = '_blank';
             link.textContent = 'Открыть';
 
