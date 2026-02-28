@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Приказы МОКПТД | для противотуберкулезных кабинетов</title>
     <style>
-        /* ========== ШРИФТЫ (как в index) ========== */
         @font-face {
             font-family: 'Inter';
             src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
@@ -13,7 +12,6 @@
             font-style: normal;
             font-display: swap;
         }
-
         @font-face {
             font-family: 'Inter';
             src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
@@ -21,7 +19,6 @@
             font-style: normal;
             font-display: swap;
         }
-
         @font-face {
             font-family: 'Inter';
             src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
@@ -29,7 +26,6 @@
             font-style: normal;
             font-display: swap;
         }
-
         @font-face {
             font-family: 'Inter';
             src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
@@ -37,14 +33,12 @@
             font-style: normal;
             font-display: swap;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
-
         :root {
             --primary: #4B0082;
             --primary-light: #f0f8ff;
@@ -59,7 +53,6 @@
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
-
         body {
             background: var(--background);
             color: var(--text-primary);
@@ -69,18 +62,15 @@
             margin: 0 auto;
             padding: 30px 25px;
         }
-
         .header {
             margin-bottom: 40px;
         }
-
         .header-title {
             font-size: 2.2rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 8px;
         }
-
         .header-sub {
             font-size: 1.2rem;
             color: var(--dark-turquoise);
@@ -88,13 +78,11 @@
             padding-left: 18px;
             font-weight: 500;
         }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
             gap: 20px;
         }
-
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -106,7 +94,6 @@
             overflow: hidden;
             position: relative;
         }
-
         .card::before {
             content: "";
             position: absolute;
@@ -116,17 +103,14 @@
             height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
         }
-
         .card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-xl);
         }
-
         .card-body {
             padding: 22px 22px 15px 22px;
             flex: 1;
         }
-
         .card-title {
             font-size: 1.05rem;
             font-weight: 600;
@@ -136,19 +120,17 @@
             align-items: flex-start;
             gap: 10px;
         }
-
         .card-icon {
             font-size: 1.3rem;
             color: var(--accent);
             flex-shrink: 0;
         }
-
         .card-footer {
             padding: 0 22px 22px 22px;
             display: flex;
             justify-content: flex-end;
+            gap: 12px;
         }
-
         .btn-open {
             background: var(--primary);
             color: white;
@@ -162,11 +144,25 @@
             cursor: pointer;
             display: inline-block;
         }
-
         .btn-open:hover {
             background: var(--primary-dark);
         }
-
+        .btn-scheme {
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-scheme:hover {
+            background: var(--dark-turquoise);
+        }
         .footer {
             margin-top: 55px;
             color: var(--text-secondary);
@@ -175,12 +171,12 @@
             padding-top: 25px;
             font-weight: 500;
         }
-
         @media (max-width: 500px) {
             body { padding: 20px 15px; }
             .header-title { font-size: 1.8rem; }
             .grid { grid-template-columns: 1fr; }
             .card-title { font-size: 1rem; }
+            .card-footer { flex-wrap: wrap; justify-content: center; }
         }
     </style>
 </head>
@@ -199,18 +195,16 @@
     </div>
 
     <script>
-        // Массив с данными для карточек
         const ordersData = [
             {
                 title: "Письмо № 04-594_25 о Порядок ведения медицинской карты пациента. Порядок оформления документации при взятии на учет Алгоритм обследования пациента ИФ",
                 file: "pismo_04-594_25.pdf"
             },
-             {
+            {
                 title: "Приказ № 217-22 от 28.07.2022 об алгоритме контроля за оформлением и ведением медицинской карты пациента, получающего медицинскую помощь в амбулаторных условиях",
                 file: "prikaz_217-22.pdf"
             },
-
-{
+            {
                 title: "Приказ № 99-22 от 01.04.2022 Порядок организации работы в очагах",
                 file: "prikaz_99-22.pdf"
             },
@@ -218,33 +212,28 @@
                 title: "Приказ № 94-24 от 18.04.2024 Об утверждении порядка назначения и выдачи лекарственных препаратов",
                 file: "prikaz_94-24.pdf"
             },
-             {
+            {   // Карточка с МГМ — именно сюда добавляем вторую кнопку
                 title: "Приказ № 211-25 от 27.11.2025 Об утверждении алгоритма назначения МГМ пациентам с подозрением или выявленным диагнозом ТБ",
-                file: "prikaz_211-25.pdf"
+                file: "prikaz_211-25.pdf",
+                hasScheme: true,               // флаг, что нужна кнопка "Схема назначений"
+                schemeFile: "MGM_do_lechenia.pdf" // файл для кнопки
             },
-
-            
             {
                 title: "Приказ № 109-25 от 14.07.2025 Об организации деятельности по мониторингу эффективности и безопасности лекарственных препаратов",
                 file: "prikaz_109-25.pdf"
             },
-            
             {
                 title: "Приказ № 15-26 от 15.01.2026 О централизованном контроле за диспансерным наблюдением, лечением больных туберкулезом и контролем за оформлением свидетельств о смерти от туберкулеза в Московской области",
                 file: "prikaz_15-26.pdf"
             },
-            
-           
-           {
+            {
                 title: "Приказ № 109-25 от 14.07.2025 Об организации деятельности по мониторингу эффективности и безопасности лекарственных препаратов",
                 file: "prikaz_109-25.pdf"
             },
-            
-            
-           {
+            {
                 title: "Приказ № 116-24 от 21.05.2024 Об обращении лекарственных средств и медицинских изделий",
                 file: "prikaz_116-24.pdf"
-            }, 
+            },
             {
                 title: "Приказ № 198-23 от 17.07.2023 О правилах пребывания пациентов в стационарных отделениях",
                 file: "prikaz_198-23.pdf"
@@ -255,12 +244,9 @@
             }
         ];
 
-        // Получаем контейнер для карточек
         const grid = document.getElementById('ordersGrid');
         
-        // Проверяем, что контейнер существует
         if (grid) {
-            // Создаем карточки для каждого элемента массива
             ordersData.forEach((item) => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -271,7 +257,6 @@
                 const title = document.createElement('div');
                 title.className = 'card-title';
                 
-                // Добавляем иконку
                 const iconSpan = document.createElement('span');
                 iconSpan.className = 'card-icon';
                 iconSpan.textContent = '📄';
@@ -286,17 +271,27 @@
                 const footer = document.createElement('div');
                 footer.className = 'card-footer';
 
-                const link = document.createElement('a');
-                link.className = 'btn-open';
-                link.href = 'documents/' + item.file;
-                link.target = '_blank';
-                link.textContent = 'Открыть';
+                // Если у карточки есть флаг hasScheme, добавляем кнопку "Схема назначений"
+                if (item.hasScheme) {
+                    const schemeLink = document.createElement('a');
+                    schemeLink.className = 'btn-scheme';
+                    schemeLink.href = 'Documents/' + item.schemeFile;  // папка Documents, файл MGM_do_lechenia.pdf
+                    schemeLink.target = '_blank';
+                    schemeLink.textContent = 'Схема назначений';
+                    footer.appendChild(schemeLink);
+                }
 
-                footer.appendChild(link);
+                // Кнопка "Открыть" есть у всех
+                const openLink = document.createElement('a');
+                openLink.className = 'btn-open';
+                openLink.href = 'documents/' + item.file;
+                openLink.target = '_blank';
+                openLink.textContent = 'Открыть';
+
+                footer.appendChild(openLink);
                 card.appendChild(body);
                 card.appendChild(footer);
                 
-                // Добавляем карточку в сетку
                 grid.appendChild(card);
             });
         }
