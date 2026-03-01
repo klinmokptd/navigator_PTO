@@ -1213,7 +1213,7 @@ Dive Dive<!DOCTYPE html>
                 
             </div> <!-- Конец grid -->
                                    
-                                                            <div class="footer">
+                                                                               <div class="footer">
                         <div style="display: flex; flex-wrap: wrap; gap: 60px; justify-content: space-between; align-items: flex-start; max-width: 1200px; margin: 0 auto; text-align: left;">
                             
                             <!-- Левая колонка: призыв -->
@@ -1229,26 +1229,30 @@ Dive Dive<!DOCTYPE html>
                                 </p>
                             </div>
                             
-                            <!-- Правая колонка: инициативная группа (без фона, на одном уровне) -->
+                            <!-- Правая колонка: инициативная группа (без жирного, без лишних переносов) -->
                             <div style="flex: 1; min-width: 280px;">
-                                <h3 style="color: var(--primary-dark); font-size: 1.3rem; margin-bottom: 20px; font-weight: 700;">Инициативная группа</h3>
+                                <div style="color: var(--primary-dark); font-size: 1.3rem; margin-bottom: 20px;">Инициативная группа:</div>
                                 
-                                <!-- Лукаш с телефоном и почтой -->
+                                <!-- Лукаш: всё в одну строку кроме должности -->
                                 <div style="margin-bottom: 25px;">
-                                    <div style="font-weight: 600; margin-bottom: 5px;">Лукаш Игорь Александрович</div>
-                                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px;">заведующий филиалом «Клинский» ГБУЗ МО «МОКПТД»</div>
-                                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">(автор и разработчик проекта)</div>
-                                    <div style="font-size: 0.95rem; margin-bottom: 3px;">📞 <a href="tel:+79162322322" style="color: var(--primary); text-decoration: none; font-weight: 500;">8 (916) 232-23-22</a></div>
-                                    <div style="font-size: 0.95rem;">📧 <a href="mailto:mz_mokptd_klin@mosreg.ru" style="color: var(--primary); text-decoration: none; font-weight: 500;">mz_mokptd_klin@mosreg.ru</a></div>
+                                    <span style="font-weight: 500;">Лукаш Игорь Александрович</span>
+                                    <span style="color: var(--text-secondary);">, заведующий филиалом «Клинский» ГБУЗ МО «МОКПТД»</span>
+                                    <span style="color: var(--text-secondary);"> (автор и разработчик проекта)</span>
+                                    <div style="margin-top: 5px;">
+                                        <span>📞 <a href="tel:+79162322322" style="color: var(--primary); text-decoration: none;">8 (916) 232-23-22</a></span>
+                                        <span style="margin-left: 15px;">📧 <a href="mailto:mz_mokptd_klin@mosreg.ru" style="color: var(--primary); text-decoration: none;">mz_mokptd_klin@mosreg.ru</a></span>
+                                    </div>
                                 </div>
                                 
-                                <!-- Место для других участников (добавите позже) -->
+                                <!-- Место для других участников (компактно) -->
                                 <!--
-                                <div style="margin-bottom: 25px;">
-                                    <div style="font-weight: 600; margin-bottom: 5px;">Фамилия Имя Отчество</div>
-                                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px;">должность</div>
-                                    <div style="font-size: 0.95rem; margin-bottom: 3px;">📞 телефон</div>
-                                    <div style="font-size: 0.95rem;">📧 email</div>
+                                <div style="margin-bottom: 20px;">
+                                    <span style="font-weight: 500;">Фамилия Имя Отчество</span>
+                                    <span style="color: var(--text-secondary);">, должность</span>
+                                    <div style="margin-top: 5px;">
+                                        <span>📞 телефон</span>
+                                        <span style="margin-left: 15px;">📧 email</span>
+                                    </div>
                                 </div>
                                 -->
                             </div>
