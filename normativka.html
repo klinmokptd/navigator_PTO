@@ -9,290 +9,293 @@
     /* ПОДКЛЮЧЕНИЕ ШРИФТОВ INTER ЛОКАЛЬНО */
     @font-face {
         font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
         src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
     }
-
     @font-face {
         font-family: 'Inter';
-        font-style: normal;
-        font-weight: 500;
-        font-display: swap;
         src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
     }
-
     @font-face {
         font-family: 'Inter';
-        font-style: normal;
-        font-weight: 600;
-        font-display: swap;
         src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
     }
-
     @font-face {
         font-family: 'Inter';
-        font-style: normal;
-        font-weight: 700;
-        font-display: swap;
         src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
     }
-    
+
     :root {
-        --primary-blue: #1A5F9E;
-        --secondary-blue: #2C8BD4;
-        --light-blue: #F0F7FF;
-        --accent-red: #D32F2F;
-        --accent-green: #2E7D32;
-        --accent-orange: #F57C00;
-        --white: #FFFFFF;
-        --gray-light: #F5F7FA;
-        --gray-medium: #E0E5EC;
-        --gray-dark: #455A64;
-        --text-primary: #263238;
-        --text-secondary: #546E7A;
-        
-        --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
-        --shadow-strong: 0 8px 24px rgba(26, 95, 158, 0.12);
-        --border-radius: 8px;
-        
-        --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
-        --radius: 6px;
+        --primary: #4B0082;
+        --primary-light: #f0f8ff;
+        --primary-dark: #370066;
+        --accent: #00BCD4;
+        --dark-turquoise: #009ACD;
+        --background: #f4f7fc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --border: #e2e8f0;
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        --radius: 20px;
     }
-    
+
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-    
+
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
                      'Open Sans', 'Helvetica Neue', sans-serif;
-        line-height: 1.6;
+        line-height: 1.5;
         color: var(--text-primary);
-        background-color: var(--light-blue);
+        background-color: var(--background);
         font-weight: 400;
         -webkit-font-smoothing: antialiased;
-        max-width: 1200px;
+        max-width: 1300px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 30px 25px;
     }
-    
+
     .document-header {
-        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-        color: white;
-        padding: 2.5rem;
-        border-radius: var(--radius);
-        margin-bottom: 2.5rem;
-        box-shadow: var(--shadow);
-        border-bottom: 4px solid var(--accent-red);
+        margin-bottom: 40px;
     }
-    
+
     .document-title {
         font-size: 2.2rem;
         font-weight: 700;
-        margin-bottom: 0.5rem;
+        color: var(--primary);
+        margin-bottom: 8px;
         line-height: 1.2;
     }
-    
+
     .document-subtitle {
-        font-size: 1.1rem;
-        opacity: 0.95;
+        font-size: 1.2rem;
+        color: var(--dark-turquoise);
+        border-left: 4px solid var(--accent);
+        padding-left: 18px;
+        font-weight: 500;
         margin-bottom: 1.5rem;
-        font-weight: 300;
     }
-    
+
     .important-note {
-        background: rgba(255, 255, 255, 0.15);
-        border-left: 4px solid var(--accent-red);
+        background: var(--surface);
+        border-left: 4px solid var(--primary);
         padding: 1.2rem;
-        border-radius: 4px;
+        border-radius: 12px;
         margin-top: 1.5rem;
         font-size: 0.95rem;
+        color: var(--text-secondary);
+        box-shadow: var(--shadow-lg);
     }
-    
+
     .buttons-section {
-        background: var(--white);
-        border-radius: var(--border-radius);
+        background: var(--surface);
+        border-radius: var(--radius);
         padding: 1.5rem 2rem;
         margin-bottom: 2rem;
-        box-shadow: var(--shadow-medium);
-        border-top: 4px solid var(--primary-blue);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
     }
-    
+
     .action-buttons {
         display: flex;
         gap: 15px;
         flex-wrap: wrap;
     }
-    
+
     .action-btn {
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        padding: 12px 24px;
-        border-radius: var(--border-radius);
+        padding: 12px 28px;
+        border-radius: 30px;
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 1rem;
-        transition: all 0.3s;
+        transition: background-color 0.3s ease;
         border: none;
         cursor: pointer;
     }
-    
+
     .btn-secondary {
-        background: transparent;
-        color: var(--primary-blue);
-        border: 2px solid var(--primary-blue);
+        background: var(--primary);
+        color: white;
     }
-    
+
     .btn-secondary:hover {
-        background: var(--light-blue);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-medium);
+        background: var(--primary-dark);
     }
-    
+
     .documents-section {
         margin-bottom: 3rem;
     }
-    
+
     .section-title {
         font-size: 1.8rem;
         font-weight: 700;
-        color: var(--primary-blue);
+        color: var(--primary);
         margin-bottom: 1.5rem;
     }
-    
+
     .documents-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
         gap: 20px;
     }
-    
+
     @media (max-width: 768px) {
         .documents-grid {
             grid-template-columns: 1fr;
         }
     }
-    
+
     .document-card {
-        background: var(--white);
-        border-radius: var(--border-radius);
-        overflow: hidden;
-        box-shadow: var(--shadow-medium);
-        border: 1px solid var(--gray-medium);
-        transition: transform 0.3s, box-shadow 0.3s;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
         display: flex;
         flex-direction: column;
+        box-shadow: var(--shadow-lg);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        position: relative;
         height: 100%;
     }
-    
-    .document-card:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-strong);
+
+    .document-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
     }
-    
+
+    .document-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+
     .document-header-card {
-        background: var(--primary-blue);
-        color: white;
-        padding: 1rem 1.2rem;
+        background: transparent;
+        color: var(--text-primary);
+        padding: 22px 22px 15px 22px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         flex-shrink: 0;
-        min-height: 140px;
-        height: 140px;
+        min-height: auto;
+        height: auto;
     }
-    
+
     .document-header-card .document-title-card {
-        color: white !important;
-        font-size: 1.15rem;
+        color: var(--primary-dark) !important;
+        font-size: 1.05rem;
         font-weight: 600;
         margin: 0 0 8px 0;
-        line-height: 1.3;
+        line-height: 1.5;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
     }
-    
+
     .document-official-title {
-        color: white;
+        color: var(--text-secondary);
         font-size: 0.95rem;
         font-weight: 400;
-        line-height: 1.3;
-        opacity: 0.95;
+        line-height: 1.5;
+        opacity: 1;
         display: -webkit-box;
         -webkit-line-clamp: 5;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-height: calc(1.3em * 5);
+        max-height: calc(1.5em * 5);
     }
-    
+
     .document-body {
-        padding: 1.5rem;
+        padding: 0 22px 15px 22px;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
     }
-    
+
     .document-details {
         color: var(--text-secondary);
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         margin-bottom: 1.2rem;
         line-height: 1.5;
         flex-grow: 1;
     }
-    
+
     .document-actions {
         display: flex;
-        gap: 8px;
+        gap: 12px;
         flex-wrap: wrap;
         margin-top: auto;
         padding-top: 1rem;
-        border-top: 1px solid var(--gray-medium);
+        border-top: 1px solid var(--border);
     }
-    
+
     .doc-btn {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 6px 10px;
-        border-radius: var(--border-radius);
+        padding: 8px 20px;
+        border-radius: 30px;
         text-decoration: none;
         font-weight: 500;
         font-size: 0.9rem;
-        transition: all 0.3s;
+        transition: background-color 0.3s ease;
         border: none;
         cursor: pointer;
-    }
-    
-    .btn-pdf {
-        background: var(--primary-blue);
+        background: var(--primary);
         color: white;
     }
-    
-    .btn-pdf:hover {
-        background: var(--secondary-blue);
-    }
-    
-    .btn-excel {
-        background: var(--accent-green);
+
+    .doc-btn.btn-pdf {
+        background: var(--primary);
         color: white;
     }
-    
-    .btn-excel:hover {
-        background: #388E3C;
+
+    .doc-btn.btn-pdf:hover {
+        background: var(--primary-dark);
     }
-    
-    .btn-explain {
-        background: var(--accent-orange);
+
+    .doc-btn.btn-excel {
+        background: var(--accent);
         color: white;
     }
-    
-    .btn-explain:hover {
-        background: #FF9800;
+
+    .doc-btn.btn-excel:hover {
+        background: var(--dark-turquoise);
     }
-    
+
+    .doc-btn.btn-explain {
+        background: var(--accent);
+        color: white;
+    }
+
+    .doc-btn.btn-explain:hover {
+        background: var(--dark-turquoise);
+    }
+
     .modal-overlay {
         position: fixed;
         top: 0;
@@ -309,15 +312,15 @@
         visibility: hidden;
         transition: all 0.3s;
     }
-    
+
     .modal-overlay.active {
         opacity: 1;
         visibility: visible;
     }
-    
+
     .modal-content {
-        background: var(--white);
-        border-radius: var(--border-radius);
+        background: var(--surface);
+        border-radius: var(--radius);
         max-width: 700px;
         width: 100%;
         max-height: 80vh;
@@ -326,27 +329,27 @@
         transform: translateY(20px);
         transition: transform 0.3s;
     }
-    
+
     .modal-overlay.active .modal-content {
         transform: translateY(0);
     }
-    
+
     .modal-header {
-        background: var(--primary-blue);
+        background: var(--primary);
         color: white;
         padding: 1.5rem;
-        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        border-radius: var(--radius) var(--radius) 0 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    
+
     .modal-title {
         font-size: 1.4rem;
         font-weight: 600;
         color: white;
     }
-    
+
     .modal-close {
         background: rgba(255, 255, 255, 0.2);
         border: none;
@@ -361,97 +364,92 @@
         transition: background 0.3s;
         font-size: 20px;
     }
-    
+
     .modal-close:hover {
         background: rgba(255, 255, 255, 0.3);
     }
-    
+
     .modal-body {
         padding: 2rem;
     }
-    
+
     .explanation-section {
         margin-bottom: 2rem;
     }
-    
+
     .explanation-title {
         font-size: 1.2rem;
         font-weight: 600;
-        color: var(--primary-blue);
+        color: var(--primary);
         margin-bottom: 1rem;
     }
-    
+
     .explanation-text {
         color: var(--text-secondary);
         line-height: 1.7;
         margin-bottom: 1rem;
     }
-    
+
     .key-points {
-        background: var(--light-blue);
+        background: var(--background);
         padding: 1.5rem;
-        border-radius: var(--border-radius);
-        border-left: 4px solid var(--secondary-blue);
+        border-radius: var(--radius);
+        border-left: 4px solid var(--accent);
         margin: 1.5rem 0;
     }
-    
+
     .key-points h4 {
-        color: var(--primary-blue);
+        color: var(--primary);
         margin-bottom: 0.8rem;
         font-size: 1.1rem;
     }
-    
+
     .key-points ul {
         margin-left: 1.2rem;
     }
-    
+
     .key-points li {
         margin-bottom: 0.5rem;
         color: var(--text-primary);
     }
-    
+
     .footer {
-        background: var(--primary-blue);
-        color: white;
-        padding: 1.5rem 0;
-        margin-top: 3rem;
+        margin-top: 55px;
+        color: var(--text-secondary);
         text-align: center;
-        border-radius: var(--radius);
+        border-top: 1px dashed var(--border);
+        padding-top: 25px;
+        font-weight: 500;
+        background: transparent;
     }
-    
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 30px;
-    }
-    
+
     .footer-info {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--text-secondary);
         font-size: 0.9rem;
         line-height: 1.6;
     }
-    
+
     .footer-info a {
-        color: white;
+        color: var(--primary);
         text-decoration: none;
         font-weight: 500;
     }
-    
+
     .footer-info a:hover {
         text-decoration: underline;
     }
-    
+
     @media (max-width: 768px) {
         body {
-            padding: 15px;
-        }
-        
-        .document-header {
-            padding: 1.8rem;
+            padding: 20px 15px;
         }
         
         .document-title {
             font-size: 1.8rem;
+        }
+        
+        .document-subtitle {
+            font-size: 1rem;
         }
         
         .documents-grid {
@@ -462,57 +460,21 @@
             flex-direction: column;
         }
         
-        .document-header-card {
-            min-height: 150px;
-            height: 150px;
-            padding: 0.9rem 1rem;
-        }
-        
-        .document-header-card .document-title-card {
-            font-size: 1.1rem;
-        }
-        
-        .document-official-title {
-            font-size: 0.84rem;
-            -webkit-line-clamp: 7;
-            max-height: calc(1.2em * 7);
+        .document-actions {
+            flex-direction: column;
         }
         
         .modal-content {
             max-height: 90vh;
         }
-        
-        .document-actions {
-            flex-direction: column;
-        }
     }
-    
+
     @media (max-width: 480px) {
         .document-title {
             font-size: 1.6rem;
         }
-        
-        .document-subtitle {
-            font-size: 1rem;
-        }
-        
-        .document-header-card {
-            min-height: 160px;
-            height: 160px;
-            padding: 0.8rem 0.9rem;
-        }
-        
-        .document-header-card .document-title-card {
-            font-size: 1.05rem;
-        }
-        
-        .document-official-title {
-            font-size: 0.82rem;
-            -webkit-line-clamp: 8;
-            max-height: calc(1.2em * 8);
-        }
     }
-    
+
     @media print {
         .document-header, .buttons-section, .footer {
             display: none;
@@ -572,14 +534,14 @@
     <!-- НОВОЕ МОДАЛЬНОЕ ОКНО для Инструментов контроля (приказ 445-Р) -->
 <div class="modal-overlay" id="instrumentsModal">
     <div class="modal-content" style="max-width: 1000px; width: 95%; max-height: 90vh;">
-        <div class="modal-header" style="background: var(--accent-green);">
+        <div class="modal-header" style="background: var(--primary);">
             <h3 class="modal-title">📗 Инструменты контроля (№445-Р)</h3>
             <button class="modal-close" id="closeInstrumentsModal">×</button>
         </div>
         <div class="modal-body" id="instrumentsModalBody" style="max-height: calc(90vh - 80px); overflow-y: auto;">
             <!-- ПЕРВЫЙ БЛОК (сокращенный) -->
-            <div class="explanation-section" style="margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--gray-medium);">
-                <h4 class="explanation-title" style="color: var(--accent-green); font-size: 1.3rem;">
+            <div class="explanation-section" style="margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--border);">
+                <h4 class="explanation-title" style="color: var(--primary); font-size: 1.3rem;">
                     Единый инструмент контроля диспансерных групп
                 </h4>
                 <p class="explanation-text" style="margin-bottom: 1rem; font-size: 1rem;">
@@ -604,7 +566,7 @@
                     <strong>Как использовать:</strong> скачайте, заполните, контролируйте кратность посещений и сроки обследований.
                 </p>
                 <div style="text-align: center;">
-                    <a href="documents/instrument_kontrolia.xlsx" 
+                    <a href="documents_ols/instrument_kontrolia.xlsx" 
                        class="doc-btn btn-excel" 
                        style="padding: 12px 30px; font-size: 1.1rem; display: inline-block;"
                        download>
@@ -615,16 +577,16 @@
             
             <!-- ВТОРОЙ БЛОК (полный) -->
             <div class="explanation-section">
-                <h4 class="explanation-title" style="color: var(--primary-blue); font-size: 1.3rem;">
+                <h4 class="explanation-title" style="color: var(--primary); font-size: 1.3rem;">
                     Мониторинг профилактических осмотров (свод по подразделению)
                 </h4>
                 <p class="explanation-text" style="margin-bottom: 1.5rem; font-size: 1rem;">
                     Это сводная таблица, которая собирает данные со всех терапевтических участков в один файл. Помогает быстро увидеть картину по подразделению в целом и контролировать выполнение осмотров. Рекомендовано разместить в удаленном доступе для заполнения на участках
                 </p>
                 <div style="text-align: center;">
-                    <a href="documents/svod.xlsx" 
+                    <a href="documents_ols/svod.xlsx" 
                        class="doc-btn btn-pdf" 
-                       style="padding: 12px 30px; font-size: 1.1rem; display: inline-block; background: var(--primary-blue);"
+                       style="padding: 12px 30px; font-size: 1.1rem; display: inline-block; background: var(--primary);"
                        download>
                         📥 Скачать
                     </a>
@@ -635,11 +597,9 @@
 </div>
 
     <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-info">
-                <p>© 2026 ГБУЗ МО "МОКПТД" филиал "Клинский"</p>
-                <p>По вопросам и замечаниям: <a href="mailto:mz_mokptd_klin@mosreg.ru">mz_mokptd_klin@mosreg.ru</a></p>
-            </div>
+        <div class="footer-info">
+            <p>2026</p>
+           
         </div>
     </footer>
 
@@ -651,7 +611,7 @@
                 "officialTitle": "Об утверждении порядка и сроков проведения профилактических медицинских осмотров граждан в целях выявления туберкулёза",
                 "date": "Утверждён 11.04.2025 г.",
                 "description": "Организация профилактических осмотров на туберкулёз врачами ОЛС: составление списков, планов, информирование и учёт",
-                "pdfFile": "documents/prikaz-190n.pdf",
+                "pdfFile": "documents_ols/prikaz-190n.pdf",
                 "pdfName": "Приказ_Минздрава_190н.pdf",
                 "explanation": {
                     "keyPoints": [
@@ -673,7 +633,7 @@
                 "officialTitle": "Об организации мониторинга проведения профилактических медицинских осмотров населения Московской области в целях раннего выявления туберкулеза",
                 "date": "Утверждено 20.04.2025 г.",
                 "description": "Организация системы мониторинга и отчётности по профилактическим осмотрам на туберкулёз в Московской области",
-                "pdfFile": "documents/rasporiazhenie-445.pdf",
+                "pdfFile": "documents_ols/rasporiazhenie-445.pdf",
                 "pdfName": "Рrasporiazhenie-445.pdf",
                 "explanation": {
                     "keyPoints": [
@@ -695,7 +655,7 @@
                 "officialTitle": "Санитарно-эпидемиологические требования по профилактике инфекционных болезней (раздел по туберкулёзу)",
                 "date": "Утверждены 28.01.2021 г.",
                 "description": "Требования к организации профилактических осмотров для раннего выявления туберкулёза в медицинских организациях",
-                "pdfFile": "documents/3.3686-21.pdf",
+                "pdfFile": "documents_ols/3.3686-21.pdf",
                 "pdfName": "3.3686-21.pdf",
                 "explanation": {
                     "keyPoints": [
@@ -719,7 +679,7 @@
                 "officialTitle": "Методические рекомендации по совершенствованию диагностики и лечения туберкулёза органов дыхания",
                 "date": "Утверждён 29.12.2014 г.",
                 "description": "Ключевой алгоритм для врачей ОЛС по диагностике и лечению туберкулёза органов дыхания.",
-                "pdfFile": "documents/prikaz-951.pdf",
+                "pdfFile": "documents_ols/prikaz-951.pdf",
                 "pdfName": "Приказ_Минздрава_951.pdf",
                 "explanation": {
                     "keyPoints": [
@@ -742,7 +702,7 @@
                 "officialTitle": "Об утверждении Порядка оказания медицинской помощи больным туберкулезом",
                 "date": "Утверждён 29.11.2012 г.",
                 "description": "Ключевые требования к врачам ОЛС при выявлении признаков туберкулеза: обследование и срочное направление к фтизиатру",
-                "pdfFile": "documents/prikaz-932.pdf",
+                "pdfFile": "documents_ols/prikaz-932.pdf",
                 "pdfName": "Приказ_Минздрава_932н.pdf",
                 "explanation": {
                     "keyPoints": [
@@ -786,7 +746,7 @@
                 "officialTitle": "О применении внутрикожной пробы с аллергеном туберкулезным рекомбинантным в стандартном разведении в медицинских организациях государственной системы здравоохранения Московской области при обследовании групп риска по заболеванию туберкулезом",
                 "date": "Утверждено 06.10.2023 г.",
                 "description": "Порядок применения Диаскинтеста для обследования групп риска по туберкулезу в Московской области",
-                "pdfFile": "documents/rasporyazhenie-333.pdf",
+                "pdfFile": "documents_ols/rasporyazhenie-333.pdf",
                 "pdfName": "Распоряжение_333-Р_Диаскинтест.pdf",
                 "explanation": {
                     "keyPoints": [
@@ -808,9 +768,9 @@
                 "officialTitle": "Об утверждении учетной документации по выявлению туберкулеза методом микроскопии",
                 "date": "Утверждён 2 октября 2006 г.",
                 "description": "Утверждение форм учётной документации для микроскопической диагностики туберкулёза",
-                "pdfFile": "documents/prikaz-690.pdf",
+                "pdfFile": "documents_ols/prikaz-690.pdf",
                 "pdfName": "Приказ_Минздрава_690.pdf",
-                "excelFile": "documents/04tb.xlsx",
+                "excelFile": "documents_ols/04tb.xlsx",
                 "excelName": "Журнал_04-ТБ.xlsx",
                 "explanation": {
                     "keyPoints": [
@@ -833,7 +793,7 @@
                 "officialTitle": "Иммунодиагностика туберкулеза у детей и подростков (ГБУЗ МО «МОКПТД», 2025)",
                 "date": "Направлены письмом МЗ МО от 17.11.2025 № 14ИСХ-19929/2025-10-01",
                 "description": "Практическое руководство для педиатров и медсестер: алгоритмы иммунодиагностики, расчет потребности в препаратах, работа в ЕМИАС",
-                "pdfFile": "documents/immunodiagnostika_2025.pdf",
+                "pdfFile": "documents_ols/immunodiagnostika_2025.pdf",
                 "pdfName": "Иммунодиагностика_детей_МО_2025.pdf",
                 "explanation": {
                     "keyPoints": [
@@ -857,7 +817,7 @@
                 "officialTitle": "Федеральные клинические рекомендации по вакцинопрофилактике туберкулеза у детей (утв. Российским обществом фтизиатров)",
                 "date": "Москва, 2015 г.",
                 "description": "Порядок проведения вакцинации и ревакцинации БЦЖ/БЦЖ-М, противопоказания, техника введения, тактика при поствакцинальных осложнениях.",
-                "pdfFile": "documents/fk_bt_vakcino_2015.pdf",
+                "pdfFile": "documents_ols/fk_bt_vakcino_2015.pdf",
                 "pdfName": "fk_bt_vakcino_2015.pdf",
                 "explanation": {
                     "keyPoints": [
@@ -880,7 +840,7 @@
                 "officialTitle": "О порядке взаимодействия врачей-патологоанатомов, врачей-судебно-медицинских экспертов и врачей-фтизиатров на территории Московской области",
                 "date": "Утверждён 25.12.2020 г.",
                 "description": "Взаимодействие при установлении причины смерти, связанной с туберкулёзом",
-                "pdfFile": "documents/prikaz-1725.pdf",
+                "pdfFile": "documents_ols/prikaz-1725.pdf",
                 "pdfName": "Приказ_МЗ_МО_1725.pdf",
                 "explanation": {
                     "keyPoints": [
@@ -906,24 +866,8 @@
                 
                 let buttonsHTML;
                 
-                // Специальная обработка для приказа №445-Р (id: 5) - добавляем третью кнопку
-                if (doc.id === 5) {
-                    buttonsHTML = `
-                        <a href="${doc.pdfFile}" 
-                           target="_blank"
-                           class="doc-btn btn-pdf">
-                            📄 Смотреть PDF
-                        </a>
-                        
-                        <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
-                            💡 Аннотация
-                        </button>
-                        
-                        <button class="doc-btn btn-excel" id="instrumentsBtn-${doc.id}" style="background: var(--accent-green);">
-                            📗 Инструменты контроля
-                        </button>
-                    `;
-                } else if (doc.id === 8 && doc.excelFile) {
+                // Специальная обработка для приказа №445-Р (id: 5) - больше нет третьей кнопки
+                if (doc.id === 8 && doc.excelFile) {
                     buttonsHTML = `
                         <a href="${doc.pdfFile}" 
                            target="_blank"
@@ -987,11 +931,7 @@
                 });
             });
             
-            // Добавляем обработчики для кнопок "Инструменты контроля" (приказ 445-Р)
-            const instrumentsBtn = document.getElementById('instrumentsBtn-5');
-            if (instrumentsBtn) {
-                instrumentsBtn.addEventListener('click', openInstrumentsModal);
-            }
+            // Удаляем обработчик для кнопки "Инструменты контроля" (приказ 445-Р)
             
             const cards = document.querySelectorAll('.document-card');
             cards.forEach((card, index) => {
@@ -1048,13 +988,13 @@
             allDocuments.forEach(doc => {
                 if (doc.explanation) {
                     allContent += `
-                        <div class="explanation-section" style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 2px solid var(--gray-medium);">
+                        <div class="explanation-section" style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 2px solid var(--border);">
                             <h4 class="explanation-title" style="font-size: 1.3rem;">
                                 ${doc.title} — ${doc.officialTitle}
                             </h4>
                             
                             <div style="margin-top: 1.5rem;">
-                                <h5 style="color: var(--primary-blue); margin-bottom: 0.8rem; font-size: 1.1rem;">Ключевые положения:</h5>
+                                <h5 style="color: var(--primary); margin-bottom: 0.8rem; font-size: 1.1rem;">Ключевые положения:</h5>
                                 <div class="key-points">
                                     <ul>
                                         ${doc.explanation.keyPoints.map(point => `<li>${point}</li>`).join('')}
@@ -1063,7 +1003,7 @@
                             </div>
                             
                             <div style="margin-top: 1.5rem;">
-                                <h5 style="color: var(--primary-blue); margin-bottom: 0.8rem; font-size: 1.1rem;">Практическое применение:</h5>
+                                <h5 style="color: var(--primary); margin-bottom: 0.8rem; font-size: 1.1rem;">Практическое применение:</h5>
                                 <p style="color: var(--text-secondary); line-height: 1.7;">${doc.explanation.application}</p>
                             </div>
                         </div>
@@ -1076,7 +1016,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // Новая функция для открытия модального окна с инструментами
+        // Функция для открытия модального окна с инструментами
         function openInstrumentsModal() {
             instrumentsModal.classList.add('active');
             document.body.style.overflow = 'hidden';
