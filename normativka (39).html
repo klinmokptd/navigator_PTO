@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нормативная база | Навигатор по выявлению туберкулеза</title>
+    
+    <style>
+    /* ПОДКЛЮЧЕНИЕ ШРИФТОВ INTER ЛОКАЛЬНО */
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+    }
+    
+    :root {
+        --primary-blue: #1A5F9E;
+        --secondary-blue: #2C8BD4;
+        --light-blue: #F0F7FF;
+        --accent-red: #D32F2F;
+        --accent-green: #2E7D32;
+        --accent-orange: #F57C00;
+        --white: #FFFFFF;
+        --gray-light: #F5F7FA;
+        --gray-medium: #E0E5EC;
+        --gray-dark: #455A64;
+        --text-primary: #263238;
+        --text-secondary: #546E7A;
+        
+        --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
+        --shadow-strong: 0 8px 24px rgba(26, 95, 158, 0.12);
+        --border-radius: 8px;
+        
+        --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
+        --radius: 6px;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
+                     'Open Sans', 'Helvetica Neue', sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background-color: var(--light-blue);
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .document-header {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        color: white;
+        padding: 2.5rem;
+        border-radius: var(--radius);
+        margin-bottom: 2.5rem;
+        box-shadow: var(--shadow);
+        border-bottom: 4px solid var(--accent-red);
+    }
+    
+    .document-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+    
+    .document-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.95;
+        margin-bottom: 1.5rem;
+        font-weight: 300;
+    }
+    
+    .important-note {
+        background: rgba(255, 255, 255, 0.15);
+        border-left: 4px solid var(--accent-red);
+        padding: 1.2rem;
+        border-radius: 4px;
+        margin-top: 1.5rem;
+        font-size: 0.95rem;
+    }
+    
+    .buttons-section {
+        background: var(--white);
+        border-radius: var(--border-radius);
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow-medium);
+        border-top: 4px solid var(--primary-blue);
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .action-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 24px;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .btn-secondary {
+        background: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+    }
+    
+    .btn-secondary:hover {
+        background: var(--light-blue);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-medium);
+    }
+    
+    .documents-section {
+        margin-bottom: 3rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-blue);
+        margin-bottom: 1.5rem;
+    }
+    
+    .documents-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        gap: 20px;
+    }
+    
+    @media (max-width: 768px) {
+        .documents-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .document-card {
+        background: var(--white);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-medium);
+        border: 1px solid var(--gray-medium);
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .document-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-strong);
+    }
+    
+    .document-header-card {
+        background: var(--primary-blue);
+        color: white;
+        padding: 1rem 1.2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-shrink: 0;
+        min-height: 140px;
+        height: 140px;
+    }
+    
+    .document-header-card .document-title-card {
+        color: white !important;
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        line-height: 1.3;
+    }
+    
+    .document-official-title {
+        color: white;
+        font-size: 0.95rem;
+        font-weight: 400;
+        line-height: 1.3;
+        opacity: 0.95;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: calc(1.3em * 5);
+    }
+    
+    .document-body {
+        padding: 1.5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .document-details {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.5;
+        flex-grow: 1;
+    }
+    
+    .document-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid var(--gray-medium);
+    }
+    
+    .doc-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .btn-pdf {
+        background: var(--primary-blue);
+        color: white;
+    }
+    
+    .btn-pdf:hover {
+        background: var(--secondary-blue);
+    }
+    
+    .btn-excel {
+        background: var(--accent-green);
+        color: white;
+    }
+    
+    .btn-excel:hover {
+        background: #388E3C;
+    }
+    
+    .btn-explain {
+        background: var(--accent-orange);
+        color: white;
+    }
+    
+    .btn-explain:hover {
+        background: #FF9800;
+    }
+    
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+    }
+    
+    .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .modal-content {
+        background: var(--white);
+        border-radius: var(--border-radius);
+        max-width: 700px;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        transform: translateY(20px);
+        transition: transform 0.3s;
+    }
+    
+    .modal-overlay.active .modal-content {
+        transform: translateY(0);
+    }
+    
+    .modal-header {
+        background: var(--primary-blue);
+        color: white;
+        padding: 1.5rem;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .modal-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: white;
+    }
+    
+    .modal-close {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.3s;
+        font-size: 20px;
+    }
+    
+    .modal-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .modal-body {
+        padding: 2rem;
+    }
+    
+    .explanation-section {
+        margin-bottom: 2rem;
+    }
+    
+    .explanation-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--primary-blue);
+        margin-bottom: 1rem;
+    }
+    
+    .explanation-text {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+    
+    .key-points {
+        background: var(--light-blue);
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        border-left: 4px solid var(--secondary-blue);
+        margin: 1.5rem 0;
+    }
+    
+    .key-points h4 {
+        color: var(--primary-blue);
+        margin-bottom: 0.8rem;
+        font-size: 1.1rem;
+    }
+    
+    .key-points ul {
+        margin-left: 1.2rem;
+    }
+    
+    .key-points li {
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+    
+    .footer {
+        background: var(--primary-blue);
+        color: white;
+        padding: 1.5rem 0;
+        margin-top: 3rem;
+        text-align: center;
+        border-radius: var(--radius);
+    }
+    
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 30px;
+    }
+    
+    .footer-info {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .footer-info a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .footer-info a:hover {
+        text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+        body {
+            padding: 15px;
+        }
+        
+        .document-header {
+            padding: 1.8rem;
+        }
+        
+        .document-title {
+            font-size: 1.8rem;
+        }
+        
+        .documents-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+        }
+        
+        .document-header-card {
+            min-height: 150px;
+            height: 150px;
+            padding: 0.9rem 1rem;
+        }
+        
+        .document-header-card .document-title-card {
+            font-size: 1.1rem;
+        }
+        
+        .document-official-title {
+            font-size: 0.84rem;
+            -webkit-line-clamp: 7;
+            max-height: calc(1.2em * 7);
+        }
+        
+        .modal-content {
+            max-height: 90vh;
+        }
+        
+        .document-actions {
+            flex-direction: column;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .document-title {
+            font-size: 1.6rem;
+        }
+        
+        .document-subtitle {
+            font-size: 1rem;
+        }
+        
+        .document-header-card {
+            min-height: 160px;
+            height: 160px;
+            padding: 0.8rem 0.9rem;
+        }
+        
+        .document-header-card .document-title-card {
+            font-size: 1.05rem;
+        }
+        
+        .document-official-title {
+            font-size: 0.82rem;
+            -webkit-line-clamp: 8;
+            max-height: calc(1.2em * 8);
+        }
+    }
+    
+    @media print {
+        .document-header, .buttons-section, .footer {
+            display: none;
+        }
+        
+        body {
+            max-width: 100%;
+        }
+    }
+</style>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <header class="document-header">
+        <h1 class="document-title">Нормативная база</h1>
+        <p class="document-subtitle">Ключевые нормативные документы, регулирующие вопросы выявления туберкулёза для врачей ОЛС и профильных служб</p>
+        
+        <div class="important-note">
+            <p>Для каждого документа доступна возможность скачать копию и получить краткое пояснение его содержания и применения на практике.</p>
+        </div>
+    </header>
+
+    <section class="buttons-section">
+    <div class="action-buttons" style="justify-content: center;">  <!-- Эта строка добавляет центрирование -->
+        <button class="action-btn btn-secondary" id="showAllExplanations"
+            title="Свод всех аннотаций — полная картина раннего выявления туберкулёза">
+            💡 Тематический обзор
+        </button>
+    </div>
+</section>
+
+    <main class="main-container">
+        <section class="documents-section">
+            <h2 class="section-title">
+                Перечень документов
+            </h2>
+            
+            <div class="documents-grid" id="documents-container">
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="explanationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalDocTitle">Пояснение документа</h3>
+                <button class="modal-close" id="closeModal">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <!-- НОВОЕ МОДАЛЬНОЕ ОКНО для Инструментов контроля (приказ 445-Р) -->
+<div class="modal-overlay" id="instrumentsModal">
+    <div class="modal-content" style="max-width: 1000px; width: 95%; max-height: 90vh;">
+        <div class="modal-header" style="background: var(--accent-green);">
+            <h3 class="modal-title">📗 Инструменты контроля (№445-Р)</h3>
+            <button class="modal-close" id="closeInstrumentsModal">×</button>
+        </div>
+        <div class="modal-body" id="instrumentsModalBody" style="max-height: calc(90vh - 80px); overflow-y: auto;">
+            <!-- ПЕРВЫЙ БЛОК (сокращенный) -->
+            <div class="explanation-section" style="margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--gray-medium);">
+                <h4 class="explanation-title" style="color: var(--accent-green); font-size: 1.3rem;">
+                    Единый инструмент контроля диспансерных групп
+                </h4>
+                <p class="explanation-text" style="margin-bottom: 1rem; font-size: 1rem;">
+                    Готовый шаблон паспорта терапевтического участка. Объединяет учет по двум приказам:
+                </p>
+                <p class="explanation-text" style="margin-bottom: 0.8rem; font-size: 1rem;">
+                    🔴 <strong>Красные листы</strong> — диспансерные по приказу №168н (сердечно-сосудистые, диабет, ХОБЛ, язва и др.)
+                </p>
+                <p class="explanation-text" style="margin-bottom: 0.5rem; font-size: 1rem;">
+                    🔵 <strong>Синие листы</strong> — группы риска по туберкулезу (приказ №445):
+                </p>
+                <p class="explanation-text" style="margin-bottom: 0.5rem; margin-left: 1.5rem; font-size: 1rem;">
+                    • Часть уже есть в красных (диабет, ХОБЛ, ЖКТ) — наблюдаются по 168-му + подлежат скринингу по 445-му
+                </p>
+                <p class="explanation-text" style="margin-bottom: 1rem; margin-left: 1.5rem; font-size: 1rem;">
+                    • Остальные (БОМЖ, контактные, снятые с учета ПТД, иммуносупрессия) — только контроль ФЛГ и Диаскинтеста или мокроты на КУМ
+                </p>
+                <p class="explanation-text" style="margin-bottom: 0.8rem; font-size: 1rem;">
+                    <strong>Удобно:</strong> один файл вместо двух журналов, цветовая маркировка, ничего не теряется.
+                </p>
+                <p class="explanation-text" style="margin-bottom: 1.5rem; font-size: 1rem;">
+                    <strong>Как использовать:</strong> скачайте, заполните, контролируйте кратность посещений и сроки обследований.
+                </p>
+                <div style="text-align: center;">
+                    <a href="documents/instrument_kontrolia.xlsx" 
+                       class="doc-btn btn-excel" 
+                       style="padding: 12px 30px; font-size: 1.1rem; display: inline-block;"
+                       download>
+                        📥 Скачать
+                    </a>
+                </div>
+            </div>
+            
+            <!-- ВТОРОЙ БЛОК (полный) -->
+            <div class="explanation-section">
+                <h4 class="explanation-title" style="color: var(--primary-blue); font-size: 1.3rem;">
+                    Мониторинг профилактических осмотров (свод по подразделению)
+                </h4>
+                <p class="explanation-text" style="margin-bottom: 1.5rem; font-size: 1rem;">
+                    Это сводная таблица, которая собирает данные со всех терапевтических участков в один файл. Помогает быстро увидеть картину по подразделению в целом и контролировать выполнение осмотров. Рекомендовано разместить в удаленном доступе для заполнения на участках
+                </p>
+                <div style="text-align: center;">
+                    <a href="documents/svod.xlsx" 
+                       class="doc-btn btn-pdf" 
+                       style="padding: 12px 30px; font-size: 1.1rem; display: inline-block; background: var(--primary-blue);"
+                       download>
+                        📥 Скачать
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <p>© 2026 ГБУЗ МО "МОКПТД" филиал "Клинский"</p>
+                <p>По вопросам и замечаниям: <a href="mailto:mz_mokptd_klin@mosreg.ru">mz_mokptd_klin@mosreg.ru</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const allDocuments = [
+           {
+                "id": 1,
+                "title": "Приказ Минздрава РФ № 190н",
+                "officialTitle": "Об утверждении порядка и сроков проведения профилактических медицинских осмотров граждан в целях выявления туберкулёза",
+                "date": "Утверждён 11.04.2025 г.",
+                "description": "Организация профилактических осмотров на туберкулёз врачами ОЛС: составление списков, планов, информирование и учёт",
+                "pdfFile": "documents/prikaz-190n.pdf",
+                "pdfName": "Приказ_Минздрава_190н.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Возлагает на врачей ОЛС основную работу: участковые врачи (педиатры, терапевты, ВОП) и фельдшеры составляют поименные списки граждан для осмотра.",
+                        "Организация планирования: уполномоченное лицо в медорганизации контролирует составление списков и формирует календарный план осмотров с датами, местами и количеством исследований.",
+                        "Информирование и мотивация: врач ОЛС обязан информировать пациента о необходимости осмотра, его дате, времени, месте и проводить разъяснительную работу.",
+                        "Осмотры в первичном звене: проводятся в поликлиниках по месту жительства, работы или учёбы в рамках программы госгарантий.",
+                        "Возрастные алгоритмы: чёткое распределение методов по возрастам (проба Манту для 1-7 лет, Диаскинтест для 8-14 лет, Диаскинтест или флюорография для 15-17 лет, флюорография или рентген с 18 лет).",
+                        "Учёт предыдущих исследований: если в течение года уже делалась флюорография, рентген или КТ, повторное исследование не проводится.",
+                        "Действие при выявлении: при подозрении на туберкулёз пациент направляется к фтизиатру в течение 2 дней."
+                    ],
+                    "application": "Этот приказ является рабочей инструкцией для врача поликлиники. Он отвечает на практические вопросы: 1) Кого включать в списки на осмотр? 2) Как составить план? 3) Как информировать пациентов? 4) Какие методы обследования применять в каждом возрасте? 5) Что делать при выявлении изменений? Используется для организации системной работы по раннему выявлению туберкулёза на уровне первичного звена, планирования нагрузки и контроля охвата населения."
+                }
+            },
+            
+            {
+                "id": 5,
+                "title": "Распоряжение Минздрава МО № 445-Р",
+                "officialTitle": "Об организации мониторинга проведения профилактических медицинских осмотров населения Московской области в целях раннего выявления туберкулеза",
+                "date": "Утверждено 20.04.2025 г.",
+                "description": "Организация системы мониторинга и отчётности по профилактическим осмотрам на туберкулёз в Московской области",
+                "pdfFile": "documents/rasporiazhenie-445.pdf",
+                "pdfName": "Рrasporiazhenie-445.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Утверждение 12 форм мониторинга и отчётности по флюорографическим осмотрам и иммунодиагностике",
+                        "Критерии несвоевременно выявленных случаев туберкулёза, требующих клинического разбора",
+                        "Обязанности медицинских организаций по назначению ответственных лиц и представлению планов осмотров",
+                        "Требования к проведению микроскопических исследований у нетранспортабельных граждан",
+                        "Медицинские и социальные группы, которые должны проходить осмотры на туберкулез у терапевтов и профильных специалистов, а также контроль за частотой проведения исследований.",
+                        "Сроки передачи информации о пациентах с подозрением на туберкулёз (2 календарных дня)",
+                        "Проведение разборов случаев несвоевременного выявления туберкулёза в двухнедельный срок",
+                        "Обязательное представление сведений в региональную систему МедИнфо"
+                    ],
+                    "application": "Документ используется для организации системы мониторинга профилактических осмотров на туберкулёз в Московской области, утверждения форм отчётности, установления сроков и порядка взаимодействия между медицинскими организациями и противотуберкулёзной службой."
+                }
+            },
+            {
+                "id": 4,
+                "title": "СанПиН 3.3686-21",
+                "officialTitle": "Санитарно-эпидемиологические требования по профилактике инфекционных болезней (раздел по туберкулёзу)",
+                "date": "Утверждены 28.01.2021 г.",
+                "description": "Требования к организации профилактических осмотров для раннего выявления туберкулёза в медицинских организациях",
+                "pdfFile": "documents/3.3686-21.pdf",
+                "pdfName": "3.3686-21.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Руководители медицинских организаций обеспечивают планирование, организацию и проведение профилактических осмотров на туберкулёз (п. 812).",
+                        "Руководители предприятий и организаций обязаны по запросу поликлиники представлять информацию для организации осмотров сотрудников и контролировать их своевременное прохождение (пп. 805, 808).",
+                        "Профилактические осмотры взрослого населения проводятся по месту жительства, работы, учёбы с ежегодным охватом не менее 65% прикрепленного населения.",
+                        "Группы для обследования 2 раза в год: ВИЧ-инфицированные, контактные с больными туберкулёзом, лица с хроническими заболеваниями (диабет, ХОБЛ, психические расстройства), мигранты, лица без определенного места жительства.",
+                        "Группы для обследования 1 раз в год: больные сахарным диабетом, онкогематологическими заболеваниями, получающие иммуносупрессивную терапию, медицинские работники.",
+                        "Внеочередное обследование: лица с симптомами туберкулёза (кашель >3 недель, интоксикация), окружение детей с виражом туберкулиновых проб, госпитализируемые пациенты при отсутствии обследования более 1 года.",
+                        "Алгоритм для детей: проба Манту ежегодно с 1 года до 7 лет; Диаскинтест или IGRA с 8 до 14 лет; дети с хроническими заболеваниями и ВИЧ – 2 раза в год.",
+                        "Требования к организации осмотров в поликлиниках: составление планов, взаимодействие с работодателями, индивидуальный учет, ежемесячный анализ эффективности выявления.",
+                        "Регламент направления к фтизиатру: дети с положительной пробой Манту направляются в течение 6 дней; без заключения фтизиатра не допускаются в образовательные организации."
+                    ],
+                    "application": "Этот СанПиН является основным документом для врачей поликлиник, определяющим порядок организации раннего выявления туберкулёза на уровне первичного звена. Используется для: 1) Определения ответственности руководителей ЛПУ и предприятий; 2) Планирования и проведения профилактических осмотров различных групп населения; 3) Взаимодействия с работодателями по предоставлению списков работников; 4) Определения контингентов, подлежащих обследованию 1 или 2 раза в год; 5) Организации внеочередного обследования пациентов с симптомами; 6) Контроля охвата населения осмотрами. Документ отвечает на практические вопросы врача ОЛС: кто отвечает за осмотры, кого, когда и как обследовать, как взаимодействовать с работодателями и куда направлять при подозрении на туберкулёз."
+                }
+            },
+            
+            {
+                "id": 7,
+                "title": "Приказ Минздрава РФ № 951",
+                "officialTitle": "Методические рекомендации по совершенствованию диагностики и лечения туберкулёза органов дыхания",
+                "date": "Утверждён 29.12.2014 г.",
+                "description": "Ключевой алгоритм для врачей ОЛС по диагностике и лечению туберкулёза органов дыхания.",
+                "pdfFile": "documents/prikaz-951.pdf",
+                "pdfName": "Приказ_Минздрава_951.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Определение групп для обследования (Раздел I): Перечислены симптомы и состояния (длительный кашель >3 нед., интоксикация, изменения на флюорографии/КТ), при которых необходимо начать диагностический поиск на туберкулез.",
+                        "Обязательный первичный диагностический минимум для ОЛС (Раздел VII): Трехкратная микроскопия мокроты на КУМ в течение 2 дней, обзорная рентгенография/КТ органов грудной клетки, Диаскинтест. ПЦР мокроты на ДНК МБТ проводится при отрицательной микроскопии.",
+                        "Алгоритм при выявлении КУМ в мокроте: Немедленная изоляция пациента и направление санитарным транспортом к фтизиатру в ПТД в тот же день.",
+                        "Алгоритм при отрицательных результатах, но сохраняющемся подозрении: Проведение КТ органов грудной клетки и обязательная консультация фтизиатра.",
+                        "Дифференциальная диагностика (Раздел IV): Подробная таблица для сопоставления рентгенологических синдромов при туберкулезе и других заболеваний (пневмония, рак, саркоидоз и др.).",
+                        "Иммунодиагностика (Раздел V): Четкие схемы применения пробы Манту (дети до 7 лет) и Диаскинтеста (дети с 8 лет и взрослые по показаниям), критерии оценки.",
+                        "Эндоскопические и хирургические методы (Раздел VI): Подробно описаны методы получения материала для верификации диагноза: бронхоскопия (включая видеобронхоскопию, БАЛ, различные виды биопсий), торакоскопия, медиастиноскопия. Указано, что они применяются при невозможности установить диагноз неинвазивными методами.",
+                        "Особенности у пациентов с ВИЧ-инфекцией: При наличии лихорадки и иммуносупрессии КТ ОГК проводится обязательно, даже при нормальной рентгенограмме.",
+                        "Соблюдение противоэпидемического режима: Забор мокроты в отдельном помещении с вентиляцией, использование СИЗ персоналом."
+                    ],
+                    "application": "Этот документ служит пошаговой инструкцией и памяткой для врача поликлиники или общего стационара. Он даёт чёткие ответы на главные вопросы: кого именно нужно обследовать на туберкулез, какой минимальный набор исследований провести в первую очередь, как интерпретировать их результаты и что делать дальше. В нём также описаны методы дифференциальной диагностика, схемы иммунотестирования и современные эндоскопические процедуры для сложных случаев. Основная задача на этапе общей лечебной сети — своевременно заподозрить заболевание, быстро выявить заразного больного, предотвратить распространение инфекции и организовать его безопасную передачу специалистам-фтизиатрам."
+                }
+            },
+           {
+                "id": 9,
+                "title": "Приказ Минздрава РФ № 932н",
+                "officialTitle": "Об утверждении Порядка оказания медицинской помощи больным туберкулезом",
+                "date": "Утверждён 29.11.2012 г.",
+                "description": "Ключевые требования к врачам ОЛС при выявлении признаков туберкулеза: обследование и срочное направление к фтизиатру",
+                "pdfFile": "documents/prikaz-932.pdf",
+                "pdfName": "Приказ_Минздрава_932н.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Требует от врачей любой специальности активно выявлять симптомы туберкулеза",
+                        "Определяет конкретные симптомы для обследования: кашель >3 недель, интоксикация >2 недель, кровохарканье, боль в груди, одышка",
+                        "Устанавливает обязательный минимум обследования: рентген ОГК, ОАК, трехкратная микроскопия мокроты на КУМ",
+                        "Устанавливает жесткий 3-дневный срок направления к фтизиатру при выявлении характерных изменений на рентгене или КУМ+ в мокроте",
+                        "Требует направления к фтизиатру даже при отсутствии бактериологического подтверждения, если есть типичная клинико-рентгенологическая картина",
+                        "Определяет особенности ведения беременных с туберкулезом (наблюдение во время беременности и роды в обсервационном отделении)",
+                        "Регламентирует изоляцию новорожденных от матерей с активным туберкулезом и бактериовыделением на срок не менее 2 месяцев после вакцинации БЦЖ",
+                        "Обязывает информировать пациента о диагнозе в 3-дневный срок"
+                    ],
+                    "application": "Этот приказ — инструкция для врача поликлиники или общего стационара при подозрении на туберкулез, наряду Приказом Минздрава РФ № 951. Он дает четкие ответы: 1) Кого обследовать? — пациентов с кашлем >3 недель или интоксикацией >2 недель; 2) Как обследовать? — сделать рентген ОГК, ОАК и взять мокроту на КУМ; 3) Куда и когда направлять? — к фтизиатру в течение 3 дней при любых подозрительных изменениях. Особенно важен для акушеров-гинекологов и педиатров при ведении беременных и новорожденных от матерей с туберкулезом. Документ снимает с врача ОЛС ответственность за установление окончательного диагноза, но возлагает ответственность за своевременное выявление подозрения и правильную организацию дообследования у специалиста."
+                }
+            },
+            
+            {
+                "id": 3,
+                "title": "Клинические рекомендации",
+                "officialTitle": "Туберкулез у взрослых (утверждены Минздравом РФ)",
+                "date": "Опубликованы 16.01.2026 г.",
+                "description": "Официальные клинические рекомендации Минздрава России. Ссылка на официальный источник",
+                "pdfFile": "https://cr.minzdrav.gov.ru/view-cr/16_4",
+                "pdfName": "Клинические_рекомендации_Туберкулез_2025.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Определение пациентов для обследования: длительный кашель (>3 недель), субфебрильная лихорадка, «ночные поты», немотивированная слабость, похудание.",
+                        "Первичный диагностический минимум в ОЛС: микроскопия мокроты на КУМ (рекомендована для общей сети как простой и быстрый метод выявления заразных больных), рентгенография/КТ органов грудной клетки.",
+                        "Алгоритм при отрицательной микроскопии: при сохраняющемся подозрении обязательны консультация фтизиатра и расширенная диагностика (КТ, бронхоскопия, молекулярно-генетические тесты).",
+                        "Ключевой принцип: комбинация методов. Диагноз устанавливается на основе комплекса клинических, лучевых и лабораторных данных.",
+                        "Особенности у пациентов с ВИЧ: клиническая и рентгенологическая картины часто нетипичны, требуется повышенная настороженность, особенно при иммуносупрессии (CD4+ < 200 кл/мкл).",
+                        "Окончательная верификация: диагноз «туберкулез» подтверждается комиссией противотуберкулезного учреждения, которое принимает решение о дальнейшем наблюдении и лечении."
+                    ],
+                    "application": "Для врача ОЛС документ отвечает на главные вопросы: 1) Кого заподозрить? — пациента с комплексом интоксикации и респираторных симптомов. 2) С чего начать обследование? — с рентгенографии ОГК и микроскопии мокроты. 3) Куда и когда направить? — при любом подозрении, не снимаемом первичным обследованием, обязательна консультация фтизиатра для решения вопроса о углубленной диагностике (бронхоскопия, КТ, ПЦР). Рекомендации подчеркивают, что задача ОЛС — не постановка окончательного диагноза, а своевременное выявление подозрения и правильное направление пациента к специалисту."
+                }
+            },
+
+            {
+                "id": 10,
+                "title": "Распоряжение Минздрава МО № 333-Р",
+                "officialTitle": "О применении внутрикожной пробы с аллергеном туберкулезным рекомбинантным в стандартном разведении в медицинских организациях государственной системы здравоохранения Московской области при обследовании групп риска по заболеванию туберкулезом",
+                "date": "Утверждено 06.10.2023 г.",
+                "description": "Порядок применения Диаскинтеста для обследования групп риска по туберкулезу в Московской области",
+                "pdfFile": "documents/rasporyazhenie-333.pdf",
+                "pdfName": "Распоряжение_333-Р_Диаскинтест.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Определяет контингенты для проведения внутрикожной пробы с аллергеном туберкулезным рекомбинантным (Диаскинтест) в Московской области",
+                        "Устанавливает периодичность обследования для различных групп риска (1 раз в год или однократно)",
+                        "Требует получения информированного добровольного согласия от обследуемого",
+                        "Устанавливает срок 6 календарных дней для направления к фтизиатру при сомнительной или положительной реакции",
+                        "Обязывает формировать врачебно-сестринские бригады под методическим руководством участкового фтизиатра",
+                        "Вводит ежемесячную отчетность через систему МедИнфо до 5 числа следующего месяца",
+                        "Определяет конкретные группы для обследования в первичном звене (ВИЧ-инфицированные, контактные с беременными, пациенты на иммуносупрессивной терапии и др.)",
+                        "Определяет группы для обследования в специализированных фтизиатрических учреждениях (излеченные от туберкулеза, контактные лица, медработники ПТО)"
+                    ],
+                    "application": "Этот документ используется для организации обследования групп риска по туберкулезу с помощью Диаскинтеста в Московской области. Он определяет: 1) Кто подлежит обследованию; 2) Как часто проводить обследование; 3) Как организовать процесс (формирование бригад, обучение персонала); 4) Куда и в какие сроки направлять при выявлении положительных результатов; 5) Как вести отчетность. Особенно важен для врачей первичного звена при работе с пациентами из групп риска и для планирования закупок диагностических препаратов."
+                }
+            },
+            {
+                "id": 8,
+                "title": "Приказ Минздрава РФ № 690",
+                "officialTitle": "Об утверждении учетной документации по выявлению туберкулеза методом микроскопии",
+                "date": "Утверждён 2 октября 2006 г.",
+                "description": "Утверждение форм учётной документации для микроскопической диагностики туберкулёза",
+                "pdfFile": "documents/prikaz-690.pdf",
+                "pdfName": "Приказ_Минздрава_690.pdf",
+                "excelFile": "documents/04tb.xlsx",
+                "excelName": "Журнал_04-ТБ.xlsx",
+                "explanation": {
+                    "keyPoints": [
+                        "Утверждает стандартные учётные формы для микроскопической диагностики туберкулёза: формы 05-ТБ/у (направление), 04-ТБ/у (журнал исследований), 04-1-ТБ/у (журнал регистрации материала), 04-2-ТБ/у (сопроводительный лист).",
+                        "Определяет правила сбора мокроты: в специально оборудованном проветриваемом помещении, с использованием СИЗ персоналом, правильная техника кашля для пациента.",
+                        "Устанавливает график сбора мокрота: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
+                        "Регламентирует транспортировку диагностического материала в закрытых биксах с сопроводительной документацией.",
+                        "Предусматривает немедленное информирование врача при положительном результате микроскопии.",
+                        "Определяет виды диагностического материала (26 позиций) помимо мокроты: ликвор, плевральная жидкость, кровь, биоптаты и др.",
+                        "Устанавливает правила количественной оценки результатов микроскопии (от единичных КУМ до 3+).",
+                        "Обязывает вести журналы учёта во всех ЛПУ, где проводится микроскопия на туберкулёз."
+                    ],
+                    "application": "Этот приказ является основным документом, регламентирующим микроскопическую диагностику туберкулёза на уровне первичного звена. Используется для: 1) Правильной организации сбора мокроты (график, условия, техника); 2) Заполнения обязательной учётной документации; 3) Безопасной транспортировки материала; 4) Стандартизации оценки результатов микроскопии; 5) Обеспечения преемственности между ЛПУ и лабораториями. Особенно важен для врачей поликлиник, фельдшерско-акушерских пунктов, приёмных отделений стационаров."
+                }
+            },
+           
+                        {
+                "id": 12,
+                "title": "Методические рекомендации МОКПТД 2025",
+                "officialTitle": "Иммунодиагностика туберкулеза у детей и подростков (ГБУЗ МО «МОКПТД», 2025)",
+                "date": "Направлены письмом МЗ МО от 17.11.2025 № 14ИСХ-19929/2025-10-01",
+                "description": "Практическое руководство для педиатров и медсестер: алгоритмы иммунодиагностики, расчет потребности в препаратах, работа в ЕМИАС",
+                "pdfFile": "documents/immunodiagnostika_2025.pdf",
+                "pdfName": "Иммунодиагностика_детей_МО_2025.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Целевой показатель охвата иммунодиагностикой детей — не менее 95% (соответствует федеральному уровню).",
+                        "Четкие возрастные алгоритмы: проба Манту (1-7 лет), Диаскинтест (с 8 лет), IGRA-тесты (при противопоказаниях к внутрикожным пробам или отказе родителей).",
+                        "Подробная техника постановки проб Манту и Диаскинтеста с указанием требований к шприцам, хранению препаратов, противопоказаниям.",
+                        "Критерии направления к фтизиатру (срок — 6 календарных дней): впервые положительная Манту, нарастание на 6+ мм, сомнительный/положительный Диаскинтест, гиперергия, везикуло-некротические реакции.",
+                        "Перечень данных для направления к фтизиатру: сведения о вакцинации БЦЖ, динамика предыдущих проб, контакты с туберкулезными больными, результаты обследования окружения.",
+                        "Группы риска для обследования 2 раза в год (ВИЧ, сахарный диабет, иммуносупрессивная терапия, невакцинированные дети 1-7 лет и др.).",
+                        "Правила планирования: составление календарного плана, учет организованных и неорганизованных детей, интервал 1 месяц после профилактических прививок.",
+                        "Методика расчета потребности в туберкулине и Диаскинтесте на 2026 год с учетом групп риска (2 дозы — обычные дети, 4 дозы — группы риска) и 20% запаса на потери.",
+                        "Альтернативные IGRA-тесты (ТиграТест.ТБ, T-SPOT.TB) для детей с иммунодефицитами, кожными заболеваниями или при отказе от внутрикожных проб.",
+                        "Пошаговая инструкция по работе в ЕМИАС: создание карты иммунопрофилактики, назначение пробы, фиксация выполнения и результата (размер папулы/гиперемии) через 72 часа."
+                    ],
+                    "application": "Документ служит ПРАКТИЧЕСКИМ РУКОВОДСТВОМ для врачей и медсестер общей лечебной сети. Он отвечает на все повседневные вопросы: КОГО, КОГДА и КАК обследовать? КАК рассчитать нужное количество препаратов на год? КАКИЕ данные собрать перед отправкой к фтизиатру? КАК правильно оформить пробу в ЕМИАС? Особенно ценны приложения с Excel-таблицами для автоматического расчета потребности в препаратах и сводные формы отчетности. Рекомендации учитывают региональную специфику Московской области и последние изменения в приказе № 190н (2025)."
+                }
+            },
+            {
+                "id": 11,
+                "title": "Федеральные клинические рекомендации по вакцинопрофилактике туберкулеза у детей",
+                "officialTitle": "Федеральные клинические рекомендации по вакцинопрофилактике туберкулеза у детей (утв. Российским обществом фтизиатров)",
+                "date": "Москва, 2015 г.",
+                "description": "Порядок проведения вакцинации и ревакцинации БЦЖ/БЦЖ-М, противопоказания, техника введения, тактика при поствакцинальных осложнениях.",
+                "pdfFile": "documents/fk_bt_vakcino_2015.pdf",
+                "pdfName": "fk_bt_vakcino_2015.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Регламентирует применение вакцин БЦЖ и БЦЖ-М (для щадящей иммунизации) строго в соответствии с инструкциями.",
+                        "Вакцинация проводится здоровым новорожденным на 3-7 день жизни. Ревакцинация — детям 6-7 лет с отрицательной пробой Манту.",
+                        "Четкие противопоказания к вакцинации: недоношенность (масса тела <2500 г для БЦЖ, <2300 г для БЦЖ-М), острые заболевания, иммунодефицитные состояния, ВИЧ-инфекция, генерализованная БЦЖ-инфекция в семье.",
+                        "Техника введения: строго внутрикожно в область левого плеча, с формированием папулы 7-9 мм. Запрещено наложение повязки или обработка места введения.",
+                        "Подробная классификация поствакцинальных осложнений: от местных инфильтратов и лимфаденитов до генерализованной БЦЖ-инфекции и оститов.",
+                        "Алгоритм действий при подозрении на осложнение: наблюдение педиатра, консультация фтизиатра, углубленная диагностика (лучевые, лабораторные методы).",
+                        "Схемы лечения осложнений: местные аппликации с димексидом и рифампицином, при лимфаденитах — изониазид и рифампицин внутрь, хирургическое лечение при абсцедировании.",
+                        "Лечение келоидных рубцов: обкалывание лидазой и гидрокортизоном, ультразвук с электрофорезом тиосульфата натрия, мазь Контрактубекс.",
+                        "Диспансерное наблюдение детей с осложнениями по V группе учета у фтизиатра."
+                    ],
+                    "application": "Документ является основным руководством для педиатров, неонатологов и медицинских сестер, проводящих вакцинацию против туберкулеза. Он содержит исчерпывающую информацию по отбору детей на прививку, технике ее проведения, наблюдению за поствакцинальной реакцией, а также четкие алгоритмы диагностики и лечения осложнений. Особое внимание уделено подготовке медицинского персонала и системе учета (включая карту регистрации осложнений). Рекомендации обязательны к применению в медицинских организациях РФ."
+                }
+            },
+             {
+                "id": 2,
+                "title": "Приказ МЗ МО № 1725",
+                "officialTitle": "О порядке взаимодействия врачей-патологоанатомов, врачей-судебно-медицинских экспертов и врачей-фтизиатров на территории Московской области",
+                "date": "Утверждён 25.12.2020 г.",
+                "description": "Взаимодействие при установлении причины смерти, связанной с туберкулёзом",
+                "pdfFile": "documents/prikaz-1725.pdf",
+                "pdfName": "Приказ_МЗ_МО_1725.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Обязательное немедленное уведомление МОКПТД при подозрении на туберкулёз как причину смерти",
+                        "Забор материал для микробиологическое исследование с целью выявления микобактерий туберкулеза (МБТ)",
+                        "Совместная оценка случая фтизиатром и патологоанатомом/судмедэкспертом",
+                        "Определение ВИЧ-статуса для корректного установления причины смерти",
+                        "Ежемесячные коллегиальные разборы случаев"
+                    ],
+                    "application": "Применяется во всех случаях смерти, где туберкулёз заподозрен как возможная причина. Позволяет избежать ошибок в статистике смертности и выявить дефекты диагностики."
+                }
+            }
+        ];
+
+        function renderDocuments() {
+            const container = document.getElementById('documents-container');
+            container.innerHTML = '';
+            
+            allDocuments.forEach(doc => {
+                const card = document.createElement('article');
+                card.className = 'document-card';
+                card.dataset.id = doc.id;
+                
+                let buttonsHTML;
+                
+                // Специальная обработка для приказа №445-Р (id: 5) - добавляем третью кнопку
+                if (doc.id === 5) {
+                    buttonsHTML = `
+                        <a href="${doc.pdfFile}" 
+                           target="_blank"
+                           class="doc-btn btn-pdf">
+                            📄 Смотреть PDF
+                        </a>
+                        
+                        <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
+                            💡 Аннотация
+                        </button>
+                        
+                        <button class="doc-btn btn-excel" id="instrumentsBtn-${doc.id}" style="background: var(--accent-green);">
+                            📗 Инструменты контроля
+                        </button>
+                    `;
+                } else if (doc.id === 8 && doc.excelFile) {
+                    buttonsHTML = `
+                        <a href="${doc.pdfFile}" 
+                           target="_blank"
+                           class="doc-btn btn-pdf">
+                            📄 Смотреть PDF
+                        </a>
+                        
+                        <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
+                            💡 Аннотация
+                        </button>
+                        
+                        <a href="${doc.excelFile}" 
+                           download="${doc.excelName || 'Журнал_04-ТБ.xlsx'}"
+                           class="doc-btn btn-excel">
+                            📊 Скачать журнал
+                        </a>
+                    `;
+                } else {
+                    buttonsHTML = `
+                        <a href="${doc.pdfFile}" 
+                           target="_blank"
+                           class="doc-btn btn-pdf">
+                            📄 Смотреть PDF
+                        </a>
+                        
+                        <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
+                            💡 Аннотация
+                        </button>
+                    `;
+                }
+                
+                card.innerHTML = `
+                    <div class="document-header-card">
+                        <h3 class="document-title-card">${doc.title}</h3>
+                        <div class="document-official-title">${doc.officialTitle}</div>
+                    </div>
+                    <div class="document-body">
+                        <p class="document-details">
+                            <strong>${doc.date}</strong><br>
+                            ${doc.description}
+                        </p>
+                        <div class="document-actions">
+                            ${buttonsHTML}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            attachEventListeners();
+        }
+        
+        function attachEventListeners() {
+            const explainBtns = document.querySelectorAll('.explain-btn');
+            
+            explainBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const docId = btn.getAttribute('data-id');
+                    openExplanation(docId);
+                });
+            });
+            
+            // Добавляем обработчики для кнопок "Инструменты контроля" (приказ 445-Р)
+            const instrumentsBtn = document.getElementById('instrumentsBtn-5');
+            if (instrumentsBtn) {
+                instrumentsBtn.addEventListener('click', openInstrumentsModal);
+            }
+            
+            const cards = document.querySelectorAll('.document-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s, transform 0.5s';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        }
+
+        function openExplanation(id) {
+            const doc = allDocuments.find(d => d.id == id);
+            
+            if (!doc || !doc.explanation) {
+                modalBody.innerHTML = '<p>Пояснение для этого документа пока не добавлено.</p>';
+                modalTitle.textContent = "Пояснение документа";
+            } else {
+                modalTitle.textContent = doc.title + " — " + doc.officialTitle;
+                
+                modalBody.innerHTML = `
+                    <div class="explanation-section">
+                        <h4 class="explanation-title">
+                            Ключевые положения документа
+                        </h4>
+                        <div class="key-points">
+                            <ul>
+                                ${doc.explanation.keyPoints.map(point => `<li>${point}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="explanation-section">
+                        <h4 class="explanation-title">
+                            Практическое применение
+                        </h4>
+                        <p class="explanation-text">${doc.explanation.application}</p>
+                    </div>
+                `;
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showAllExplanations() {
+            modalTitle.textContent = "Объяснения всех документов";
+            
+            let allContent = '';
+            
+            allDocuments.forEach(doc => {
+                if (doc.explanation) {
+                    allContent += `
+                        <div class="explanation-section" style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 2px solid var(--gray-medium);">
+                            <h4 class="explanation-title" style="font-size: 1.3rem;">
+                                ${doc.title} — ${doc.officialTitle}
+                            </h4>
+                            
+                            <div style="margin-top: 1.5rem;">
+                                <h5 style="color: var(--primary-blue); margin-bottom: 0.8rem; font-size: 1.1rem;">Ключевые положения:</h5>
+                                <div class="key-points">
+                                    <ul>
+                                        ${doc.explanation.keyPoints.map(point => `<li>${point}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 1.5rem;">
+                                <h5 style="color: var(--primary-blue); margin-bottom: 0.8rem; font-size: 1.1rem;">Практическое применение:</h5>
+                                <p style="color: var(--text-secondary); line-height: 1.7;">${doc.explanation.application}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            modalBody.innerHTML = allContent;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Новая функция для открытия модального окна с инструментами
+        function openInstrumentsModal() {
+            instrumentsModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeInstrumentsModal() {
+            instrumentsModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        const modal = document.getElementById('explanationModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const modalTitle = document.getElementById('modalDocTitle');
+        const modalBody = document.getElementById('modalBody');
+        const showAllBtn = document.getElementById('showAllExplanations');
+        
+        // Элементы для нового модального окна
+        const instrumentsModal = document.getElementById('instrumentsModal');
+        const closeInstrumentsModalBtn = document.getElementById('closeInstrumentsModal');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDocuments();
+            
+            showAllBtn.addEventListener('click', showAllExplanations);
+            closeModalBtn.addEventListener('click', closeModal);
+            
+            // Обработчики для нового модального окна
+            if (closeInstrumentsModalBtn) {
+                closeInstrumentsModalBtn.addEventListener('click', closeInstrumentsModal);
+            }
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            if (instrumentsModal) {
+                instrumentsModal.addEventListener('click', (e) => {
+                    if (e.target === instrumentsModal) {
+                        closeInstrumentsModal();
+                    }
+                });
+            }
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (modal.classList.contains('active')) {
+                        closeModal();
+                    }
+                    if (instrumentsModal && instrumentsModal.classList.contains('active')) {
+                        closeInstrumentsModal();
+                    }
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
