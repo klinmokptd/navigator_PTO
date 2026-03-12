@@ -67,35 +67,11 @@
         }
         
         body {
-            background: #f5fafc;
+            background: #ffffff;
             color: var(--text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Цветные "софиты" на фоне как в примере */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 50% 10%, rgba(32, 178, 170, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 5% 20%, rgba(32, 178, 170, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 25% 40%, rgba(211, 84, 0, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 45% 30%, rgba(74, 119, 146, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 65% 50%, rgba(90, 138, 107, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 35%, rgba(122, 107, 140, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 15% 70%, rgba(140, 122, 107, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 40% 85%, rgba(106, 76, 156, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 75% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 40%);
-            pointer-events: none;
-            z-index: 0;
         }
         
         .content-header {
@@ -257,8 +233,6 @@
             flex: 1;
             padding: 35px;
             overflow-y: auto;
-            position: relative;
-            z-index: 1;
         }
         
         .grid {
@@ -269,16 +243,16 @@
         }
         
         .card {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 20px;
             padding: 28px;
-            box-shadow: 0 8px 32px rgba(112, 128, 144, 0.1);
+            box-shadow: var(--shadow-lg);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border);
             min-height: 300px;
             display: flex;
             flex-direction: column;
@@ -296,7 +270,7 @@
         
         .card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(112, 128, 144, 0.15);
+            box-shadow: var(--shadow-xl);
         }
         
         .card-header {
@@ -315,10 +289,6 @@
             margin-right: 16px;
             font-size: 1.4rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(135deg, var(--primary-light) 0%, white 100%);
-            color: var(--primary);
-            box-shadow: 0 4px 12px rgba(112, 128, 144, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.9);
         }
 
         .card:hover .card-icon {
@@ -365,10 +335,7 @@
             --block-color-light: #fcfaff;
         }
         
-        .card .card-icon { 
-            background: linear-gradient(135deg, var(--block-color-light) 0%, white 100%);
-            color: var(--block-color);
-        }
+        .card .card-icon { background: var(--block-color-light); }
         
         .card h2 {
             color: var(--block-color);
@@ -391,16 +358,15 @@
             text-decoration: none;
             color: var(--block-color);
             border: 1px solid transparent;
-            background: rgba(255, 255, 255, 0.7);
+            background: var(--block-color-light);
             margin-bottom: 10px;
             flex-direction: column;
             cursor: pointer;
-            backdrop-filter: blur(5px);
         }
         
         .link-item:hover {
-            background: white;
-            border-color: var(--border);
+            background: var(--surface);
+            border-color: var(--block-color);
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.12);
             transform: translateX(6px);
         }
@@ -452,14 +418,11 @@
 
         .dropdown-content {
             display: none;
-            background: white;
+            background: var(--block-color-light);
             border-left: 3px solid var(--block-color);
             border-radius: 0 0 12px 12px;
             margin-top: -10px;
             margin-bottom: 10px;
-            box-shadow: 0 4px 12px rgba(112, 128, 144, 0.08);
-            border: 1px solid var(--border);
-            border-top: none;
         }
         
         .dropdown-content.show {
@@ -476,7 +439,7 @@
         }
         
         .dropdown-link:hover {
-            background: var(--block-color-light);
+            background: var(--primary-light);
         }
         
         .dropdown-link:last-child {
@@ -496,25 +459,11 @@
             text-align: center;
             padding: 35px;
             color: var(--text-secondary);
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--surface);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 32px rgba(112, 128, 144, 0.1);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
             margin-top: 35px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
         }
         
         .footer p {
