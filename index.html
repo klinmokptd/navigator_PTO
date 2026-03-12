@@ -709,6 +709,35 @@
         grid-template-columns: 1fr;
     }
 }
+        /* ===== ОГРАНИЧЕНИЕ ШИРИНЫ КОНТЕНТА ===== */
+.content-area {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.quick-tools {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 80px); /* Отступы 40px с каждой стороны */
+}
+
+.content-header {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: 100%;
+}
+
+.site-footer .footer {
+    max-width: 1400px; /* Оставляем 1100px или меняем на 1400px как хотите */
+}
     </style>
 </head>
 <body>
