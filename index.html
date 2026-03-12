@@ -229,6 +229,67 @@
             font-weight: 400;
         }
 
+        /* ========== СТИЛИ ДЛЯ ПАНЕЛИ БЫСТРЫХ ИНСТРУМЕНТОВ ========== */
+        .quick-tools {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 60px;
+            padding: 15px 30px;
+            margin: 0 40px 30px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 2;
+        }
+
+        .tool-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            white-space: nowrap;
+        }
+
+        .tool-button:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(75, 0, 130, 0.15);
+        }
+
+        .tool-icon-img {
+            width: 20px !important;
+            height: 20px !important;
+            max-width: 20px !important;
+            max-height: 20px !important;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .tool-icon-fallback {
+            font-size: 1.2rem;
+            line-height: 1;
+            display: none;
+        }
+        /* ========== КОНЕЦ СТИЛЕЙ ДЛЯ ПАНЕЛИ ========== */
+
         .content-area {
             flex: 1;
             padding: 35px;
@@ -500,6 +561,11 @@
                 margin-left: 0;
                 max-width: 100%;
             }
+            .quick-tools {
+                margin: 0 20px 25px 20px;
+                border-radius: 30px;
+                padding: 12px 20px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -535,6 +601,13 @@
             .link-meta {
                 margin-left: 0;
             }
+
+            .quick-tools {
+                margin: 0 15px 20px 15px;
+                border-radius: 20px;
+                padding: 10px 15px;
+                justify-content: flex-start;
+            }
         }
         
         @media (max-width: 480px) {
@@ -561,6 +634,9 @@
             .header-logo {
                 width: 80px;
                 height: 80px;
+            }
+            .quick-tools {
+                margin: 0 10px 15px 10px;
             }
         }
     </style>
@@ -591,8 +667,39 @@
     </div>
 </div>
         </header>
-        
-               </header>
+
+        <!-- ========== НОВАЯ ПАНЕЛЬ БЫСТРЫХ ИНСТРУМЕНТОВ ========== -->
+        <div class="quick-tools">
+            <a href="https://1c.mokptd.ru:8443/mis" target="_blank" class="tool-button">
+                <img src="picture/topline/1c.png" alt="1С" class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">🧪</span>
+                <span>1С-мокрота</span>
+            </a>
+            
+            <a href="https://webviewer.eris.mosreg.ru/viewer/#/login" target="_blank" class="tool-button">
+                <img src="picture/topline/pax.png" alt="DIGIPAX" class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">🖼️</span>
+                <span>DIGIPAX</span>
+            </a>
+            
+            <a href="https://nr.egisz.rosminzdrav.ru/index.xhtml" target="_blank" class="tool-button">
+                <img src="picture/topline/frbt.png" alt="ФРБТ" class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">📊</span>
+                <span>ФРБТ</span>
+            </a>
+            
+            <a href="https://stat.miacmo.ru/datainput" target="_blank" class="tool-button">
+                <img src="picture/topline/medinfo.png" alt="Мединфо" class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">📊</span>
+                <span>Мединфо</span>
+            </a>
+            
+            <a href="https://smo-egisz.emias.mosreg.ru/Account/Login?ReturnUrl=%2f" target="_blank" class="tool-button">
+                <img src="picture/topline/donor.png" alt="База доноров" class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">🩸</span>
+                <span>База доноров</span>
+            </a>
+        </div>
         
         <div class="content-area">
             <div class="grid">
