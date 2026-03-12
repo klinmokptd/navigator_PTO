@@ -1228,35 +1228,41 @@
             document.body.appendChild(modal);
         }
 
-// ===== ОБЫЧНОЕ ОБЪЯВЛЕНИЕ ===== 
-        // Текст из этой переменной появится в верхнем блоке.
-        // Рядом будет кнопка "Показать" — при нажатии текст откроется в отдельном окне.
-        const nonUrgentAnnouncement = "";
+// ===== ОБЪЯВЛЕНИЯ ===== 
+// Текст из этой переменной появится в верхнем блоке.
+// Рядом будет кнопка "Показать" — при нажатии текст откроется в отдельном окне.
+const nonUrgentAnnouncement = "Добавлены ссылки на вебинары ФГБУ «НМИЦ ФПИ» в раздел «Образовательные ресурсы». Запланируйте посмотреть новые или прошедшие, сохраненные в Rutube";
+
+// ===== СРОЧНОЕ/ВАЖНОЕ ОБЪЯВЛЕНИЕ ===== 
+// Текст из этой переменной автоматически откроется во всплывающем окне (модальном) 
+// СРАЗУ при загрузке страницы. Используйте для экстренных оповещений.
+const announcementText = "";
+
+document.addEventListener('DOMContentLoaded', () => {
+    const announcementBox = document.getElementById('announcement-content');
+    const showBtn = document.getElementById('show-announcement-btn');
+    const announcementContainer = document.getElementById('announcement-container');
+    
+    if (nonUrgentAnnouncement.trim() !== "") {
+        // Если есть объявление — показываем контейнер и заполняем данные
+        announcementContainer.style.display = 'flex'; // или 'block', но у вас там flex-родитель
+        announcementBox.innerHTML = nonUrgentAnnouncement;
+        showBtn.style.display = 'block';
         
-        // ===== СРОЧНОЕ/ВАЖНОЕ ОБЪЯВЛЕНИЕ ===== 
-        // Текст из этой переменной автоматически откроется во всплывающем окне (модальном) 
-        // СРАЗУ при загрузке страницы. Используйте для экстренных оповещений.
-        const announcementText = "";
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const announcementBox = document.getElementById('announcement-content');
-            const showBtn = document.getElementById('show-announcement-btn');
-            
-            if (nonUrgentAnnouncement.trim() !== "") {
-                announcementBox.innerHTML = nonUrgentAnnouncement;
-                showBtn.style.display = 'block';
-                showBtn.addEventListener('click', () => {
-                    createModal(nonUrgentAnnouncement, 'Объявление');
-                });
-            } else {
-                announcementBox.innerHTML = '<span class="no-announcements">Новых объявлений нет.</span>';
-                showBtn.style.display = 'none';
-            }
-
-            if (announcementText.trim() !== "") {
-                 createModal(announcementText, '⚠️ Важное объявление');
-            }
+        // Удаляем старый обработчик, если был, и вешаем новый
+        showBtn.replaceWith(showBtn.cloneNode(true));
+        document.getElementById('show-announcement-btn').addEventListener('click', () => {
+            createModal(nonUrgentAnnouncement, 'Объявление');
         });
+    } else {
+        // Если объявлений нет — контейнер скрыт
+        announcementContainer.style.display = 'none';
+    }
+
+    if (announcementText.trim() !== "") {
+         createModal(announcementText, '⚠️ Важное объявление');
+    }
+});
     </script>
 </body>
 </html>
