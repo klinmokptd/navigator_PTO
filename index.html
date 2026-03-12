@@ -585,16 +585,17 @@
                 <p class="page-description" style="margin-top: 20px; font-size: 1.8rem; font-weight: 700; color: #dc2626; text-align: left; line-height: 1.3;"></p>
             </div>
 
-            <div class="announcements-box-container">
-                <div class="announcements-box">
-                    <div class="announcement-header">
-                        <h3>Объявления</h3> 
-                        <button id="show-announcement-btn" class="show-announcement-btn" style="display: none;">Показать</button>
-                    </div>
-                    
-                    <div id="announcement-content"></div>
-                </div>
-            </div>
+            <!-- Весь блок announcements-box-container теперь будет скрыт, если нет объявлений -->
+<div class="announcements-box-container" id="announcement-container" style="display: none;">
+    <div class="announcements-box">
+        <div class="announcement-header">
+            <h3>Объявления</h3> 
+            <button id="show-announcement-btn" class="show-announcement-btn" style="display: none;">Показать</button>
+        </div>
+        
+        <div id="announcement-content"></div>
+    </div>
+</div>
         </header>
         
                </header>
