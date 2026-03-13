@@ -242,6 +242,12 @@
             transition: all 0.2s ease;
             min-width: 100px;
             gap: 10px;
+            
+            /* Кнопка теперь сама по себе круглая, но НЕ ОБРЕЗАЕТ содержимое */
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            overflow: visible;
         }
 
         .tool-icon-img {
@@ -250,7 +256,7 @@
             object-fit: contain;
             background: white;
             border: 2px solid var(--primary);
-            border-radius: 120px;
+            border-radius: 100px;  /* Круглая только обводка, картинка не обрезается */
             padding: 26px;
             box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
             transition: all 0.2s ease;
@@ -265,11 +271,12 @@
             max-width: 100px;
         }
 
+        /* УБРАЛ ВСЯКУЮ ХУЙНУ ПРИ НАВЕДЕНИИ */
         .tool-button:hover .tool-icon-img {
-            background: var(--primary);
             border-color: var(--accent);
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 25px rgba(75, 0, 130, 0.3);
+            /* НИКАКОГО background: var(--primary) - УДАЛЕНО НАХУЙ */
         }
 
         .tool-button:hover span {
