@@ -252,20 +252,24 @@
         .tool-icon-img {
     width: 100px !important;
     height: 100px !important;
-    object-fit: contain;
+    object-fit: cover; /* чтобы картинка заполняла область */
     
-    /* Убираем старый border-radius */
-    /* border-radius: 100px; */
+    /* Это делает картинку круглой */
+    border-radius: 100px;
     
-    /* Добавляем clip-path для обрезки */
-    clip-path: circle(70px at center);
-    -webkit-clip-path: circle(70px at center);
+    /* Эти два свойства создают иллюзию, что круг больше */
+    transform: scale(1.3); /* увеличиваем картинку внутри */
+    margin: -15px; /* компенсируем увеличение, чтобы не вылезала за края */
     
     background: white;
     border: 2px solid var(--primary);
-    padding: 0; /* Убираем padding, чтобы картинка не сжималась */
     box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
     transition: all 0.2s ease;
+}
+
+/* Убираем padding, который сжимал картинку */
+.tool-icon-img {
+    padding: 0;
 }
 
         .tool-button span {
