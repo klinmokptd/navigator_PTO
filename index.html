@@ -213,7 +213,7 @@
             transform: scale(1.05);
         }
 
-        /* ===== КРУГЛЫЕ КНОПКИ TOPLINE С ТЕКСТОМ ВНИЗУ ===== */
+        /* ===== КРУГЛЫЕ КНОПКИ TOPLINE ===== */
         .quick-tools {
             padding: 30px 40px;
             margin: 0 auto 30px auto;
@@ -236,19 +236,19 @@
         }
 
         .tool-icon-img {
-            width: 64px !important;   /* КРУПНЫЕ ЗНАЧКИ */
+            width: 64px !important;
             height: 64px !important;
             object-fit: contain;
             background: white;
-            border: 2px solid var(--primary);  /* ТОНКАЯ ОБВОДКА 2px */
-            border-radius: 100px;      /* ИДЕАЛЬНО КРУГЛЫЕ */
+            border: 1px solid var(--primary);
+            border-radius: 100px;
             padding: 12px;
             box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
             transition: all 0.2s ease;
         }
 
         .tool-button span {
-            font-size: 0.75rem;      /* ОЧЕНЬ МЕЛКИЙ ТЕКСТ */
+            font-size: 0.75rem;
             font-weight: 500;
             color: var(--primary);
             text-align: center;
@@ -295,7 +295,7 @@
             position: relative;
         }
 
-        /* ТОЛЬКО ТВОЯ ОРИГИНАЛЬНАЯ ПОЛОСА */
+        /* ТОЛЬКО ТВОЯ ПОЛОСА - МОЮ УБРАЛ */
         .card::before {
             content: "";
             position: absolute;
@@ -353,6 +353,7 @@
             flex: 1;
         }
         
+        /* ===== БЛОКИ-РАЗДЕЛЫ ===== */
         .link-item {
             display: flex;
             align-items: flex-start;
@@ -361,16 +362,17 @@
             transition: all 0.2s ease;
             text-decoration: none;
             color: var(--text-primary);
-            background: white;
+            background: #EFF1F5;  /* на 15% темнее белого */
             margin-bottom: 8px;
             flex-direction: column;
             cursor: pointer;
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            /* УБРАЛ ЧЁРНЫЙ КОНТУР */
+            border: none;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
         
         .link-item:hover {
-            border-color: var(--primary);
+            background: white;
             box-shadow: 0 4px 10px rgba(75, 0, 130, 0.15);
             transform: translateX(4px);
         }
@@ -407,19 +409,19 @@
             margin-left: 34px;
         }
 
-        /* ===== ВЫПАДАЮЩИЕ СПИСКИ СО СМЕЩЕНИЕМ ===== */
+        /* ===== ВЫПАДАЮЩИЕ СПИСКИ ===== */
         .dropdown-content {
             display: none;
             background: white;
-            border-left: 4px solid var(--primary);  /* ЖИРНАЯ ЛЕВАЯ ГРАНИЦА */
+            border-left: 4px solid var(--primary);
             border-radius: 0 12px 12px 12px;
             margin-top: -4px;
             margin-bottom: 12px;
-            margin-left: 15px;  /* СМЕЩЕНИЕ ВПРАВО НА 15px */
+            margin-left: 15px;
             padding: 8px 0;
             border: 1px solid var(--border);
             border-top: none;
-            border-left: 4px solid var(--primary);  /* ЯВНЫЙ ОТЛИЧИТЕЛЬНЫЙ КОНТУР */
+            border-left: 4px solid var(--primary);
             box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
         }
         
@@ -433,7 +435,6 @@
             color: var(--text-primary);
             text-decoration: none;
             border-bottom: 1px solid var(--border);
-            position: relative;
             transition: all 0.2s ease;
         }
         
@@ -447,10 +448,6 @@
             transform: translateX(5px);
         }
         
-        .dropdown-link:hover .dropdown-meta {
-            color: var(--primary);
-        }
-        
         .dropdown-meta {
             font-size: 0.8rem;
             color: var(--text-secondary);
@@ -458,7 +455,7 @@
             padding-left: 5px;
         }
         
-        /* ===== ФУТЕР - ВСЁ ПО ЦЕНТРУ ===== */
+        /* ===== ФУТЕР - БЕЗ ЛИШНИХ ПОЛОС ===== */
         .site-footer {
             margin-top: 60px;
             padding: 0 20px 30px;
@@ -476,22 +473,15 @@
             text-align: center;
         }
 
+        /* УБРАЛ ВСЕ ЛИШНИЕ ПОЛОСЫ */
         .footer::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 20px 20px 0 0;
+            display: none;
         }
 
         .footer-message {
             text-align: center;
-            padding: 20px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            padding: 0 0 20px 0;
+            /* УБРАЛ border-top и border-bottom */
             margin-bottom: 20px;
         }
 
@@ -500,10 +490,11 @@
             margin-bottom: 25px;
         }
 
+        /* КНОПКА КАК В TOPLINE - ПРОЗРАЧНАЯ С КОНТУРОМ */
         .feedback-link {
             display: inline-block;
-            color: white;
-            background: var(--primary);
+            color: var(--primary);
+            background: transparent;
             text-decoration: none;
             padding: 12px 30px;
             border-radius: 40px;
@@ -513,8 +504,8 @@
         }
 
         .feedback-link:hover {
-            background: white;
-            color: var(--primary);
+            background: var(--primary);
+            color: white;
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(75, 0, 130, 0.2);
         }
