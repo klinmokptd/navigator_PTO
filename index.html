@@ -131,13 +131,16 @@
             height: 180px;
             flex-shrink: 0;
             object-fit: contain;
+            align-self: center;
         }
 
         .header-text-container {
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
-        /* УБРАЛ "ГБУЗ МО МОКПТД" */
         .institution-main {
             display: none;
         }
@@ -146,14 +149,15 @@
             font-size: 2.8rem;
             font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 6px;
+            margin-bottom: 0;
             line-height: 1.1;
+            display: flex;
+            flex-direction: column;
         }
 
         .title-navigator { 
             color: var(--primary); 
             font-size: 3.2rem;
-            display: block;
             line-height: 1;
             margin-bottom: 5px;
         }
@@ -162,18 +166,22 @@
             color: var(--dark-turquoise); 
             font-size: 1.6rem;
             font-weight: 500;
-            display: block;
         }
 
-        .page-description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;  /* УМЕНЬШИЛ */
-            margin-top: 20px;      /* ОПУСТИЛ НИЖЕ */
-            max-width: 450px;
+        /* Контейнер для фразы над чертой */
+        .resource-tagline {
+            text-align: center;
+            max-width: 1400px;
+            margin: 20px auto 10px auto;
+            padding: 0 40px;
         }
         
-        /* УБРАЛ ТЕКСТ В СКОБКАХ - ОН БЫЛ ВНУТРИ P */
-        /* Теперь там просто "Система доступа к профессиональным ресурсам" */
+        .resource-tagline p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0;
+        }
         
         .announcements-box-container {
             display: flex;
@@ -224,7 +232,7 @@
             flex-wrap: wrap;
             align-items: flex-end;
             justify-content: center;
-            gap: 25px 20px;
+            gap: 30px 25px;
         }
 
         .tool-button {
@@ -233,30 +241,29 @@
             align-items: center;
             text-decoration: none;
             transition: all 0.2s ease;
-            min-width: 90px;
-            gap: 8px;
+            min-width: 100px;
+            gap: 10px;
         }
 
         .tool-icon-img {
-            width: 64px !important;
-            height: 64px !important;
+            width: 72px !important;
+            height: 72px !important;
             object-fit: contain;
             background: white;
-            border: 2px solid var(--primary);  /* ВЕРНУЛ ЖИРНОСТЬ 2px */
+            border: 2px solid var(--primary);
             border-radius: 100px;
-            padding: 12px;
+            padding: 14px;
             box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
             transition: all 0.2s ease;
         }
 
         .tool-button span {
-            font-size: 0.75rem;
-            font-weight: 500;
+            font-size: 0.8rem;
+            font-weight: 600;
             color: var(--primary);
             text-align: center;
-            line-height: 1.2;
-            max-width: 90px;
-            opacity: 0.9;
+            line-height: 1.3;
+            max-width: 100px;
         }
 
         .tool-button:hover .tool-icon-img {
@@ -268,7 +275,6 @@
 
         .tool-button:hover span {
             color: var(--primary-dark);
-            font-weight: 600;
         }
 
         .content-area {
@@ -295,9 +301,10 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            overflow: hidden;
         }
 
-        /* ТОЛЬКО ТВОЯ ПОЛОСА - МОЮ УБРАЛ ПОЛНОСТЬЮ */
+        /* ТВОЯ ПОЛОСА - СКРУГЛЕННАЯ, БЕЗ ВЫПИРАНИЙ */
         .card::before {
             content: "";
             position: absolute;
@@ -307,11 +314,6 @@
             height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
             border-radius: 20px 20px 0 0;
-        }
-        
-        /* УБЕДИЛСЯ, ЧТО НЕТ ДРУГИХ ПСЕВДОЭЛЕМЕНТОВ */
-        .card::after {
-            display: none;
         }
         
         .card:hover {
@@ -369,7 +371,7 @@
             transition: all 0.2s ease;
             text-decoration: none;
             color: var(--text-primary);
-            background: #F2F4F8;  /* УМЕНЬШИЛ КОНТРАСТНОСТЬ (было #EFF1F5) */
+            background: #F2F4F8;
             margin-bottom: 8px;
             flex-direction: column;
             cursor: pointer;
@@ -541,24 +543,24 @@
                 font-size: 1.4rem;
             }
             
-            .page-description {
-                margin-left: auto;
-                margin-right: auto;
+            .resource-tagline {
+                padding: 0 20px;
             }
             
             .quick-tools {
                 padding: 20px 15px;
-                gap: 15px;
+                gap: 20px;
             }
             
             .tool-icon-img {
-                width: 56px !important;
-                height: 56px !important;
-                padding: 10px;
+                width: 64px !important;
+                height: 64px !important;
+                padding: 12px;
             }
             
             .tool-button span {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
+                max-width: 80px;
             }
             
             .grid {
