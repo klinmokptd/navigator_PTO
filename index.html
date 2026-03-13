@@ -15,6 +15,38 @@
     <!-- Preload логотипа -->
     <link rel="preload" href="header-logo.png" as="image">
 
+    <!-- СКРИПТ ДЛЯ МГНОВЕННОЙ ЗАГРУЗКИ (ИСПРАВЛЕН) -->
+    <script>
+        (function() {
+            // Ждем, когда DOM загрузится (структура страницы готова)
+            document.addEventListener('DOMContentLoaded', function() {
+                // Находим все картинки в панели инструментов
+                const images = document.querySelectorAll('.quick-tools img');
+                
+                images.forEach(img => {
+                    // Запоминаем путь к картинке в data-src
+                    const src = img.getAttribute('src');
+                    if (src) {
+                        img.setAttribute('data-src', src);
+                        // Убираем src, чтобы браузер не грузил картинку
+                        img.removeAttribute('src');
+                    }
+                });
+
+                // Когда страница полностью загрузилась (со всеми стилями и шрифтами)
+                window.addEventListener('load', function() {
+                    // Через 100 миллисекунд возвращаем картинки
+                    setTimeout(() => {
+                        document.querySelectorAll('.quick-tools img[data-src]').forEach(img => {
+                            img.src = img.getAttribute('data-src');
+                            img.removeAttribute('data-src');
+                        });
+                    }, 100);
+                });
+            });
+        })();
+    </script>
+
     <style>
         @font-face {
             font-family: 'Inter';
@@ -886,25 +918,6 @@
 }
     </style>
 </head>
-    <script>
-    (function() {
-        // Прячем все картинки в quick-tools при загрузке
-        const images = document.querySelectorAll('.quick-tools img');
-        images.forEach(img => {
-            // Запоминаем исходный src
-            const src = img.src;
-            // Убираем src, чтобы браузер не грузил
-            img.src = '';
-            // Вешаем событие на загрузку страницы
-            window.addEventListener('load', function() {
-                // Возвращаем src обратно через 0.5 сек после полной загрузки страницы
-                setTimeout(() => {
-                    img.src = src;
-                }, 500);
-            });
-        });
-    })();
-</script>
 <body>
     <main class="main-content" id="main-content">
         <header class="content-header">
