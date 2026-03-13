@@ -42,7 +42,7 @@
     </script>
 
    <style>
-        @font-face {
+                @font-face {
             font-family: 'Inter';
             src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
             font-weight: 400;
@@ -245,14 +245,15 @@
             gap: 10px;
         }
 
+        /* УВЕЛИЧЕННЫЕ КНОПКИ, НО ИКОНКИ ПРЕЖНЕГО РАЗМЕРА */
         .tool-icon-img {
-            width: 72px !important;
-            height: 72px !important;
+            width: 100px !important;      /* Увеличили саму кнопку */
+            height: 100px !important;     /* Увеличили саму кнопку */
             object-fit: contain;
             background: white;
             border: 2px solid var(--primary);
             border-radius: 100px;
-            padding: 14px;
+            padding: 20px;                /* Больше свободного места вокруг иконки */
             box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
             transition: all 0.2s ease;
         }
@@ -552,10 +553,11 @@
                 gap: 20px;
             }
             
+            /* Адаптация увеличенных кнопок для мобильных */
             .tool-icon-img {
-                width: 64px !important;
-                height: 64px !important;
-                padding: 12px;
+                width: 80px !important;
+                height: 80px !important;
+                padding: 16px;
             }
             
             .tool-button span {
