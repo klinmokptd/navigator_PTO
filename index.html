@@ -250,21 +250,23 @@
         }
 
         .tool-icon-img {
-            width: 100px !important;
-            height: 100px !important;
-            object-fit: contain;
-            
-            /* Круглая кнопка вокруг картинки */
-            background: white;
-            border: 2px solid var(--primary);
-            border-radius: 100px;
-            padding: 26px;
-            box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
-            transition: all 0.2s ease;
-            
-            /* Сама картинка квадратная */
-            border-radius: 100px;  /* Убирает круг у картинки */
-        }
+    width: 100px !important;
+    height: 100px !important;
+    object-fit: contain;
+    
+    /* Убираем старый border-radius */
+    /* border-radius: 100px; */
+    
+    /* Добавляем clip-path для обрезки */
+    clip-path: circle(70px at center);
+    -webkit-clip-path: circle(70px at center);
+    
+    background: white;
+    border: 2px solid var(--primary);
+    padding: 0; /* Убираем padding, чтобы картинка не сжималась */
+    box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
+    transition: all 0.2s ease;
+}
 
         .tool-button span {
             font-size: 0.8rem;
