@@ -247,16 +247,16 @@
 
         /* УВЕЛИЧЕННЫЕ КНОПКИ, НО ИКОНКИ МАЛЕНЬКИЕ И НЕ ОБРЕЗАНЫ */
         .tool-icon-img {
-            width: 100px !important;
-            height: 100px !important;
-            object-fit: contain;
-            background: white;
-            border: 2px solid var(--primary);
-            border-radius: 100px;
-            padding: 26px;           /* Много места вокруг иконки */
-            box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
-            transition: all 0.2s ease;
-        }
+    width: 100px !important;
+    height: 100px !important;
+    object-fit: contain;
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: 0;  /* ← УБРАЛ КРУГ НАХУЙ */
+    padding: 26px;
+    box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
+    transition: all 0.2s ease;
+}
 
         .tool-button span {
             font-size: 0.8rem;
@@ -550,10 +550,11 @@
             }
             
             .tool-icon-img {
-                width: 80px !important;
-                height: 80px !important;
-                padding: 20px;   /* На мобильных тоже много воздуха */
-            }
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 0;  /* ← И ЗДЕСЬ ТОЖЕ УБЕРИ */
+    padding: 20px;
+}
             
             .tool-button span {
                 font-size: 0.75rem;
