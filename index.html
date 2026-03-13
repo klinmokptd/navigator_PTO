@@ -252,7 +252,7 @@
     object-fit: contain;
     background: white;
     border: 2px solid var(--primary);
-    border-radius: 0;  /* ← УБРАЛ КРУГ НАХУЙ */
+    border-radius: 0;  /* ← УБРАЛ, ТЕПЕРЬ КАРТИНКА КВАДРАТНАЯ */
     padding: 26px;
     box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
     transition: all 0.2s ease;
@@ -267,12 +267,12 @@
             max-width: 100px;
         }
 
-        .tool-button:hover .tool-icon-img {
-            background: var(--primary);
-            border-color: var(--accent);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 25px rgba(75, 0, 130, 0.3);
-        }
+        .tool-icon-img {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 0;  /* ← И ТУТ */
+    padding: 20px;
+}
 
         .tool-button:hover span {
             color: var(--primary-dark);
