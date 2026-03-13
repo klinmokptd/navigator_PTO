@@ -154,16 +154,16 @@
 
         .title-navigator { 
             color: var(--primary); 
-            font-size: 3.2rem;  /* КРУПНЕЕ */
-            display: block;       /* Чтобы было на отдельной строке */
+            font-size: 3.2rem;
+            display: block;
             line-height: 1;
             margin-bottom: 5px;
         }
 
         .title-specialist {
             color: var(--dark-turquoise); 
-            font-size: 1.6rem;    /* МЕЛЬЧЕ */
-            font-weight: 500;      /* ТОНЬШЕ */
+            font-size: 1.6rem;
+            font-weight: 500;
             display: block;
         }
 
@@ -213,50 +213,60 @@
             transform: scale(1.05);
         }
 
-        /* ===== КРУГЛЫЕ КНОПКИ TOPLINE ===== */
+        /* ===== КРУГЛЫЕ КНОПКИ TOPLINE С ТЕКСТОМ ВНИЗУ ===== */
         .quick-tools {
-            padding: 20px 40px;
+            padding: 30px 40px;
             margin: 0 auto 30px auto;
             max-width: 1400px;
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
-            gap: 15px;
+            gap: 25px 20px;
         }
 
         .tool-button {
-            display: inline-flex;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
-            background: white;
-            border: 1px solid var(--primary);  /* ТОНЬШЕ */
-            border-radius: 50px;  /* КРУГЛЫЕ */
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: 500;  /* НЕ ЖИРНЫЙ */
-            color: var(--primary);
             text-decoration: none;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            white-space: nowrap;
-        }
-
-        .tool-button:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(75, 0, 130, 0.2);
-        }
-
-        .tool-button:hover .tool-icon-img {
-            filter: brightness(0) invert(1);
+            min-width: 90px;
+            gap: 8px;
         }
 
         .tool-icon-img {
-            width: 24px !important;
-            height: 24px !important;
+            width: 64px !important;   /* КРУПНЫЕ ЗНАЧКИ */
+            height: 64px !important;
             object-fit: contain;
+            background: white;
+            border: 2px solid var(--primary);  /* ТОНКАЯ ОБВОДКА 2px */
+            border-radius: 100px;      /* ИДЕАЛЬНО КРУГЛЫЕ */
+            padding: 12px;
+            box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .tool-button span {
+            font-size: 0.75rem;      /* ОЧЕНЬ МЕЛКИЙ ТЕКСТ */
+            font-weight: 500;
+            color: var(--primary);
+            text-align: center;
+            line-height: 1.2;
+            max-width: 90px;
+            opacity: 0.9;
+        }
+
+        .tool-button:hover .tool-icon-img {
+            background: var(--primary);
+            border-color: var(--accent);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 25px rgba(75, 0, 130, 0.3);
+        }
+
+        .tool-button:hover span {
+            color: var(--primary-dark);
+            font-weight: 600;
         }
 
         .content-area {
@@ -285,7 +295,7 @@
             position: relative;
         }
 
-        /* ТОЛЬКО ОДНА ПОЛОСА - ТВОЯ ОРИГИНАЛЬНАЯ */
+        /* ТОЛЬКО ТВОЯ ОРИГИНАЛЬНАЯ ПОЛОСА */
         .card::before {
             content: "";
             position: absolute;
@@ -332,7 +342,7 @@
         .card-8 .card-icon { color: var(--block-8-color); }
         
         .card h2 {
-            color: var(--primary);  /* ФИОЛЕТОВЫЙ */
+            color: var(--primary);
             font-size: 1.3rem;
             font-weight: 700;
             margin: 0;
@@ -397,16 +407,20 @@
             margin-left: 34px;
         }
 
+        /* ===== ВЫПАДАЮЩИЕ СПИСКИ СО СМЕЩЕНИЕМ ===== */
         .dropdown-content {
             display: none;
             background: white;
-            border-left: 3px solid var(--primary);
-            border-radius: 0 0 12px 12px;
+            border-left: 4px solid var(--primary);  /* ЖИРНАЯ ЛЕВАЯ ГРАНИЦА */
+            border-radius: 0 12px 12px 12px;
             margin-top: -4px;
-            margin-bottom: 8px;
-            padding: 4px 0;
+            margin-bottom: 12px;
+            margin-left: 15px;  /* СМЕЩЕНИЕ ВПРАВО НА 15px */
+            padding: 8px 0;
             border: 1px solid var(--border);
             border-top: none;
+            border-left: 4px solid var(--primary);  /* ЯВНЫЙ ОТЛИЧИТЕЛЬНЫЙ КОНТУР */
+            box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
         }
         
         .dropdown-content.show {
@@ -414,22 +428,34 @@
         }
         
         .dropdown-link {
-            padding: 10px 16px 10px 40px;
+            padding: 12px 20px 12px 25px;
             display: block;
             color: var(--text-primary);
             text-decoration: none;
             border-bottom: 1px solid var(--border);
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-link:last-child {
+            border-bottom: none;
         }
         
         .dropdown-link:hover {
             background: var(--primary-light);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .dropdown-link:hover .dropdown-meta {
             color: var(--primary);
         }
         
         .dropdown-meta {
             font-size: 0.8rem;
             color: var(--text-secondary);
-            margin-top: 2px;
+            margin-top: 4px;
+            padding-left: 5px;
         }
         
         /* ===== ФУТЕР - ВСЁ ПО ЦЕНТРУ ===== */
@@ -526,7 +552,18 @@
             }
             
             .quick-tools {
-                padding: 15px;
+                padding: 20px 15px;
+                gap: 15px;
+            }
+            
+            .tool-icon-img {
+                width: 56px !important;
+                height: 56px !important;
+                padding: 10px;
+            }
+            
+            .tool-button span {
+                font-size: 0.7rem;
             }
             
             .grid {
