@@ -886,6 +886,25 @@
 }
     </style>
 </head>
+    <script>
+    (function() {
+        // Прячем все картинки в quick-tools при загрузке
+        const images = document.querySelectorAll('.quick-tools img');
+        images.forEach(img => {
+            // Запоминаем исходный src
+            const src = img.src;
+            // Убираем src, чтобы браузер не грузил
+            img.src = '';
+            // Вешаем событие на загрузку страницы
+            window.addEventListener('load', function() {
+                // Возвращаем src обратно через 0.5 сек после полной загрузки страницы
+                setTimeout(() => {
+                    img.src = src;
+                }, 500);
+            });
+        });
+    })();
+</script>
 <body>
     <main class="main-content" id="main-content">
         <header class="content-header">
