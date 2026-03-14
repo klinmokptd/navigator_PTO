@@ -14,7 +14,7 @@
     <link rel="preload" href="header-logo.png" as="image">
 
     <style>
-        /* Подключаем шрифты */
+                /* Подключаем шрифты */
         @font-face {
             font-family: 'Inter';
             src: url('fonts/inter-cyrillic-400-normal.woff2') format('woff2');
@@ -63,6 +63,31 @@
             --shadow-sm: 0 10px 25px -5px rgba(94, 58, 140, 0.1);
             --shadow-md: 0 20px 30px -10px rgba(94, 58, 140, 0.2);
             --shadow-lg: 0 30px 40px -15px rgba(94, 58, 140, 0.3);
+            
+            /* Цвета для блоков (из content.html) */
+            --block-1-color: #20B2AA;      /* Бирюзовый */
+            --block-1-light: #E0F7FA;
+            --block-1-secondary: #48D1CC;
+            
+            --block-2-color: #D35400;      /* Оранжевый */
+            --block-2-light: #FFF3E0;
+            --block-2-secondary: #E67E22;
+            
+            --block-3-color: #4A7792;      /* Синий */
+            --block-3-light: #EDF3F8;
+            --block-3-secondary: #6B95B0;
+            
+            --block-4-color: #5A8A6B;      /* Зеленый */
+            --block-4-light: #EBF3EE;
+            --block-4-secondary: #7BA58C;
+            
+            --block-5-color: #7A6B8C;      /* Фиолетовый */
+            --block-5-light: #F2F0F7;
+            --block-5-secondary: #998BA9;
+            
+            --block-6-color: #8C7A6B;      /* Коричневый */
+            --block-6-light: #F7F4F2;
+            --block-6-secondary: #A9988B;
         }
 
         body {
@@ -194,6 +219,7 @@
             gap: 25px;
         }
 
+        /* ========== НОВЫЕ СТИЛИ ДЛЯ КАРТОЧЕК (из content.html) ========== */
         /* Карточки — стеклянные, с "игрушечными" тенями */
         .card {
             background: rgba(255, 255, 255, 0.85);
@@ -205,6 +231,11 @@
             transition: all 0.25s ease;
             display: flex;
             flex-direction: column;
+            
+            /* Цвет блока по умолчанию */
+            --block-color: var(--block-1-color);
+            --block-color-light: var(--block-1-light);
+            --block-color-secondary: var(--block-1-secondary);
         }
 
         .card:hover {
@@ -213,32 +244,78 @@
             border-color: var(--accent);
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
+        /* Цвета для каждого блока */
+        .card-1 { 
+            --block-color: var(--block-1-color); 
+            --block-color-light: var(--block-1-light); 
+            --block-color-secondary: var(--block-1-secondary); 
+        }
+        .card-2 { 
+            --block-color: var(--block-2-color); 
+            --block-color-light: var(--block-2-light); 
+            --block-color-secondary: var(--block-2-secondary); 
+        }
+        .card-3 { 
+            --block-color: var(--block-3-color); 
+            --block-color-light: var(--block-3-light); 
+            --block-color-secondary: var(--block-3-secondary); 
+        }
+        .card-4 { 
+            --block-color: var(--block-4-color); 
+            --block-color-light: var(--block-4-light); 
+            --block-color-secondary: var(--block-4-secondary); 
+        }
+        .card-5 { 
+            --block-color: var(--block-5-color); 
+            --block-color-light: var(--block-5-light); 
+            --block-color-secondary: var(--block-5-secondary); 
+        }
+        .card-6 { 
+            --block-color: var(--block-6-color); 
+            --block-color-light: var(--block-6-light); 
+            --block-color-secondary: var(--block-6-secondary); 
         }
 
-        .card-icon {
-    width: 54px;
-    height: 54px;
-    background: white;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 16px;
-    font-size: 2rem;        /* добавить */
-    font-weight: 800;       /* добавить */
-    box-shadow: 0 5px 12px rgba(94,58,140,0.08);
-    border: 1px solid var(--border);
-    color: var(--primary);
-}
+        /* Полоска сверху карточки цветом блока */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--block-color), var(--block-color-secondary));
+            border-radius: 28px 28px 0 0;
+        }
+
+        /* Заголовок карточки */
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            min-height: 85px;
+        }
+
+        /* Цифра в карточке */
+        .card-number {
+            font-size: 6rem;
+            font-weight: 800;
+            color: var(--block-color);
+            opacity: 0.3;
+            line-height: 0.9;
+            margin-right: 20px;
+            letter-spacing: -3px;
+            user-select: none;
+            font-family: 'Inter', sans-serif;
+            flex-shrink: 0;
+        }
 
         .card h2 {
             font-size: 1.25rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--block-color);
+            margin: 0;
+            margin-top: 10px;
             line-height: 1.3;
         }
 
@@ -255,7 +332,7 @@
             padding: 12px 16px;
             margin-bottom: 8px;
             text-decoration: none;
-            color: var(--text);
+            color: var(--block-color);
             border: 1px solid transparent;
             transition: all 0.15s ease;
             cursor: pointer;
@@ -276,7 +353,7 @@
 
         .link-icon {
             width: 22px;
-            color: var(--primary);
+            color: var(--block-color);
             font-weight: 600;
             font-size: 1.1rem;
         }
@@ -284,6 +361,7 @@
         .link-text {
             font-weight: 600;
             font-size: 0.95rem;
+            color: var(--block-color);
         }
 
         .link-meta {
@@ -298,7 +376,7 @@
             display: none;
             background: white;
             border-radius: 0 0 20px 20px;
-            border-left: 3px solid var(--accent);
+            border-left: 3px solid var(--block-color);
             margin: -4px 0 12px 15px;
             padding: 6px 0;
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
@@ -312,7 +390,7 @@
             display: block;
             padding: 12px 20px;
             text-decoration: none;
-            color: var(--text);
+            color: var(--block-color);
             border-bottom: 1px solid var(--border);
             transition: all 0.1s ease;
         }
@@ -322,8 +400,8 @@
         }
 
         .dropdown-link:hover {
-            background: var(--primary-light);
-            color: var(--primary);
+            background: var(--block-color-light);
+            color: var(--block-color);
             padding-left: 25px;
         }
 
@@ -403,31 +481,20 @@
             .tool-button { width: 90px; height: 90px; }
             .tool-icon-img { width: 38px; height: 38px; }
             .title-navigator { font-size: 2.5rem; }
+            
+            .card-number {
+                font-size: 5rem;
+            }
+            .card h2 {
+                font-size: 1.1rem;
+            }
         }
-        .card-header {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.card-number {
-    font-size: 6rem;        /* увеличил */
-    font-weight: 800;
-    color: rgba(94, 58, 140, 0.2);
-    line-height: 1;
-    margin-right: 20px;
-    letter-spacing: -2px;
-    user-select: none;
-    font-family: 'Inter', sans-serif;
-}
-
-.card-header h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin: 0;
-    margin-top: 10px; 
-}
+        
+        @media (max-width: 480px) {
+            .card-number {
+                font-size: 4rem;
+            }
+        }
     </style>
 </head>
 <body>
