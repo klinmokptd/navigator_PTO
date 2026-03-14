@@ -15,32 +15,6 @@
     <!-- Preload логотипа -->
     <link rel="preload" href="header-logo.png" as="image">
 
-    <!-- СКРИПТ ДЛЯ МГНОВЕННОЙ ЗАГРУЗКИ (ИСПРАВЛЕН) -->
-    <script>
-        (function() {
-            document.addEventListener('DOMContentLoaded', function() {
-                const images = document.querySelectorAll('.quick-tools img');
-                
-                images.forEach(img => {
-                    const src = img.getAttribute('src');
-                    if (src) {
-                        img.setAttribute('data-src', src);
-                        img.removeAttribute('src');
-                    }
-                });
-
-                window.addEventListener('load', function() {
-                    setTimeout(() => {
-                        document.querySelectorAll('.quick-tools img[data-src]').forEach(img => {
-                            img.src = img.getAttribute('data-src');
-                            img.removeAttribute('data-src');
-                        });
-                    }, 100);
-                });
-            });
-        })();
-    </script>
-
    <style>
         @font-face {
             font-family: 'Inter';
@@ -222,128 +196,92 @@
             transform: scale(1.05);
         }
 
-        /* ===== КРУГЛЫЕ КНОПКИ TOPLINE ===== */
-.quick-tools {
-    padding: 30px 40px;
-    margin: 0 auto 30px auto;
-    max-width: 1400px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 30px 25px;
-}
-
-.tool-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    min-width: 100px;
-    gap: 10px;
-    background: transparent;
-    border: none;
-}
-
-/* Круглый контейнер */
-.tool-icon-container {
-    width: 100px;
-    height: 100px;
-    background: white;
-    border: 2px solid var(--primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 26px; /* РАЗМЕР КАК БЫЛО */
-    box-shadow: 0 4px 10px rgba(75, 0, 130, 0.1);
-    transition: all 0.2s ease;
-    box-sizing: border-box;
-}
-
-/* Картинка */
-.tool-icon-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    border-radius: 0;
-    background: transparent;
-}
-
-/* УБРАЛ ФИОЛЕТОВОЕ СВЕЧЕНИЕ */
-.tool-button:hover .tool-icon-container {
-    border-color: var(--primary); /* Оставляем фиолетовую рамку */
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 25px rgba(75, 0, 130, 0.3);
-    background: white;
-}
-
-.tool-button:hover span {
-    color: var(--primary); /* Оставляем фиолетовый текст */
-}
-
-.tool-button span {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--primary);
-    text-align: center;
-    line-height: 1.3;
-    max-width: 100px;
-    margin-top: 5px;
-}
-
-@media (max-width: 768px) {
-    .quick-tools {
-        padding: 20px 15px;
-        gap: 20px;
-    }
-    
-    .tool-icon-container {
-        width: 80px;
-        height: 80px;
-        padding: 20px;
-    }
-    
-    .tool-button span {
-        font-size: 0.75rem;
-        max-width: 80px;
-    }
-}
-
-@media (max-width: 768px) {
-    .quick-tools {
-        padding: 20px 15px;
-        gap: 20px;
-    }
-    
-    .tool-icon-container {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .tool-icon-img {
-        width: 75%;
-        height: 75%;
-    }
-    
-    .tool-button span {
-        font-size: 0.75rem;
-        max-width: 80px;
-    }
-}
-
-        /* При наведении — только рамка и тень, фон не меняется */
-        .tool-button:hover .tool-icon-img {
-            border-color: var(--accent);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 25px rgba(75, 0, 130, 0.3);
-            background: white;  /* Оставляем белый фон */
+        /* ===== КРУГЛЫЕ КНОПКИ TOPLINE (СТИЛЬ ИЗ ФАЙЛА 72) ===== */
+        .quick-tools {
+            padding: 30px 40px;
+            margin: 0 auto 30px auto;
+            max-width: 1400px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
         }
 
-        .tool-button:hover span {
-            color: var(--primary-dark);
+        .tool-button {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            gap: 0;
+        }
+
+        .tool-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .tool-icon-img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .tool-icon-fallback {
+            font-size: 30px;
+            line-height: 1;
+            display: none;
+            margin-bottom: 5px;
+        }
+
+        .tool-button span:last-child {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: center;
+            line-height: 1.2;
+            max-width: 90px;
+            display: block;
+            padding: 0 5px;
+        }
+
+        @media (max-width: 768px) {
+            .quick-tools {
+                padding: 20px 15px;
+                gap: 15px;
+            }
+            
+            .tool-button {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .tool-icon-img {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .tool-icon-fallback {
+                font-size: 24px;
+            }
+            
+            .tool-button span:last-child {
+                font-size: 0.65rem;
+                max-width: 70px;
+            }
         }
 
         .content-area {
@@ -589,62 +527,45 @@
         }
 
         @media (max-width: 768px) {
-    .content-header {
-        flex-direction: column;
-        padding: 20px;
-        text-align: center;
-    }
-    
-    .header-logo {
-        width: 120px;
-        height: 120px;
-    }
-    
-    .title-navigator { 
-        font-size: 2.5rem;
-    }
-    
-    .title-specialist {
-        font-size: 1.4rem;
-    }
-    
-    .resource-tagline {
-        padding: 0 20px 10px 20px;
-    }
-    
-    .quick-tools {
-        padding: 20px 15px;
-        gap: 20px;
-    }
-    
-    .tool-icon-img {
-        width: 80px !important;
-        height: 80px !important;
-        padding: 20px;
-    }
-    
-    .tool-button span {
-        font-size: 0.75rem;
-        max-width: 80px;
-    }
-    
-    .grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Исправление для расширения карточек */
-    .content-area {
-        padding: 20px 15px 35px 15px; /* Уменьшены боковые отступы */
-    }
-    
-    .card {
-        padding: 18px; /* Немного уменьшен внутренний отступ для экономии места */
-    }
-    
-    .link-item {
-        padding: 10px 12px; /* Чуть уменьшены отступы в элементах списка */
-    }
-}
+            .content-header {
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+            }
+            
+            .header-logo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .title-navigator { 
+                font-size: 2.5rem;
+            }
+            
+            .title-specialist {
+                font-size: 1.4rem;
+            }
+            
+            .resource-tagline {
+                padding: 0 20px 10px 20px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-area {
+                padding: 20px 15px 35px 15px;
+            }
+            
+            .card {
+                padding: 18px;
+            }
+            
+            .link-item {
+                padding: 10px 12px;
+            }
+        }
     </style>
     
 </head>
@@ -658,8 +579,6 @@
                 <h1 class="page-title">
                     <span class="title-navigator">Навигатор</span> <span class="title-specialist">врача-фтизиатра</span>
                 </h1>
-                <!-- СТАРАЯ ФРАЗА УДАЛЕНА (ты сам её уберёшь) -->
-                <!-- <p class="page-description">Система доступа к профессиональным ресурсам</p> -->
                 <p class="page-description" style="margin-top: 20px; font-size: 1.8rem; font-weight: 700; color: #dc2626; text-align: left; line-height: 1.3;"></p>
             </div>
 
@@ -675,47 +594,41 @@
             </div>
         </header>
 
-        <!-- ФРАЗА НАД ЧЕРТОЙ (ты её не удаляй, она теперь здесь) -->
         <div class="resource-tagline">
             <p>Система доступа к профессиональным ресурсам</p>
         </div>
 
         <div class="quick-tools">
-    <a href="https://1c.mokptd.ru:8443/mis" target="_blank" class="tool-button">
-        <div class="tool-icon-container">
-            <img src="picture/topline/1c.png" alt=" " class="tool-icon-img">
+            <a href="https://1c.mokptd.ru:8443/mis" target="_blank" class="tool-button">
+                <img src="picture/topline/1c.png" alt=" " class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">🧪</span>
+                <span>1С-МИС</span>
+            </a>
+            
+            <a href="https://webviewer.eris.mosreg.ru/viewer/#/login" target="_blank" class="tool-button">
+                <img src="picture/topline/pax.png" alt=" " class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">🖼️</span>
+                <span>DIGIPAX</span>
+            </a>
+            
+            <a href="https://nr.egisz.rosminzdrav.ru/index.xhtml" target="_blank" class="tool-button">
+                <img src="picture/topline/frbt.png" alt=" " class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">📊</span>
+                <span>ФРБТ</span>
+            </a>
+            
+            <a href="https://stat.miacmo.ru/datainput" target="_blank" class="tool-button">
+                <img src="picture/topline/medinfo.png" alt=" " class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">📈</span>
+                <span>Мединфо</span>
+            </a>
+            
+            <a href="https://smo-egisz.emias.mosreg.ru/Account/Login?ReturnUrl=%2f" target="_blank" class="tool-button">
+                <img src="picture/topline/donor.png" alt=" " class="tool-icon-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="tool-icon-fallback" style="display: none;">🩸</span>
+                <span>Доноры</span>
+            </a>
         </div>
-        <span>1С-МИС</span>
-    </a>
-    
-    <a href="https://webviewer.eris.mosreg.ru/viewer/#/login" target="_blank" class="tool-button">
-        <div class="tool-icon-container">
-            <img src="picture/topline/pax.png" alt=" " class="tool-icon-img">
-        </div>
-        <span>DIGIPAX</span>
-    </a>
-    
-    <a href="https://nr.egisz.rosminzdrav.ru/index.xhtml" target="_blank" class="tool-button">
-        <div class="tool-icon-container">
-            <img src="picture/topline/frbt.png" alt=" " class="tool-icon-img">
-        </div>
-        <span>ФРБТ</span>
-    </a>
-    
-    <a href="https://stat.miacmo.ru/datainput" target="_blank" class="tool-button">
-        <div class="tool-icon-container">
-            <img src="picture/topline/medinfo.png" alt=" " class="tool-icon-img">
-        </div>
-        <span>Мединфо</span>
-    </a>
-    
-    <a href="https://smo-egisz.emias.mosreg.ru/Account/Login?ReturnUrl=%2f" target="_blank" class="tool-button">
-        <div class="tool-icon-container">
-            <img src="picture/topline/donor.png" alt=" " class="tool-icon-img">
-        </div>
-        <span>Доноры</span>
-    </a>
-</div>
         
         <div class="content-area">
             <div class="grid">
