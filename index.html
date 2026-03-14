@@ -222,7 +222,7 @@
             transform: scale(1.05);
         }
 
-        /* ===== КРУГЛЫЕ КНОПКИ TOPLINE ===== */
+                /* ===== КРУГЛЫЕ КНОПКИ TOPLINE ===== */
         .quick-tools {
             padding: 30px 40px;
             margin: 0 auto 30px auto;
@@ -269,17 +269,17 @@
             z-index: 1;
         }
 
-        /* Картинка сверху кнопки */
+        /* Картинка по центру кнопки */
         .tool-icon-img {
-            width: 80px !important;
-            height: 80px !important;
+            width: 50px !important;
+            height: 50px !important;
             object-fit: contain;
             
-            /* Поднимаем картинку над кнопкой */
+            /* Центрируем картинку точно по середине кнопки */
             position: absolute;
-            top: -10px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             z-index: 2;
             
             /* Прозрачный фон, без обрезки */
@@ -315,7 +315,7 @@
         }
 
         .tool-button:hover .tool-icon-img {
-            transform: translateX(-50%) translateY(-5px) scale(1.05);
+            transform: translate(-50%, -50%) translateY(-2px) scale(1.05);
         }
 
         .content-area {
