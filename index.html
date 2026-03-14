@@ -57,8 +57,8 @@
     --accent: #14B8A6;          /* Бирюзовый акцент */
     --background: #F3F4F6;       /* Светло-серый фон */
     --surface: #FFFFFF;           /* Белый для карточек */
-    --text: #1F2937;              /* Темно-серый текст */
-    --text-soft: #6B7280;          /* Мягкий серый */
+    --text: #111827;              /* ИЗМЕНЕНО: Почти черный, но мягкий (был #1F2937) */
+    --text-soft: #4B5563;          /* ИЗМЕНЕНО: Темно-серый, отлично читается (был #6B7280) */
     --border: #E5E7EB;              /* Светлая граница */
     --shadow-sm: 0 10px 25px -5px rgba(94, 58, 140, 0.1);
     --shadow-md: 0 20px 30px -10px rgba(94, 58, 140, 0.2);
@@ -120,7 +120,9 @@ body {
 
 .resource-tagline p {
     text-align: center;
-    color: var(--text-soft);
+    /* ИЗМЕНЕНО: Используем основной цвет текста */
+    color: var(--text);
+    /* ИЗМЕНЕНО: Добавляем полужирное начертание */
     font-weight: 500;
     padding: 5px 20px 15px;
     font-size: 1rem;
@@ -330,7 +332,8 @@ body {
 
 .link-item {
     display: block;
-    background: #F8F9FC;
+    /* ИЗМЕНЕНО: чуть светлее фон для лучшего контраста с серым текстом */
+    background: #F9FAFB;
     border-radius: 16px;
     padding: 12px 16px;
     margin-bottom: 8px;
@@ -369,8 +372,11 @@ body {
 .link-meta {
     font-size: 0.75rem;
     color: var(--text-soft);
-    margin-top: 4px;
+    /* ИЗМЕНЕНО: увеличен отступ для визуального отделения */
+    margin-top: 6px;
     margin-left: 34px;
+    /* ИЗМЕНЕНО: добавлена полужирность для лучшей читаемости мелкого текста */
+    font-weight: 500;
 }
 
 /* Выпадайки - ТОЛЬКО ЦВЕТ */
